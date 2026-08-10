@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Layanan - Shae Cleaners</title>
+
+  <meta
+    name="theme-color"
+    content="#16a34a"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/layanan.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="service-header">
+
+  <button
+    class="service-back"
+    onclick="history.back()"
+    aria-label="Kembali"
+  >
+
+    <i class="fa-solid fa-arrow-left"></i>
+
+  </button>
+
+
+  <div class="service-header-title">
+
+    <strong id="headerServiceName">
+      Layanan
+    </strong>
+
+    <small>
+      Shae Cleaners
+    </small>
+
+  </div>
+
+
+  <button
+    class="service-cart"
+    onclick="location.href='checkout.html'"
+    aria-label="Checkout"
+  >
+
+    <i class="fa-solid fa-cart-shopping"></i>
+
+    <span
+      id="cartBadge"
+      class="cart-badge"
+    >
+      0
+    </span>
+
+  </button>
+
+</header>
+
+
+
+<!-- =====================================================
+     CONTENT
+===================================================== -->
+
+<main class="service-page">
+
+
+  <!-- ===================================================
+       HERO
+  ==================================================== -->
+
+  <section class="service-hero">
+
+    <div class="service-hero-icon">
+
+      <img
+        id="serviceIcon"
+        src="assets/icons/sofa.png"
+        alt="Layanan"
+      >
+
+    </div>
+
+
+    <div class="service-hero-info">
+
+      <span class="service-label">
+        LAYANAN SHAE CLEANERS
+      </span>
+
+      <h1 id="serviceName">
+        Cuci Sofa
+      </h1>
+
+      <p id="serviceDescription">
+        Bersihkan sofa agar kembali bersih,
+        wangi dan nyaman digunakan.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       PROMO
+  ==================================================== -->
+
+  <div class="service-promo">
+
+    <i class="fa-solid fa-tag"></i>
+
+    <span id="servicePromo">
+      Promo tersedia untuk layanan ini
+    </span>
+
+  </div>
+
+
+
+  <!-- ===================================================
+       PRICE LIST
+  ==================================================== -->
+
+  <section class="service-section">
+
+    <div class="service-section-title">
+
+      <div>
+
+        <strong>
+          Pilih Paket
+        </strong>
+
+        <small>
+          Tentukan layanan yang Anda butuhkan
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="serviceProducts"
+      class="service-products"
+    >
+
+      <!-- Produk dibuat otomatis oleh Layanan.js -->
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       ORDER SUMMARY
+  ==================================================== -->
+
+  <section
+    id="serviceSummary"
+    class="service-summary"
+  >
+
+    <div class="summary-title">
+
+      <strong>
+        Pesanan
+      </strong>
+
+      <span id="summaryCount">
+        0 item
+      </span>
+
+    </div>
+
+
+    <div
+      id="summaryItems"
+      class="summary-items"
+    >
+
+      <div class="summary-empty">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        <span>
+          Belum ada layanan dipilih
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-total">
+
+      <span>
+        Total
+      </span>
+
+      <strong id="summaryTotal">
+        Rp0
+      </strong>
+
+    </div>
+
+
+    <button
+      id="orderButton"
+      class="order-button"
+      disabled
+    >
+
+      <i class="fa-solid fa-cart-plus"></i>
+
+      Tambah ke Checkout
+
+    </button>
+
+  </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
+
+<nav class="bottom-nav">
+
+  <a href="index.html">
+
+    <i class="fa-solid fa-house"></i>
+
+    <span>
+      Home
+    </span>
+
+  </a>
+
+
+  <a href="aktivitas.html">
+
+    <i class="fa-solid fa-receipt"></i>
+
+    <span>
+      Pesanan
+    </span>
+
+  </a>
+
+
+  <a
+    href="order.html"
+    class="bottom-order"
+  >
+
+    <span>
+
+      <i class="fa-solid fa-plus"></i>
+
+    </span>
+
+    <label>
+      Order
+    </label>
+
+  </a>
+
+
+  <a href="promo.html">
+
+    <i class="fa-solid fa-ticket"></i>
+
+    <span>
+      Promo
+    </span>
+
+  </a>
+
+
+  <a href="akun.html">
+
+    <i class="fa-solid fa-user"></i>
+
+    <span>
+      Akun
+    </span>
+
+  </a>
+
+</nav>
+
+
+
+<script src="js/Layanan.js"></script>
+
+</body>
+
+</html>
