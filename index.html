@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+  rel="manifest"
+  href="manifest.json"
+>
+<meta
+  name="theme-color"
+  content="#16a34a"
+>
+<meta
+  name="mobile-web-app-capable"
+  content="yes"
+>
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes"
+>
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="default"
+>
+<meta
+  name="apple-mobile-web-app-title"
+  content="Shae Cleaners"
+>
+  <title>Shae Cleaners</title>
+  <meta name="description"
+        content="Shae Cleaners - Marketplace jasa cleaning sofa, springbed, jok mobil, karpet dan lainnya.">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- ICON -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+  <div class="header-top">
+    <div class="brand">
+      <img src="assets/logo/logo.png" alt="Shae Cleaners">
+      <div>
+        <h1>Shae <span>Cleaners</span></h1>
+        <small>Cleaning Marketplace</small>
+      </div>
+    </div>
+
+    <button class="notification-btn" onclick="openNotifications()">
+      <i class="fa-regular fa-bell"></i>
+      <span class="notification-dot"></span>
+    </button>
+
+  </div>
+
+
+  <!-- SEARCH -->
+
+  <div class="search-box">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Cari layanan cleaning..."
+      autocomplete="off"
+    >
+
+  </div>
+
+</header>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+<!-- =====================================================
+     PROMO BANNER
+===================================================== -->
+
+<section class="promo-section">
+
+  <div class="promo-slider" id="promoSlider">
+
+    <div class="promo-card">
+
+      <div class="promo-content">
+
+        <span class="promo-label">
+          PROMO SPESIAL
+        </span>
+
+        <h2>
+          Sofa Bersih,<br>
+          Rumah Lebih Nyaman
+        </h2>
+
+        <p>
+          Pesan cleaning sekarang dan dapatkan harga terbaik.
+        </p>
+
+        <button onclick="goToServices()">
+          Pesan Sekarang
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+      </div>
+
+      <div class="promo-icon">
+        <i class="fa-solid fa-couch"></i>
+      </div>
+
+    </div>
+
+
+    <div class="promo-card promo-card-2">
+
+      <div class="promo-content">
+
+        <span class="promo-label">
+          CLEANING PROFESIONAL
+        </span>
+
+        <h2>
+          Kasur Bersih,<br>
+          Tidur Lebih Nyaman
+        </h2>
+
+        <p>
+          Booking layanan langsung melalui WhatsApp.
+        </p>
+
+        <button onclick="goToServices()">
+          Lihat Layanan
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+      </div>
+
+      <div class="promo-icon">
+        <i class="fa-solid fa-bed"></i>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="slider-dots">
+
+    <span class="dot active"></span>
+    <span class="dot"></span>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CATEGORY
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-title">
+
+    <div>
+      <h2>Kategori Layanan</h2>
+      <p>Pilih kebutuhan cleaning Anda</p>
+    </div>
+
+    <button onclick="goToServices()">
+      Lihat Semua
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+  </div>
+
+
+  <div class="category-grid">
+
+    <div class="category-item"
+         onclick="openService('sofa')">
+
+      <div class="category-icon">
+        <i class="fa-solid fa-couch"></i>
+      </div>
+
+      <span>Sofa</span>
+
+    </div>
+
+
+    <div class="category-item"
+         onclick="openService('kasur')">
+
+      <div class="category-icon">
+        <i class="fa-solid fa-bed"></i>
+      </div>
+
+      <span>Springbed</span>
+
+    </div>
+
+
+    <div class="category-item"
+         onclick="openService('jokmobil')">
+
+      <div class="category-icon">
+        <i class="fa-solid fa-car"></i>
+      </div>
+
+      <span>Jok Mobil</span>
+
+    </div>
+
+
+    <div class="category-item"
+         onclick="openService('karpet')">
+
+      <div class="category-icon">
+        <i class="fa-solid fa-rug"></i>
+      </div>
+
+      <span>Karpet</span>
+
+    </div>
+
+
+    <div class="category-item"
+         onclick="openService('kursi')">
+
+      <div class="category-icon">
+        <i class="fa-solid fa-chair"></i>
+      </div>
+
+      <span>Kursi</span>
+
+    </div>
+
+
+    <div class="category-item"
+         onclick="openService('gorden')">
+
+      <div class="category-icon">
+        <i class="fa-solid fa-panorama"></i>
+      </div>
+
+      <span>Gorden</span>
+
+    </div>
+
+
+    <div class="category-item"
+         onclick="openService('ac')">
+
+      <div class="category-icon">
+        <i class="fa-solid fa-snowflake"></i>
+      </div>
+
+      <span>AC</span>
+
+    </div>
+
+
+    <div class="category-item"
+         onclick="openService('home-cleaning')">
+
+      <div class="category-icon">
+        <i class="fa-solid fa-house"></i>
+      </div>
+
+      <span>Home Cleaning</span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LAYANAN POPULER
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-title">
+
+    <div>
+      <h2>Layanan Populer</h2>
+      <p>Paling sering dipesan pelanggan</p>
+    </div>
+
+    <button onclick="goToServices()">
+      Semua
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+  </div>
+
+
+  <div class="service-list">
+
+
+    <!-- SOFA -->
+
+    <article class="service-card"
+             onclick="openService('sofa')">
+
+      <div class="service-image">
+
+        <img
+          src="assets/sofa.jpg"
+          alt="Cuci Sofa"
+          loading="lazy"
+        >
+
+        <span class="service-badge">
+          POPULER
+        </span>
+
+      </div>
+
+      <div class="service-info">
+
+        <h3>Cuci Sofa</h3>
+
+        <p>
+          Sofa standard, lepasan dan sofa besar
+        </p>
+
+        <div class="service-bottom">
+
+          <strong>
+            Mulai Rp60.000
+          </strong>
+
+          <button
+            onclick="event.stopPropagation(); openService('sofa')">
+
+            <i class="fa-solid fa-plus"></i>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- SPRINGBED -->
+
+    <article class="service-card"
+             onclick="openService('kasur')">
+
+      <div class="service-image">
+
+        <img
+          src="assets/kasur.jpg"
+          alt="Cuci Springbed"
+          loading="lazy"
+        >
+
+        <span class="service-badge">
+          FAVORIT
+        </span>
+
+      </div>
+
+      <div class="service-info">
+
+        <h3>Cuci Springbed</h3>
+
+        <p>
+          Membersihkan debu, noda dan tungau
+        </p>
+
+        <div class="service-bottom">
+
+          <strong>
+            Mulai Rp150.000
+          </strong>
+
+          <button
+            onclick="event.stopPropagation(); openService('kasur')">
+
+            <i class="fa-solid fa-plus"></i>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- JOK MOBIL -->
+
+    <article class="service-card"
+             onclick="openService('jokmobil')">
+
+      <div class="service-image">
+
+        <img
+          src="assets/jokmobil.jpg"
+          alt="Cuci Jok Mobil"
+          loading="lazy"
+        >
+
+      </div>
+
+      <div class="service-info">
+
+        <h3>Cuci Jok Mobil</h3>
+
+        <p>
+          Cleaning jok dan interior mobil
+        </p>
+
+        <div class="service-bottom">
+
+          <strong>
+            Mulai Rp250.000
+          </strong>
+
+          <button
+            onclick="event.stopPropagation(); openService('jokmobil')">
+
+            <i class="fa-solid fa-plus"></i>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     KEUNGGULAN
+===================================================== -->
+
+<section class="section advantage-section">
+
+  <div class="section-title">
+
+    <div>
+      <h2>Kenapa Shae Cleaners?</h2>
+      <p>Cleaning lebih mudah dan praktis</p>
+    </div>
+
+  </div>
+
+
+  <div class="advantage-grid">
+
+    <div class="advantage-item">
+
+      <div class="advantage-icon">
+        <i class="fa-solid fa-bolt"></i>
+      </div>
+
+      <h3>Booking Cepat</h3>
+
+      <p>
+        Pesan layanan hanya dalam beberapa langkah.
+      </p>
+
+    </div>
+
+
+    <div class="advantage-item">
+
+      <div class="advantage-icon">
+        <i class="fa-brands fa-whatsapp"></i>
+      </div>
+
+      <h3>Langsung WhatsApp</h3>
+
+      <p>
+        Order langsung diteruskan ke WhatsApp.
+      </p>
+
+    </div>
+
+
+    <div class="advantage-item">
+
+      <div class="advantage-icon">
+        <i class="fa-solid fa-receipt"></i>
+      </div>
+
+      <h3>Invoice Otomatis</h3>
+
+      <p>
+        Pesanan mendapatkan nomor invoice otomatis.
+      </p>
+
+    </div>
+
+
+    <div class="advantage-item">
+
+      <div class="advantage-icon">
+        <i class="fa-solid fa-shield-heart"></i>
+      </div>
+
+      <h3>Profesional</h3>
+
+      <p>
+        Layanan cleaning untuk rumah dan kendaraan.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     BOTTOM NAVIGATION
+===================================================== -->
+
+<nav class="bottom-nav">
+
+  <a href="index.html"
+     class="nav-item active">
+
+    <i class="fa-solid fa-house"></i>
+
+    <span>Home</span>
+
+  </a>
+
+
+  <a href="layanan.html"
+     class="nav-item">
+
+    <i class="fa-solid fa-layer-group"></i>
+
+    <span>Layanan</span>
+
+  </a>
+
+
+  <a href="checkout.html"
+     class="nav-item nav-order">
+
+    <div class="order-icon">
+
+      <i class="fa-solid fa-bag-shopping"></i>
+
+      <span id="cartCount">0</span>
+
+    </div>
+
+    <span>Pesanan</span>
+
+  </a>
+
+
+  <a href="invoice.html"
+     class="nav-item">
+
+    <i class="fa-solid fa-file-invoice"></i>
+
+    <span>Invoice</span>
+
+  </a>
+
+
+  <a href="akun.html"
+     class="nav-item">
+
+    <i class="fa-regular fa-user"></i>
+
+    <span>Akun</span>
+
+  </a>
+
+</nav>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+<script>
+
+if (
+  "serviceWorker" in navigator
+) {
+
+  window.addEventListener(
+    "load",
+    () => {
+
+      navigator.serviceWorker
+        .register(
+          "sw.js"
+        )
+        .then(
+          registration => {
+
+            console.log(
+              "Shae Cleaners App aktif:",
+              registration.scope
+            );
+
+          }
+        )
+        .catch(
+          error => {
+
+            console.error(
+              "Service Worker gagal:",
+              error
+            );
+
+          }
+        );
+
+    }
+  );
+
+}
+
+</script>
+<script src="js/app.js"></script>
+</body>
+</html>
