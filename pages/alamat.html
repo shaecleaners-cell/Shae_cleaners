@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Alamat Saya - Shae Cleaners</title>
+
+  <meta
+    name="theme-color"
+    content="#16a34a"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/alamat.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="address-header">
+
+
+  <button
+    type="button"
+    class="address-back"
+    onclick="history.back()"
+    aria-label="Kembali"
+  >
+
+    <i class="fa-solid fa-arrow-left"></i>
+
+  </button>
+
+
+  <div class="address-title">
+
+    <strong>
+      Alamat Saya
+    </strong>
+
+    <span>
+      Shae Cleaners
+    </span>
+
+  </div>
+
+
+  <button
+    type="button"
+    class="address-home"
+    onclick="location.href='index.html'"
+    aria-label="Home"
+  >
+
+    <i class="fa-solid fa-house"></i>
+
+  </button>
+
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="address-page">
+
+
+  <!-- ===================================================
+       INFO
+  ==================================================== -->
+
+  <section class="address-info">
+
+    <div class="address-info-icon">
+
+      <i class="fa-solid fa-location-dot"></i>
+
+    </div>
+
+
+    <div>
+
+      <strong>
+        Alamat Cleaning
+      </strong>
+
+      <p>
+        Simpan alamat agar proses checkout
+        lebih cepat.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       ADD ADDRESS
+  ==================================================== -->
+
+  <button
+    type="button"
+    class="add-address-button"
+    id="btnAddAddress"
+  >
+
+    <i class="fa-solid fa-plus"></i>
+
+    Tambah Alamat Baru
+
+  </button>
+
+
+
+  <!-- ===================================================
+       ADDRESS LIST
+  ==================================================== -->
+
+  <section class="address-list-section">
+
+
+    <div class="section-heading">
+
+      <h1>
+        Alamat Tersimpan
+      </h1>
+
+      <span id="addressCount">
+        0 alamat
+      </span>
+
+    </div>
+
+
+    <div
+      id="addressList"
+      class="address-list"
+    >
+
+      <!-- Diisi otomatis oleh Alamat.js -->
+
+    </div>
+
+
+    <div
+      id="addressEmpty"
+      class="address-empty"
+    >
+
+      <div class="address-empty-icon">
+
+        <i class="fa-regular fa-map"></i>
+
+      </div>
+
+
+      <strong>
+        Belum ada alamat
+      </strong>
+
+
+      <span>
+        Tambahkan alamat untuk mempermudah
+        proses pemesanan.
+      </span>
+
+    </div>
+
+
+  </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     ADDRESS MODAL
+===================================================== -->
+
+<div
+  id="addressModal"
+  class="address-modal"
+>
+
+
+  <div
+    class="address-overlay"
+    id="addressOverlay"
+  ></div>
+
+
+  <section class="address-modal-box">
+
+
+    <div class="address-modal-header">
+
+      <div>
+
+        <strong id="addressModalTitle">
+          Tambah Alamat
+        </strong>
+
+        <span>
+          Isi data alamat cleaning
+        </span>
+
+      </div>
+
+
+      <button
+        type="button"
+        id="btnCloseAddress"
+        class="address-close"
+      >
+
+        <i class="fa-solid fa-xmark"></i>
+
+      </button>
+
+    </div>
+
+
+
+    <form
+      id="addressForm"
+      autocomplete="on"
+    >
+
+
+      <!-- NAMA -->
+
+      <div class="address-field">
+
+        <label for="addressName">
+          Nama Penerima
+        </label>
+
+        <input
+          type="text"
+          id="addressName"
+          name="name"
+          placeholder="Nama lengkap"
+          maxlength="60"
+          required
+        >
+
+      </div>
+
+
+
+      <!-- WHATSAPP -->
+
+      <div class="address-field">
+
+        <label for="addressPhone">
+          Nomor WhatsApp
+        </label>
+
+        <input
+          type="tel"
+          id="addressPhone"
+          name="phone"
+          placeholder="08xxxxxxxxxx"
+          inputmode="tel"
+          maxlength="16"
+          required
+        >
+
+      </div>
+
+
+
+      <!-- LABEL -->
+
+      <div class="address-field">
+
+        <label for="addressLabel">
+          Label Alamat
+        </label>
+
+        <select
+          id="addressLabel"
+          name="label"
+        >
+
+          <option value="Rumah">
+            Rumah
+          </option>
+
+          <option value="Kantor">
+            Kantor
+          </option>
+
+          <option value="Apartemen">
+            Apartemen
+          </option>
+
+          <option value="Lainnya">
+            Lainnya
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- ALAMAT -->
+
+      <div class="address-field">
+
+        <label for="addressDetail">
+          Alamat Lengkap
+        </label>
+
+        <textarea
+          id="addressDetail"
+          name="address"
+          rows="4"
+          maxlength="300"
+          placeholder="Nama jalan, nomor rumah, RT/RW, kelurahan, kecamatan..."
+          required
+        ></textarea>
+
+      </div>
+
+
+
+      <!-- CATATAN -->
+
+      <div class="address-field">
+
+        <label for="addressNote">
+          Catatan
+          <small>(opsional)</small>
+        </label>
+
+        <textarea
+          id="addressNote"
+          name="note"
+          rows="2"
+          maxlength="200"
+          placeholder="Contoh: Rumah pagar hitam, dekat minimarket"
+        ></textarea>
+
+      </div>
+
+
+
+      <!-- PRIMARY -->
+
+      <label class="primary-address">
+
+        <input
+          type="checkbox"
+          id="addressPrimary"
+          name="primary"
+        >
+
+
+        <span class="primary-check">
+
+          <i class="fa-solid fa-check"></i>
+
+        </span>
+
+
+        <span>
+
+          Jadikan alamat utama
+
+        </span>
+
+      </label>
+
+
+
+      <!-- ACTION -->
+
+      <div class="address-form-actions">
+
+
+        <button
+          type="button"
+          id="btnCancelAddress"
+          class="address-cancel"
+        >
+
+          Batal
+
+        </button>
+
+
+        <button
+          type="submit"
+          class="address-save"
+        >
+
+          <i class="fa-solid fa-check"></i>
+
+          Simpan Alamat
+
+        </button>
+
+
+      </div>
+
+
+    </form>
+
+
+  </section>
+
+</div>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+  id="addressToast"
+  class="address-toast"
+></div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="js/app.js"></script>
+
+<script src="js/Alamat.js"></script>
+
+
+</body>
+
+</html>

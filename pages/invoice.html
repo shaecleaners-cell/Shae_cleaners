@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Invoice - Shae Cleaners</title>
+
+  <meta
+    name="description"
+    content="Invoice pesanan Shae Cleaners"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/Invoice.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="invoice-header">
+
+
+  <button
+    type="button"
+    class="invoice-back"
+    onclick="history.back()"
+  >
+
+    <i class="fa-solid fa-arrow-left"></i>
+
+  </button>
+
+
+  <div class="invoice-header-title">
+
+    <strong>
+      Invoice
+    </strong>
+
+    <span>
+      Shae Cleaners
+    </span>
+
+  </div>
+
+
+  <button
+    type="button"
+    class="invoice-home"
+    onclick="location.href='index.html'"
+  >
+
+    <i class="fa-solid fa-house"></i>
+
+  </button>
+
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="invoice-page">
+
+
+  <!-- ===================================================
+       INVOICE CARD
+  ==================================================== -->
+
+  <section
+    id="invoiceCard"
+    class="invoice-card"
+  >
+
+
+    <!-- ===============================================
+         BRAND
+    ================================================ -->
+
+    <div class="invoice-brand">
+
+
+      <div class="invoice-logo">
+
+        <i class="fa-solid fa-sparkles"></i>
+
+      </div>
+
+
+      <div>
+
+        <h1>
+          Shae Cleaners
+        </h1>
+
+        <p>
+          Cleaning Service
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- ===============================================
+         INVOICE INFO
+    ================================================ -->
+
+    <div class="invoice-top">
+
+
+      <div>
+
+        <span class="invoice-label">
+          INVOICE
+        </span>
+
+
+        <strong
+          id="invoiceNumber"
+          class="invoice-number"
+        >
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="invoice-date-box">
+
+        <span>
+          Tanggal
+        </span>
+
+
+        <strong id="invoiceDate">
+          -
+        </strong>
+
+      </div>
+
+
+    </div>
+
+
+
+    <div class="invoice-status-box">
+
+      <span>
+        Status Pesanan
+      </span>
+
+
+      <strong id="invoiceStatus">
+        Menunggu Konfirmasi
+      </strong>
+
+    </div>
+
+
+
+    <!-- ===============================================
+         CUSTOMER
+    ================================================ -->
+
+    <section class="invoice-section">
+
+
+      <h2>
+
+        <i class="fa-solid fa-user"></i>
+
+        Data Customer
+
+      </h2>
+
+
+      <div class="customer-grid">
+
+
+        <div class="customer-field">
+
+          <span>
+            Nama
+          </span>
+
+          <strong id="invoiceCustomer">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="customer-field">
+
+          <span>
+            WhatsApp
+          </span>
+
+          <strong id="invoicePhone">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="customer-field customer-address">
+
+          <span>
+            Alamat
+          </span>
+
+          <strong id="invoiceAddress">
+            -
+          </strong>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===============================================
+         SCHEDULE
+    ================================================ -->
+
+    <section class="invoice-section">
+
+
+      <h2>
+
+        <i class="fa-regular fa-calendar-check"></i>
+
+        Jadwal Cleaning
+
+      </h2>
+
+
+      <div class="invoice-schedule">
+
+        <i class="fa-regular fa-clock"></i>
+
+
+        <strong id="invoiceSchedule">
+          -
+        </strong>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===============================================
+         ITEMS
+    ================================================ -->
+
+    <section class="invoice-section">
+
+
+      <h2>
+
+        <i class="fa-solid fa-basket-shopping"></i>
+
+        Detail Pesanan
+
+      </h2>
+
+
+      <div class="invoice-items-header">
+
+        <span>
+          Layanan
+        </span>
+
+        <span>
+          Qty
+        </span>
+
+        <span>
+          Total
+        </span>
+
+      </div>
+
+
+      <div
+        id="invoiceItems"
+        class="invoice-items"
+      >
+
+        <!-- Data otomatis dari Invoice.js -->
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===============================================
+         SUMMARY
+    ================================================ -->
+
+    <section class="invoice-summary">
+
+
+      <div class="invoice-summary-row">
+
+        <span>
+          Subtotal
+        </span>
+
+
+        <strong id="invoiceSubtotal">
+          Rp0
+        </strong>
+
+      </div>
+
+
+      <div class="invoice-summary-row">
+
+        <span>
+          Diskon
+        </span>
+
+
+        <strong
+          id="invoiceDiscount"
+          class="invoice-discount"
+        >
+          -Rp0
+        </strong>
+
+      </div>
+
+
+      <div class="invoice-line"></div>
+
+
+      <div class="invoice-grand-total">
+
+        <span>
+          TOTAL
+        </span>
+
+
+        <strong id="invoiceTotal">
+          Rp0
+        </strong>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===============================================
+         PAYMENT INFO
+    ================================================ -->
+
+    <section class="invoice-payment">
+
+
+      <div class="payment-icon">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          Pembayaran
+        </strong>
+
+
+        <p>
+          Pembayaran dilakukan sesuai
+          konfirmasi dari Shae Cleaners.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===============================================
+         FOOTER
+    ================================================ -->
+
+    <div class="invoice-footer">
+
+
+      <strong>
+        Terima kasih telah memilih
+        Shae Cleaners.
+      </strong>
+
+
+      <span>
+        Bersih • Wangi • Profesional
+      </span>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- ===================================================
+       ACTION BUTTONS
+  ==================================================== -->
+
+  <section class="invoice-actions">
+
+
+    <button
+      type="button"
+      id="btnInvoiceWA"
+      class="invoice-wa-button"
+    >
+
+      <i class="fa-brands fa-whatsapp"></i>
+
+      Kirim ke WhatsApp
+
+    </button>
+
+
+    <button
+      type="button"
+      id="btnPrintInvoice"
+      class="invoice-print-button"
+    >
+
+      <i class="fa-solid fa-print"></i>
+
+      Cetak Invoice
+
+    </button>
+
+
+  </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="js/app.js"></script>
+
+<script src="js/Invoice.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Detail Layanan - Shae Cleaners</title>
+
+  <meta
+    name="description"
+    content="Detail dan pemesanan layanan Shae Cleaners"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/detail.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="detail-header">
+
+  <button
+    class="detail-back"
+    onclick="history.back()"
+    aria-label="Kembali"
+  >
+
+    <i class="fa-solid fa-arrow-left"></i>
+
+  </button>
+
+
+  <h1>
+    Detail Layanan
+  </h1>
+
+
+  <a
+    href="checkout.html"
+    class="detail-cart"
+    aria-label="Pesanan"
+  >
+
+    <i class="fa-solid fa-bag-shopping"></i>
+
+    <span id="detailCartCount">
+      0
+    </span>
+
+  </a>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="detail-main">
+
+
+<!-- =====================================================
+     SERVICE IMAGE
+===================================================== -->
+
+<section class="detail-image-section">
+
+  <div class="detail-image">
+
+    <img
+      id="serviceImage"
+      src="assets/sofa.jpg"
+      alt="Layanan Shae Cleaners"
+    >
+
+
+    <span
+      id="serviceBadge"
+      class="detail-badge"
+    >
+      POPULER
+    </span>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICE INFO
+===================================================== -->
+
+<section class="detail-info-section">
+
+  <span
+    id="serviceCategory"
+    class="detail-category"
+  >
+    Sofa
+  </span>
+
+
+  <h2 id="serviceName">
+    Cuci Sofa
+  </h2>
+
+
+  <p
+    id="serviceDescription"
+    class="detail-description"
+  >
+    Cleaning sofa untuk menghilangkan
+    debu, noda dan kotoran.
+  </p>
+
+
+  <div class="detail-price">
+
+    <small>
+      Mulai dari
+    </small>
+
+    <strong id="servicePrice">
+      Rp60.000
+    </strong>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FORM PEMESANAN
+===================================================== -->
+
+<section class="order-form-section">
+
+
+  <!-- TIPE / VARIASI -->
+
+  <div
+    class="form-group"
+    id="variantGroup"
+  >
+
+    <label>
+      Pilih Jenis / Ukuran
+    </label>
+
+
+    <div
+      class="variant-list"
+      id="variantList"
+    >
+
+      <!-- Diisi otomatis oleh detail.js -->
+
+    </div>
+
+  </div>
+
+
+
+  <!-- QUANTITY -->
+
+  <div class="form-group">
+
+    <label>
+      Jumlah
+    </label>
+
+
+    <div class="quantity-control">
+
+      <button
+        type="button"
+        id="minusQty"
+        aria-label="Kurangi"
+      >
+
+        <i class="fa-solid fa-minus"></i>
+
+      </button>
+
+
+      <strong id="qtyValue">
+        1
+      </strong>
+
+
+      <button
+        type="button"
+        id="plusQty"
+        aria-label="Tambah"
+      >
+
+        <i class="fa-solid fa-plus"></i>
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- TANGGAL -->
+
+  <div class="form-group">
+
+    <label for="bookingDate">
+      Tanggal Booking
+    </label>
+
+
+    <div class="input-box">
+
+      <i class="fa-regular fa-calendar"></i>
+
+      <input
+        type="date"
+        id="bookingDate"
+      >
+
+    </div>
+
+  </div>
+
+
+
+  <!-- JAM -->
+
+  <div class="form-group">
+
+    <label for="bookingTime">
+      Jam Booking
+    </label>
+
+
+    <div class="input-box">
+
+      <i class="fa-regular fa-clock"></i>
+
+      <input
+        type="time"
+        id="bookingTime"
+      >
+
+    </div>
+
+  </div>
+
+
+
+  <!-- CATATAN -->
+
+  <div class="form-group">
+
+    <label for="orderNote">
+      Catatan
+      <span>(opsional)</span>
+    </label>
+
+
+    <textarea
+      id="orderNote"
+      rows="3"
+      placeholder="Contoh: Sofa warna abu-abu, ada noda..."
+    ></textarea>
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     SUMMARY
+===================================================== -->
+
+<section class="detail-summary">
+
+  <div>
+
+    <span>
+      Total Pesanan
+    </span>
+
+    <strong id="detailTotal">
+      Rp60.000
+    </strong>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BOTTOM ACTION
+===================================================== -->
+
+<div class="detail-bottom">
+
+  <div class="bottom-price">
+
+    <small>
+      Total
+    </small>
+
+    <strong id="bottomTotal">
+      Rp60.000
+    </strong>
+
+  </div>
+
+
+  <button
+    id="addOrderButton"
+    class="add-order-button"
+  >
+
+    <i class="fa-solid fa-bag-shopping"></i>
+
+    Tambah ke Pesanan
+
+  </button>
+
+</div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="js/app.js"></script>
+
+<script src="js/detail.js"></script>
+
+
+</body>
+</html>

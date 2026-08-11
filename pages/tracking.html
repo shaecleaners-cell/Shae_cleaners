@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Tracking Pesanan - Shae Cleaners</title>
+
+  <meta
+    name="description"
+    content="Pantau status pesanan Shae Cleaners"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/tracking.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="tracking-header">
+
+  <button
+    type="button"
+    class="tracking-back"
+    onclick="history.back()"
+  >
+
+    <i class="fa-solid fa-arrow-left"></i>
+
+  </button>
+
+
+  <div class="tracking-title">
+
+    <h1>
+      Pesanan Saya
+    </h1>
+
+    <span>
+      Shae Cleaners
+    </span>
+
+  </div>
+
+
+  <button
+    type="button"
+    class="tracking-home"
+    onclick="location.href='index.html'"
+  >
+
+    <i class="fa-solid fa-house"></i>
+
+  </button>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="tracking-main">
+
+
+  <!-- ===================================================
+       ORDER NOT FOUND
+  ==================================================== -->
+
+  <section
+    id="trackingEmpty"
+    class="tracking-empty"
+    style="display:none;"
+  >
+
+    <div class="tracking-empty-icon">
+
+      <i class="fa-solid fa-box-open"></i>
+
+    </div>
+
+
+    <h2>
+      Belum Ada Pesanan
+    </h2>
+
+
+    <p>
+      Pesanan yang Anda buat akan
+      muncul di halaman ini.
+    </p>
+
+
+    <button
+      type="button"
+      onclick="location.href='index.html'"
+      class="tracking-order-button"
+    >
+
+      <i class="fa-solid fa-plus"></i>
+
+      Buat Pesanan
+
+    </button>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       ORDER CONTENT
+  ==================================================== -->
+
+  <section
+    id="trackingContent"
+    style="display:none;"
+  >
+
+
+    <!-- ===============================================
+         STATUS CARD
+    ================================================ -->
+
+    <div class="tracking-status-card">
+
+
+      <div class="tracking-status-top">
+
+        <div>
+
+          <span class="tracking-label">
+            Status Pesanan
+          </span>
+
+
+          <h2 id="trackingStatus">
+            Menunggu Konfirmasi
+          </h2>
+
+        </div>
+
+
+        <div
+          id="trackingStatusIcon"
+          class="tracking-status-icon"
+        >
+
+          <i class="fa-solid fa-clock"></i>
+
+        </div>
+
+      </div>
+
+
+      <div class="tracking-invoice">
+
+        <span>
+          No. Invoice
+        </span>
+
+
+        <strong id="trackingInvoice">
+          -
+        </strong>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===============================================
+         PROGRESS
+    ================================================ -->
+
+    <div class="tracking-card">
+
+      <div class="tracking-card-title">
+
+        <i class="fa-solid fa-route"></i>
+
+        <span>
+          Perjalanan Pesanan
+        </span>
+
+      </div>
+
+
+      <div class="tracking-timeline">
+
+
+        <!-- STEP 1 -->
+
+        <div
+          class="tracking-step active"
+          data-status="created"
+        >
+
+          <div class="step-icon">
+
+            <i class="fa-solid fa-receipt"></i>
+
+          </div>
+
+
+          <div class="step-content">
+
+            <strong>
+              Pesanan Dibuat
+            </strong>
+
+
+            <span>
+              Pesanan berhasil dibuat
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- STEP 2 -->
+
+        <div
+          class="tracking-step"
+          data-status="confirmed"
+        >
+
+          <div class="step-icon">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+          </div>
+
+
+          <div class="step-content">
+
+            <strong>
+              Dikonfirmasi
+            </strong>
+
+
+            <span>
+              Pesanan telah dikonfirmasi
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- STEP 3 -->
+
+        <div
+          class="tracking-step"
+          data-status="processing"
+        >
+
+          <div class="step-icon">
+
+            <i class="fa-solid fa-broom"></i>
+
+          </div>
+
+
+          <div class="step-content">
+
+            <strong>
+              Sedang Diproses
+            </strong>
+
+
+            <span>
+              Tim sedang menyiapkan pesanan
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- STEP 4 -->
+
+        <div
+          class="tracking-step"
+          data-status="onway"
+        >
+
+          <div class="step-icon">
+
+            <i class="fa-solid fa-truck-fast"></i>
+
+          </div>
+
+
+          <div class="step-content">
+
+            <strong>
+              Teknisi Berangkat
+            </strong>
+
+
+            <span>
+              Teknisi menuju lokasi
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- STEP 5 -->
+
+        <div
+          class="tracking-step"
+          data-status="completed"
+        >
+
+          <div class="step-icon">
+
+            <i class="fa-solid fa-star"></i>
+
+          </div>
+
+
+          <div class="step-content">
+
+            <strong>
+              Selesai
+            </strong>
+
+
+            <span>
+              Pesanan telah selesai
+            </span>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===============================================
+         CUSTOMER
+    ================================================ -->
+
+    <div class="tracking-card">
+
+      <div class="tracking-card-title">
+
+        <i class="fa-regular fa-user"></i>
+
+        <span>
+          Data Pelanggan
+        </span>
+
+      </div>
+
+
+      <div class="tracking-customer">
+
+        <div class="tracking-customer-row">
+
+          <i class="fa-regular fa-user"></i>
+
+          <div>
+
+            <span>
+              Nama
+            </span>
+
+            <strong id="trackingCustomerName">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="tracking-customer-row">
+
+          <i class="fa-brands fa-whatsapp"></i>
+
+          <div>
+
+            <span>
+              WhatsApp
+            </span>
+
+            <strong id="trackingCustomerPhone">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="tracking-customer-row">
+
+          <i class="fa-solid fa-location-dot"></i>
+
+          <div>
+
+            <span>
+              Alamat
+            </span>
+
+            <strong id="trackingCustomerAddress">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===============================================
+         ORDER ITEMS
+    ================================================ -->
+
+    <div class="tracking-card">
+
+      <div class="tracking-card-title">
+
+        <i class="fa-solid fa-list-check"></i>
+
+        <span>
+          Detail Pesanan
+        </span>
+
+      </div>
+
+
+      <div
+        id="trackingItems"
+        class="tracking-items"
+      >
+
+      </div>
+
+
+      <div class="tracking-total">
+
+        <span>
+          Total Pesanan
+        </span>
+
+
+        <strong id="trackingTotal">
+          Rp0
+        </strong>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===============================================
+         ACTION
+    ================================================ -->
+
+    <div class="tracking-actions">
+
+
+      <button
+        type="button"
+        id="trackingInvoiceButton"
+        class="tracking-action invoice-action"
+      >
+
+        <i class="fa-solid fa-file-invoice"></i>
+
+        Lihat Invoice
+
+      </button>
+
+
+      <button
+        type="button"
+        id="trackingWhatsAppButton"
+        class="tracking-action whatsapp-action"
+      >
+
+        <i class="fa-brands fa-whatsapp"></i>
+
+        Hubungi Shae Cleaners
+
+      </button>
+
+
+      <button
+        type="button"
+        id="trackingRefreshButton"
+        class="tracking-action refresh-action"
+      >
+
+        <i class="fa-solid fa-rotate"></i>
+
+        Refresh Status
+
+      </button>
+
+    </div>
+
+
+  </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+  id="trackingToast"
+  class="tracking-toast"
+>
+
+  <i class="fa-solid fa-circle-check"></i>
+
+  <span id="trackingToastText">
+    Berhasil
+  </span>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="js/app.js"></script>
+
+<script src="js/tracking.js"></script>
+
+
+</body>
+
+</html>
