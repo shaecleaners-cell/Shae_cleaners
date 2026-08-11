@@ -1,0 +1,1233 @@
+/* =========================================================
+   SHAE CLEANERS MARKETPLACE
+   css/order-detail.css
+   PRODUCT / SERVICE DETAIL
+========================================================= */
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.detail-header {
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 1500;
+
+  height: 62px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 14px;
+
+  background:
+    rgba(255,255,255,0.97);
+
+  border-bottom:
+    1px solid #edf0f2;
+
+  box-shadow:
+    0 2px 12px
+    rgba(0,0,0,0.04);
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
+}
+
+
+.detail-header-title {
+
+  position: absolute;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  text-align: center;
+
+}
+
+
+.detail-header-title h1 {
+
+  color: #1d2939;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+}
+
+
+.detail-header-title span {
+
+  display: block;
+
+  margin-top: 2px;
+
+  color: #98a2b3;
+
+  font-size: 8px;
+
+}
+
+
+.detail-header-button {
+
+  position: relative;
+
+  width: 38px;
+
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 11px;
+
+  background: #f3f5f6;
+
+  color: #344054;
+
+  font-size: 14px;
+
+}
+
+
+.detail-header-button:active {
+
+  transform:
+    scale(0.9);
+
+}
+
+
+/* =========================================================
+   CART BADGE
+========================================================= */
+
+.detail-cart-badge {
+
+  position: absolute;
+
+  top: -3px;
+
+  right: -3px;
+
+  min-width: 16px;
+
+  height: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0 4px;
+
+  border-radius: 20px;
+
+  background: #ef4444;
+
+  color: white;
+
+  border: 2px solid white;
+
+  font-size: 7px;
+
+  font-weight: 900;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.detail-main {
+
+  width: 100%;
+
+  max-width: 700px;
+
+  margin: auto;
+
+  padding-bottom: 100px;
+
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.detail-image-section {
+
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      #eef9f2,
+      #f7faf8
+    );
+
+}
+
+
+.detail-image {
+
+  width: 100%;
+
+  height: 255px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
+  color: var(--primary);
+
+  font-size: 62px;
+
+}
+
+
+.detail-image img {
+
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+}
+
+
+.detail-image-dots {
+
+  position: absolute;
+
+  bottom: 10px;
+
+  left: 50%;
+
+  display: flex;
+
+  gap: 5px;
+
+  transform:
+    translateX(-50%);
+
+}
+
+
+.detail-image-dots span {
+
+  width: 6px;
+
+  height: 6px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(0,0,0,0.18);
+
+}
+
+
+.detail-image-dots span.active {
+
+  width: 17px;
+
+  border-radius: 10px;
+
+  background: var(--primary);
+
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.detail-info {
+
+  padding:
+    16px 15px 14px;
+
+  background: white;
+
+}
+
+
+.detail-service-category {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding:
+    5px 8px;
+
+  border-radius: 7px;
+
+  background: #effaf3;
+
+  color: var(--primary);
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+}
+
+
+.detail-service-category i {
+
+  font-size: 8px;
+
+}
+
+
+.detail-name {
+
+  margin-top: 9px;
+
+  color: #1d2939;
+
+  font-size: 19px;
+
+  line-height: 1.3;
+
+  font-weight: 900;
+
+}
+
+
+.detail-rating {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 8px;
+
+  color: #98a2b3;
+
+  font-size: 8px;
+
+}
+
+
+.rating-star {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  color: #d89200;
+
+  font-weight: 800;
+
+}
+
+
+.rating-star i {
+
+  font-size: 8px;
+
+}
+
+
+.rating-divider {
+
+  color: #d0d5d9;
+
+}
+
+
+.detail-price {
+
+  margin-top: 10px;
+
+  color: var(--primary);
+
+  font-size: 21px;
+
+  font-weight: 900;
+
+}
+
+
+.detail-price-note {
+
+  margin-top: 3px;
+
+  color: #98a2b3;
+
+  font-size: 8px;
+
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.detail-card {
+
+  margin-top: 8px;
+
+  padding:
+    16px 15px;
+
+  background: white;
+
+}
+
+
+.detail-card-title {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 12px;
+
+  color: #344054;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+}
+
+
+.detail-card-title i {
+
+  color: var(--primary);
+
+  font-size: 11px;
+
+}
+
+
+/* =========================================================
+   VARIANTS
+========================================================= */
+
+.detail-variants {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 8px;
+
+}
+
+
+.detail-variant {
+
+  position: relative;
+
+  min-height: 55px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding:
+    8px 10px;
+
+  border:
+    1px solid #e2e6e8;
+
+  border-radius: 11px;
+
+  background: white;
+
+  cursor: pointer;
+
+  transition:
+    .18s ease;
+
+}
+
+
+.detail-variant:active {
+
+  transform:
+    scale(0.98);
+
+}
+
+
+.detail-variant.active {
+
+  border-color:
+    var(--primary);
+
+  background:
+    #f1faf4;
+
+  box-shadow:
+    0 0 0 1px
+    var(--primary);
+
+}
+
+
+.detail-variant-name {
+
+  color: #344054;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+}
+
+
+.detail-variant-price {
+
+  margin-top: 4px;
+
+  color: var(--primary);
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+}
+
+
+.detail-variant-check {
+
+  position: absolute;
+
+  top: 6px;
+
+  right: 6px;
+
+  width: 15px;
+
+  height: 15px;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+
+  color: white;
+
+  font-size: 7px;
+
+}
+
+
+.detail-variant.active
+.detail-variant-check {
+
+  display: flex;
+
+}
+
+
+/* =========================================================
+   QUANTITY
+========================================================= */
+
+.detail-quantity {
+
+  width: max-content;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding:
+    5px;
+
+  border:
+    1px solid #e4e7e9;
+
+  border-radius: 11px;
+
+}
+
+
+.qty-button {
+
+  width: 32px;
+
+  height: 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  background: #f2f5f5;
+
+  color: #344054;
+
+  font-size: 9px;
+
+}
+
+
+.qty-button:active {
+
+  transform:
+    scale(0.9);
+
+}
+
+
+.qty-value {
+
+  min-width: 20px;
+
+  text-align: center;
+
+  color: #1d2939;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+}
+
+
+/* =========================================================
+   BOOKING
+========================================================= */
+
+.detail-booking {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 9px;
+
+}
+
+
+.detail-input-group {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+
+}
+
+
+.detail-input-group label {
+
+  color: #667085;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+}
+
+
+.detail-input {
+
+  position: relative;
+
+}
+
+
+.detail-input > i {
+
+  position: absolute;
+
+  left: 10px;
+
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  color: var(--primary);
+
+  font-size: 10px;
+
+  pointer-events: none;
+
+}
+
+
+.detail-input input {
+
+  width: 100%;
+
+  height: 40px;
+
+  padding:
+    0 9px 0 29px;
+
+  border:
+    1px solid #e0e4e6;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background: #fafbfb;
+
+  color: #344054;
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+}
+
+
+.detail-input input:focus {
+
+  border-color:
+    var(--primary);
+
+  background: white;
+
+}
+
+
+.detail-booking-note {
+
+  display: block;
+
+  margin-top: 8px;
+
+  color: #98a2b3;
+
+  font-size: 7px;
+
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.detail-note {
+
+  width: 100%;
+
+  min-height: 78px;
+
+  resize: vertical;
+
+  padding:
+    10px;
+
+  border:
+    1px solid #e0e4e6;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background: #fafbfb;
+
+  color: #344054;
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+  line-height: 1.5;
+
+}
+
+
+.detail-note::placeholder {
+
+  color: #b0b7bd;
+
+}
+
+
+.detail-note:focus {
+
+  border-color:
+    var(--primary);
+
+  background: white;
+
+}
+
+
+.detail-note-counter {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 5px;
+
+  color: #98a2b3;
+
+  font-size: 7px;
+
+}
+
+
+.detail-note-counter strong {
+
+  font-weight: 700;
+
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.detail-summary {
+
+  margin-top: 8px;
+
+  padding:
+    16px 15px;
+
+  background: #f6faf7;
+
+  border-top:
+    1px solid #e9f1eb;
+
+  border-bottom:
+    1px solid #e9f1eb;
+
+}
+
+
+.detail-summary > div {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+}
+
+
+.detail-summary span {
+
+  color: #667085;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+}
+
+
+.detail-summary strong {
+
+  color: var(--primary);
+
+  font-size: 18px;
+
+  font-weight: 900;
+
+}
+
+
+.detail-summary small {
+
+  display: block;
+
+  margin-top: 5px;
+
+  color: #98a2b3;
+
+  font-size: 7px;
+
+  line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   ACTION
+========================================================= */
+
+.detail-actions {
+
+  position: fixed;
+
+  left: 0;
+
+  right: 0;
+
+  bottom: 0;
+
+  z-index: 1400;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1.25fr;
+
+  gap: 8px;
+
+  padding:
+    9px 10px;
+
+  background:
+    rgba(255,255,255,0.97);
+
+  border-top:
+    1px solid #e7eaec;
+
+  box-shadow:
+    0 -5px 20px
+    rgba(0,0,0,0.06);
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
+}
+
+
+.detail-actions button {
+
+  min-height: 45px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  border-radius: 11px;
+
+  font-family: inherit;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+}
+
+
+.detail-cart-button {
+
+  border:
+    1px solid var(--primary);
+
+  background: white;
+
+  color: var(--primary);
+
+}
+
+
+.detail-buy-button {
+
+  border: 0;
+
+  background: var(--primary);
+
+  color: white;
+
+  box-shadow:
+    0 5px 15px
+    rgba(22,163,74,0.18);
+
+}
+
+
+.detail-actions button:active {
+
+  transform:
+    scale(0.98);
+
+}
+
+
+/* =========================================================
+   TRUST
+========================================================= */
+
+.detail-trust {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 5px;
+
+  padding:
+    15px 10px;
+
+  background: white;
+
+}
+
+
+.detail-trust > div {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 6px;
+
+  text-align: center;
+
+}
+
+
+.detail-trust i {
+
+  color: var(--primary);
+
+  font-size: 15px;
+
+}
+
+
+.detail-trust span {
+
+  color: #98a2b3;
+
+  font-size: 7px;
+
+  line-height: 1.3;
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.detail-toast {
+
+  position: fixed;
+
+  left: 50%;
+
+  bottom: 75px;
+
+  z-index: 3000;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  max-width:
+    calc(100% - 35px);
+
+  padding:
+    10px 14px;
+
+  transform:
+    translate(-50%, 20px);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  border-radius: 10px;
+
+  background: #1d2939;
+
+  color: white;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,0,0,0.18);
+
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
+
+}
+
+
+.detail-toast.show {
+
+  opacity: 1;
+
+  transform:
+    translate(-50%, 0);
+
+}
+
+
+.detail-toast i {
+
+  color: #4ade80;
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (min-width: 600px) {
+
+  .detail-main {
+
+    background: #f6f8f8;
+
+  }
+
+
+  .detail-image-section,
+  .detail-info,
+  .detail-card,
+  .detail-summary,
+  .detail-trust {
+
+    max-width: 700px;
+
+    margin-left: auto;
+
+    margin-right: auto;
+
+  }
+
+
+  .detail-image {
+
+    height: 360px;
+
+  }
+
+
+  .detail-actions {
+
+    left: 50%;
+
+    right: auto;
+
+    width: 700px;
+
+    transform:
+      translateX(-50%);
+
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .detail-image {
+
+    height: 220px;
+
+  }
+
+
+  .detail-name {
+
+    font-size: 17px;
+
+  }
+
+
+  .detail-price {
+
+    font-size: 19px;
+
+  }
+
+
+  .detail-variant {
+
+    min-height: 52px;
+
+  }
+
+
+  .detail-actions {
+
+    padding:
+      8px 7px;
+
+  }
+
+}

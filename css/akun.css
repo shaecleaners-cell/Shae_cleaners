@@ -1,0 +1,1121 @@
+/* =========================================================
+   SHAE CLEANERS
+   css/akun.css
+   ACCOUNT PAGE
+========================================================= */
+
+:root {
+  --account-green: #16a34a;
+  --account-green-dark: #15803d;
+  --account-bg: #f5f7f8;
+  --account-text: #344054;
+  --account-muted: #98a2b3;
+  --account-border: #e7eaec;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 76px;
+  background: var(--account-bg);
+  color: var(--account-text);
+  font-family: inherit;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.account-header {
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 2000;
+
+  height: 60px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 13px;
+
+  box-sizing: border-box;
+
+  background:
+    rgba(255,255,255,.97);
+
+  border-bottom:
+    1px solid var(--account-border);
+
+  box-shadow:
+    0 2px 12px
+    rgba(16,24,40,.04);
+
+  backdrop-filter:
+    blur(12px);
+
+}
+
+
+.account-header-button {
+
+  width: 37px;
+
+  height: 37px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: #f3f5f6;
+
+  color: #475467;
+
+  cursor: pointer;
+
+}
+
+
+.account-header-button:active {
+
+  transform: scale(.92);
+
+}
+
+
+.account-header-title {
+
+  position: absolute;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  text-align: center;
+
+}
+
+
+.account-header-title strong {
+
+  display: block;
+
+  color: #1d2939;
+
+  font-size: 13px;
+
+  font-weight: 900;
+
+}
+
+
+.account-header-title small {
+
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--account-muted);
+
+  font-size: 7px;
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.account-page {
+
+  width: 100%;
+
+  max-width: 680px;
+
+  margin: 0 auto;
+
+  padding:
+    10px 10px 25px;
+
+  box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.account-profile {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 14px;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--account-border);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 3px 14px
+    rgba(16,24,40,.03);
+
+}
+
+
+.account-avatar {
+
+  width: 52px;
+
+  height: 52px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #16a34a,
+      #22c55e
+    );
+
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: 900;
+
+  box-shadow:
+    0 5px 14px
+    rgba(22,163,74,.18);
+
+}
+
+
+.account-profile-info {
+
+  min-width: 0;
+
+  flex: 1;
+
+}
+
+
+.account-profile-info strong {
+
+  display: block;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  color: #1d2939;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+}
+
+
+.account-profile-info span {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: #667085;
+
+  font-size: 8px;
+
+}
+
+
+.account-profile-info small {
+
+  display: block;
+
+  margin-top: 4px;
+
+  color: var(--account-green);
+
+  font-size: 7px;
+
+  font-weight: 800;
+
+}
+
+
+.account-edit {
+
+  width: 32px;
+
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border:
+    1px solid #e2e6e8;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #667085;
+
+  cursor: pointer;
+
+}
+
+
+.account-edit:active {
+
+  transform: scale(.92);
+
+}
+
+
+/* =========================================================
+   QUICK MENU
+========================================================= */
+
+.account-menu {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 5px;
+
+  margin-top: 9px;
+
+  padding: 8px 4px;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--account-border);
+
+  border-radius: 14px;
+
+}
+
+
+.account-menu button {
+
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 5px 2px;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+}
+
+
+.account-menu button:active {
+
+  transform: scale(.94);
+
+}
+
+
+.account-menu-icon {
+
+  width: 34px;
+
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 5px;
+
+  border-radius: 10px;
+
+  font-size: 12px;
+
+}
+
+
+.account-menu-icon.green {
+
+  background: #ecfdf3;
+
+  color: #16a34a;
+
+}
+
+
+.account-menu-icon.blue {
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+}
+
+
+.account-menu-icon.orange {
+
+  background: #fff7ed;
+
+  color: #ea580c;
+
+}
+
+
+.account-menu-icon.red {
+
+  background: #fef2f2;
+
+  color: #ef4444;
+
+}
+
+
+.account-menu strong {
+
+  display: block;
+
+  color: #475467;
+
+  font-size: 7px;
+
+  font-weight: 900;
+
+}
+
+
+.account-menu small {
+
+  display: block;
+
+  margin-top: 2px;
+
+  color: #98a2b3;
+
+  font-size: 5.5px;
+
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.account-section {
+
+  margin-top: 13px;
+
+}
+
+
+.account-section-title {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+
+  padding: 0 2px;
+
+}
+
+
+.account-section-title strong {
+
+  color: #344054;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+}
+
+
+.account-section-title button {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--account-green);
+
+  font-family: inherit;
+
+  font-size: 7px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+}
+
+
+/* =========================================================
+   LATEST ORDERS
+========================================================= */
+
+.latest-orders {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+}
+
+
+.latest-order-empty {
+
+  padding: 24px 15px;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--account-border);
+
+  border-radius: 12px;
+
+}
+
+
+.latest-order-empty i {
+
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #c5cbd1;
+
+  font-size: 20px;
+
+}
+
+
+.latest-order-empty strong {
+
+  display: block;
+
+  color: #667085;
+
+  font-size: 8px;
+
+}
+
+
+.latest-order-empty span {
+
+  display: block;
+
+  margin-top: 4px;
+
+  color: #98a2b3;
+
+  font-size: 7px;
+
+}
+
+
+/* =========================================================
+   ORDER CARD
+========================================================= */
+
+.latest-order-card {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 11px;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--account-border);
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+}
+
+
+.latest-order-card:active {
+
+  transform: scale(.99);
+
+}
+
+
+.latest-order-icon {
+
+  width: 38px;
+
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #ecfdf3;
+
+  color: var(--account-green);
+
+  font-size: 13px;
+
+}
+
+
+.latest-order-content {
+
+  flex: 1;
+
+  min-width: 0;
+
+}
+
+
+.latest-order-content strong {
+
+  display: block;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  color: #344054;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+}
+
+
+.latest-order-content span {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: #98a2b3;
+
+  font-size: 6.5px;
+
+}
+
+
+.latest-order-price {
+
+  text-align: right;
+
+}
+
+
+.latest-order-price strong {
+
+  display: block;
+
+  color: var(--account-green);
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+}
+
+
+.latest-order-price span {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: #98a2b3;
+
+  font-size: 6px;
+
+}
+
+
+/* =========================================================
+   ACCOUNT LIST
+========================================================= */
+
+.account-list {
+
+  overflow: hidden;
+
+  margin-top: 13px;
+
+  background: #ffffff;
+
+  border:
+    1px solid var(--account-border);
+
+  border-radius: 14px;
+
+}
+
+
+.account-list button {
+
+  width: 100%;
+
+  min-height: 57px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 9px 12px;
+
+  box-sizing: border-box;
+
+  border: 0;
+
+  border-bottom:
+    1px solid #f0f2f3;
+
+  background: #ffffff;
+
+  text-align: left;
+
+  cursor: pointer;
+
+}
+
+
+.account-list button:last-child {
+
+  border-bottom: 0;
+
+}
+
+
+.account-list button:active {
+
+  background: #fafafa;
+
+}
+
+
+.account-list-icon {
+
+  width: 34px;
+
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #f4f7f5;
+
+  color: #667085;
+
+  font-size: 11px;
+
+}
+
+
+.account-list-text {
+
+  flex: 1;
+
+  min-width: 0;
+
+}
+
+
+.account-list-text strong {
+
+  display: block;
+
+  color: #475467;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+}
+
+
+.account-list-text small {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: #98a2b3;
+
+  font-size: 6.5px;
+
+}
+
+
+.account-list > button > i {
+
+  color: #c2c8cc;
+
+  font-size: 8px;
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-button {
+
+  width: 100%;
+
+  min-height: 44px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-top: 13px;
+
+  border:
+    1px solid #fee2e2;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #dc2626;
+
+  font-family: inherit;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+
+}
+
+
+.logout-button:active {
+
+  transform: scale(.98);
+
+}
+
+
+/* =========================================================
+   VERSION
+========================================================= */
+
+.account-version {
+
+  padding: 15px 0 8px;
+
+  text-align: center;
+
+  color: #b0b7bd;
+
+  font-size: 6.5px;
+
+}
+
+
+.account-version span {
+
+  margin: 0 4px;
+
+}
+
+
+/* =========================================================
+   BOTTOM NAV
+========================================================= */
+
+.bottom-nav {
+
+  position: fixed;
+
+  left: 0;
+
+  right: 0;
+
+  bottom: 0;
+
+  z-index: 3000;
+
+  height: 64px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  align-items: end;
+
+  padding:
+    4px 6px
+    env(safe-area-inset-bottom);
+
+  box-sizing: border-box;
+
+  background:
+    rgba(255,255,255,.98);
+
+  border-top:
+    1px solid var(--account-border);
+
+  box-shadow:
+    0 -4px 18px
+    rgba(16,24,40,.06);
+
+  backdrop-filter:
+    blur(12px);
+
+}
+
+
+.bottom-nav a {
+
+  position: relative;
+
+  height: 55px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 3px;
+
+  color: #98a2b3;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+}
+
+
+.bottom-nav a i {
+
+  font-size: 14px;
+
+}
+
+
+.bottom-nav a.active {
+
+  color: var(--account-green);
+
+}
+
+
+.bottom-nav a.active i {
+
+  transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   ORDER BUTTON
+========================================================= */
+
+.bottom-order {
+
+  justify-content: flex-start !important;
+
+}
+
+
+.bottom-order span {
+
+  width: 43px;
+
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-top: -17px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #16a34a,
+      #22c55e
+    );
+
+  color: white;
+
+  box-shadow:
+    0 6px 15px
+    rgba(22,163,74,.25);
+
+}
+
+
+.bottom-order span i {
+
+  font-size: 16px;
+
+}
+
+
+.bottom-order label {
+
+  margin-top: 1px;
+
+  color: var(--account-green);
+
+  font-size: 7px;
+
+  font-weight: 900;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (min-width: 600px) {
+
+  .account-page {
+
+    padding-top: 18px;
+
+  }
+
+
+  .bottom-nav {
+
+    max-width: 680px;
+
+    left: 50%;
+
+    right: auto;
+
+    width: 100%;
+
+    transform:
+      translateX(-50%);
+
+    border-left:
+      1px solid var(--account-border);
+
+    border-right:
+      1px solid var(--account-border);
+
+    border-radius:
+      16px 16px 0 0;
+
+  }
+
+}
