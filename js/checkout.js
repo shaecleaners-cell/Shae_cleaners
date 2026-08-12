@@ -7,6 +7,7 @@
    - Menampilkan pesanan
    - Hitung subtotal
    - Promo otomatis
+   - Membaca promo dari promo.html
    - Data customer
    - Jadwal
    - Invoice otomatis
@@ -24,7 +25,8 @@ document.addEventListener(
    CONFIG
 ========================================================= */
 
-const CART_KEY = "shae_cart";
+const CART_KEY =
+  "shae_cart";
 
 const CUSTOMER_KEY =
   "shae_customer";
@@ -32,11 +34,18 @@ const CUSTOMER_KEY =
 const ORDER_KEY =
   "shae_orders";
 
+const PROMO_KEY =
+  "shae_selected_promo";
+
+const ACTIVE_ORDER_KEY =
+  "shae_active_order";
+
 
 /*
  * Nomor WhatsApp Shae Cleaners.
  * Format internasional tanpa +
  */
+
 const ADMIN_WA =
   "6283813138221";
 
@@ -51,6 +60,8 @@ let customer = null;
 
 let discount = 0;
 
+let selectedPromo = null;
+
 
 /* =========================================================
    INIT
@@ -61,6 +72,8 @@ function initCheckout() {
   loadCart();
 
   loadCustomer();
+
+  loadSelectedPromo();
 
   setMinimumDate();
 
@@ -176,12 +189,84 @@ function loadCustomer() {
     );
 
 
+    setValue(
+      "serviceDate",
+      customer.date
+    );
+
+
+    setValue(
+      "serviceTime",
+      customer.time
+    );
+
+
   } catch (error) {
 
     console.error(
       "Customer error:",
       error
     );
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD SELECTED PROMO
+========================================================= */
+
+function loadSelectedPromo() {
+
+  try {
+
+    const saved =
+      localStorage.getItem(
+        PROMO_KEY
+      );
+
+
+    if (!saved) {
+
+      selectedPromo = null;
+
+      return;
+
+    }
+
+
+    const data =
+      JSON.parse(
+        saved
+      );
+
+
+    if (
+      data &&
+      typeof data === "object"
+    ) {
+
+      selectedPromo =
+        data;
+
+    } else {
+
+      selectedPromo =
+        null;
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "Promo error:",
+      error
+    );
+
+    selectedPromo =
+      null;
 
   }
 
@@ -218,13 +303,19 @@ function setMinimumDate() {
   const month =
     String(
       today.getMonth() + 1
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
 
 
   const day =
     String(
       today.getDate()
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
 
 
   const date =
@@ -235,12 +326,9 @@ function setMinimumDate() {
     date;
 
 
-  /*
-   * Default jadwal:
-   * hari ini
-   */
-
-  if (!dateInput.value) {
+  if (
+    !dateInput.value
+  ) {
 
     dateInput.value =
       date;
@@ -280,9 +368,16 @@ function renderCart() {
       (
         total,
         item
-      ) =>
-        total +
-        Number(item.qty || 0),
+      ) => {
+
+        return (
+          total +
+          Number(
+            item.qty || 0
+          )
+        );
+
+      },
       0
     );
 
@@ -341,7 +436,8 @@ function renderCart() {
 
 
           const subtotal =
-            qty * price;
+            qty *
+            price;
 
 
           return `
@@ -367,7 +463,9 @@ function renderCart() {
 
                 <small>
                   ${qty} ×
-                  ${formatRupiah(price)}
+                  ${formatRupiah(
+                    price
+                  )}
                 </small>
 
               </div>
@@ -383,7 +481,8 @@ function renderCart() {
 
                 <small>
                   ${escapeHTML(
-                    item.service || "Layanan"
+                    item.service ||
+                    "Layanan"
                   )}
                 </small>
 
@@ -401,7 +500,7 @@ function renderCart() {
 
 
 /* =========================================================
-   CALCULATE
+   CALCULATE TOTAL
 ========================================================= */
 
 function calculateTotal() {
@@ -436,62 +535,102 @@ function calculateTotal() {
 
 
   /*
-   * Promo:
+   * ===============================================
+   * ATURAN PROMO SHAE CLEANERS
+   * ===============================================
    *
-   * >= Rp500.000
-   * diskon 8%
+   * Rp350.000 - Rp499.999
+   *     → diskon 17%
    *
-   * >= Rp350.000
-   * diskon 17%
+   * Rp500.000 ke atas
+   *     → diskon 17%
+   *     → tambahan 8% dari harga setelah diskon 17%
    *
-   * Catatan:
-   * Untuk order >= 500rb,
-   * sistem menggunakan diskon
-   * 8% tambahan setelah diskon
-   * 17%.
+   * Contoh:
+   *
+   * Rp500.000
+   *
+   * Diskon 17%:
+   * Rp85.000
+   *
+   * Sisa:
+   * Rp415.000
+   *
+   * Tambahan 8%:
+   * Rp33.200
+   *
+   * Total diskon:
+   * Rp118.200
+   *
+   * Grand total:
+   * Rp381.800
+   *
+   * ===============================================
    */
 
   discount = 0;
 
 
+  let discount17 = 0;
+
+  let discount8 = 0;
+
+
+  /*
+   * PROMO 17%
+   */
+
+  if (
+    subtotal >= 350000
+  ) {
+
+    discount17 =
+      Math.round(
+        subtotal * 0.17
+      );
+
+  }
+
+
+  /*
+   * TAMBAHAN 8%
+   */
+
   if (
     subtotal >= 500000
   ) {
 
-    discount =
-      Math.round(
-        subtotal * 0.17
-      );
+    const after17 =
+      subtotal -
+      discount17;
 
 
-    discount +=
+    discount8 =
       Math.round(
-        (
-          subtotal -
-          discount
-        ) * 0.08
+        after17 * 0.08
       );
 
   }
 
-  else if (
-    subtotal >= 350000
-  ) {
 
-    discount =
-      Math.round(
-        subtotal * 0.17
-      );
-
-  }
+  discount =
+    discount17 +
+    discount8;
 
 
   const grandTotal =
     Math.max(
       0,
-      subtotal - discount
+      subtotal -
+      discount
     );
 
+
+  /*
+   * ===============================================
+   * TAMPILKAN SUBTOTAL
+   * ===============================================
+   */
 
   setText(
     "subtotal",
@@ -501,13 +640,27 @@ function calculateTotal() {
   );
 
 
+  /*
+   * ===============================================
+   * TAMPILKAN DISKON
+   * ===============================================
+   */
+
   setText(
     "discount",
-    `- ${formatRupiah(
-      discount
-    )}`
+    discount > 0
+      ? `- ${formatRupiah(
+          discount
+        )}`
+      : "Rp0"
   );
 
+
+  /*
+   * ===============================================
+   * GRAND TOTAL
+   * ===============================================
+   */
 
   setText(
     "grandTotal",
@@ -517,11 +670,31 @@ function calculateTotal() {
   );
 
 
+  /*
+   * ===============================================
+   * TOTAL DI BUTTON
+   * ===============================================
+   */
+
   setText(
     "buttonTotal",
     formatRupiah(
       grandTotal
     )
+  );
+
+
+  /*
+   * ===============================================
+   * DETAIL PROMO
+   * ===============================================
+   */
+
+  renderPromoStatus(
+    subtotal,
+    discount17,
+    discount8,
+    discount
   );
 
 
@@ -531,9 +704,137 @@ function calculateTotal() {
 
     discount,
 
+    discount17,
+
+    discount8,
+
     grandTotal
 
   };
+
+}
+
+
+/* =========================================================
+   PROMO STATUS
+========================================================= */
+
+function renderPromoStatus(
+  subtotal,
+  discount17,
+  discount8,
+  totalDiscount
+) {
+
+  const element =
+    document.getElementById(
+      "promoStatus"
+    );
+
+
+  if (!element) {
+
+    return;
+
+  }
+
+
+  if (
+    subtotal < 350000
+  ) {
+
+    const remaining =
+      350000 -
+      subtotal;
+
+
+    element.innerHTML = `
+
+      <i
+        class="fa-solid fa-tag"
+      ></i>
+
+      Tambah
+      <strong>
+        ${formatRupiah(
+          remaining
+        )}
+      </strong>
+      untuk mendapatkan diskon 17%.
+
+    `;
+
+
+    element.className =
+      "promo-status warning";
+
+
+    return;
+
+  }
+
+
+  if (
+    subtotal < 500000
+  ) {
+
+    const remaining =
+      500000 -
+      subtotal;
+
+
+    element.innerHTML = `
+
+      <i
+        class="fa-solid fa-circle-check"
+      ></i>
+
+      Diskon 17% aktif.
+
+      Tambah
+      <strong>
+        ${formatRupiah(
+          remaining
+        )}
+      </strong>
+      untuk mendapatkan tambahan diskon 8%.
+
+    `;
+
+
+    element.className =
+      "promo-status success";
+
+
+    return;
+
+  }
+
+
+  element.innerHTML = `
+
+    <i
+      class="fa-solid fa-gift"
+    ></i>
+
+    Promo aktif:
+
+    <strong>
+      Diskon 17% + tambahan 8%
+    </strong>
+
+    <small>
+      Total hemat
+      ${formatRupiah(
+        totalDiscount
+      )}
+    </small>
+
+  `;
+
+
+  element.className =
+    "promo-status success";
 
 }
 
@@ -547,10 +848,15 @@ function setupEvents() {
   const fields = [
 
     "customerName",
+
     "customerPhone",
+
     "customerAddress",
+
     "customerNote",
+
     "serviceDate",
+
     "serviceTime"
 
   ];
@@ -634,9 +940,21 @@ function setupEvents() {
         calculateTotal();
 
 
-        alert(
-          "Promo otomatis akan diterapkan sesuai total pesanan."
-        );
+        if (
+          selectedPromo
+        ) {
+
+          alert(
+            `${selectedPromo.name} dipilih.\n\nDiskon akan dihitung otomatis berdasarkan total pesanan.`
+          );
+
+        } else {
+
+          alert(
+            "Promo otomatis akan diterapkan sesuai total pesanan."
+          );
+
+        }
 
       }
     );
@@ -791,7 +1109,7 @@ function validateCheckout() {
 
 
 /* =========================================================
-   DISABLE
+   DISABLE CHECKOUT
 ========================================================= */
 
 function disableCheckout() {
@@ -870,6 +1188,11 @@ function createOrder() {
   }
 
 
+  /*
+   * Hitung ulang tepat sebelum
+   * membuat order.
+   */
+
   const totals =
     calculateTotal();
 
@@ -885,9 +1208,11 @@ function createOrder() {
     createdAt:
       new Date().toISOString(),
 
-    customer: data,
+    customer:
+      data,
 
-    items: cart,
+    items:
+      cart,
 
     subtotal:
       totals.subtotal,
@@ -895,14 +1220,37 @@ function createOrder() {
     discount:
       totals.discount,
 
+    discount17:
+      totals.discount17,
+
+    discount8:
+      totals.discount8,
+
     total:
       totals.grandTotal,
+
+    promo:
+      selectedPromo
+        ? {
+
+            code:
+              selectedPromo.code,
+
+            name:
+              selectedPromo.name
+
+          }
+        : null,
 
     status:
       "Menunggu Konfirmasi"
 
   };
 
+
+  /*
+   * Simpan order.
+   */
 
   saveOrder(
     order
@@ -911,10 +1259,11 @@ function createOrder() {
 
   /*
    * Simpan order aktif
+   * untuk invoice/detail.
    */
 
   localStorage.setItem(
-    "shae_active_order",
+    ACTIVE_ORDER_KEY,
     JSON.stringify(
       order
     )
@@ -922,7 +1271,7 @@ function createOrder() {
 
 
   /*
-   * Buat pesan WhatsApp
+   * Buat pesan WhatsApp.
    */
 
   const message =
@@ -938,7 +1287,27 @@ function createOrder() {
 
 
   /*
-   * Buka WhatsApp
+   * Bersihkan promo terpilih
+   * agar tidak terbawa ke order berikutnya.
+   */
+
+  localStorage.removeItem(
+    PROMO_KEY
+  );
+
+
+  /*
+   * Bersihkan cart setelah
+   * order berhasil dibuat.
+   */
+
+  localStorage.removeItem(
+    CART_KEY
+  );
+
+
+  /*
+   * Buka WhatsApp.
    */
 
   window.location.href =
@@ -1020,13 +1389,19 @@ function generateInvoice() {
   const month =
     String(
       today.getMonth() + 1
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
 
 
   const day =
     String(
       today.getDate()
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
 
 
   const dateKey =
@@ -1057,7 +1432,10 @@ function generateInvoice() {
   return (
     `INV-${dateKey}-` +
     String(number)
-      .padStart(3,"0")
+      .padStart(
+        3,
+        "0"
+      )
   );
 
 }
@@ -1081,12 +1459,16 @@ function saveOrder(
 
     let orders =
       saved
-        ? JSON.parse(saved)
+        ? JSON.parse(
+            saved
+          )
         : [];
 
 
     if (
-      !Array.isArray(orders)
+      !Array.isArray(
+        orders
+      )
     ) {
 
       orders = [];
@@ -1184,12 +1566,80 @@ ${order.customer.time}
       message +=
 
 `\n• ${item.name}
-  ${item.qty} × ${formatRupiah(item.price)}
-  = ${formatRupiah(subtotal)}
+  ${item.qty} × ${formatRupiah(
+    item.price
+  )}
+  = ${formatRupiah(
+    subtotal
+  )}
 `;
 
     }
   );
+
+
+  /*
+   * PROMO
+   */
+
+  if (
+    order.discount17 > 0 ||
+    order.discount8 > 0
+  ) {
+
+    message +=
+
+`
+━━━━━━━━━━━━━━
+*PROMO*
+━━━━━━━━━━━━━━
+`;
+
+    if (
+      order.discount17 > 0
+    ) {
+
+      message +=
+
+`Diskon 17%:
+- ${formatRupiah(
+  order.discount17
+)}
+`;
+
+    }
+
+
+    if (
+      order.discount8 > 0
+    ) {
+
+      message +=
+
+`Tambahan 8%:
+- ${formatRupiah(
+  order.discount8
+)}
+`;
+
+    }
+
+  }
+
+
+  if (
+    order.promo
+  ) {
+
+    message +=
+
+`
+Kode Promo:
+${order.promo.code}
+${order.promo.name}
+`;
+
+  }
 
 
   message +=
@@ -1201,7 +1651,7 @@ ${formatRupiah(
   order.subtotal
 )}
 
-Diskon:
+Total Diskon:
 - ${formatRupiah(
   order.discount
 )}
@@ -1219,6 +1669,7 @@ Mohon konfirmasi pesanan saya.
 
 Terima kasih.
 `;
+
 
   return message;
 
@@ -1246,12 +1697,27 @@ function formatDate(
     );
 
 
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return value;
+
+  }
+
+
   return new Intl.DateTimeFormat(
     "id-ID",
     {
+
       day: "2-digit",
+
       month: "long",
+
       year: "numeric"
+
     }
   ).format(
     date
@@ -1279,18 +1745,24 @@ function normalizePhone(
 
 
   if (
-    value.startsWith("0")
+    value.startsWith(
+      "0"
+    )
   ) {
 
     value =
       "62" +
-      value.substring(1);
+      value.substring(
+        1
+      );
 
   }
 
 
   if (
-    value.startsWith("8")
+    value.startsWith(
+      "8"
+    )
   ) {
 
     value =
@@ -1317,15 +1789,20 @@ function formatRupiah(
     "id-ID",
     {
 
-      style: "currency",
+      style:
+        "currency",
 
-      currency: "IDR",
+      currency:
+        "IDR",
 
-      maximumFractionDigits: 0
+      maximumFractionDigits:
+        0
 
     }
   ).format(
-    Number(value) || 0
+    Number(
+      value
+    ) || 0
   );
 
 }
