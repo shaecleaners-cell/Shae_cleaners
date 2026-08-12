@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#16a34a"
+  >
+
+  <title>Cuci AC - Shae Cleaners</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/ac.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="service-header">
+
+    <button
+      class="back-button"
+      onclick="history.back()"
+      aria-label="Kembali"
+    >
+
+      <i class="fa-solid fa-arrow-left"></i>
+
+    </button>
+
+
+    <div class="header-title">
+
+      <strong>
+        Cuci AC
+      </strong>
+
+      <small>
+        Cleaning & Perawatan AC
+      </small>
+
+    </div>
+
+
+    <a
+      href="checkout.html"
+      class="cart-button"
+      aria-label="Keranjang"
+    >
+
+      <i class="fa-solid fa-cart-shopping"></i>
+
+      <span
+        id="cartCount"
+        class="cart-count"
+      >
+        0
+      </span>
+
+    </a>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="service-page">
+
+
+    <!-- ===================================================
+         HERO
+    ==================================================== -->
+
+    <section class="service-hero">
+
+      <div class="hero-icon">
+
+        <i class="fa-solid fa-snowflake"></i>
+
+      </div>
+
+
+      <div class="hero-content">
+
+        <span>
+          SHAE CLEANERS
+        </span>
+
+        <h1>
+          Cuci AC
+        </h1>
+
+        <p>
+          AC lebih bersih, sejuk dan nyaman
+          digunakan setiap hari.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         PROMO
+    ==================================================== -->
+
+    <section class="promo-card">
+
+      <div class="promo-icon">
+
+        <i class="fa-solid fa-tags"></i>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          Promo Cleaning
+        </strong>
+
+        <p>
+          Diskon otomatis sesuai total pesanan
+        </p>
+
+      </div>
+
+
+      <span>
+        PROMO
+      </span>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         SERVICE
+    ==================================================== -->
+
+    <section class="service-section">
+
+      <div class="section-heading">
+
+        <strong>
+          Pilih Layanan AC
+        </strong>
+
+        <small>
+          Harga per unit
+        </small>
+
+      </div>
+
+
+      <div class="service-list">
+
+
+        <!-- AC 0.5 - 1 PK -->
+
+        <article class="service-card">
+
+          <div class="service-card-icon">
+
+            <i class="fa-solid fa-snowflake"></i>
+
+          </div>
+
+
+          <div class="service-card-info">
+
+            <strong>
+              AC 0.5 – 1 PK
+            </strong>
+
+            <small>
+              Cleaning AC rumah / kamar
+            </small>
+
+            <b>
+              Konsultasi
+            </b>
+
+          </div>
+
+
+          <button
+            class="add-service"
+            type="button"
+
+            data-name="Cuci AC 0.5 - 1 PK"
+
+            data-service="Cuci AC"
+
+            data-price="0"
+
+            data-consultation="true"
+          >
+
+            <i class="fa-solid fa-phone"></i>
+
+          </button>
+
+        </article>
+
+
+
+        <!-- AC 1.5 - 2 PK -->
+
+        <article class="service-card">
+
+          <div class="service-card-icon">
+
+            <i class="fa-solid fa-snowflake"></i>
+
+          </div>
+
+
+          <div class="service-card-info">
+
+            <strong>
+              AC 1.5 – 2 PK
+            </strong>
+
+            <small>
+              Cleaning AC ukuran besar
+            </small>
+
+            <b>
+              Konsultasi
+            </b>
+
+          </div>
+
+
+          <button
+            class="add-service"
+            type="button"
+
+            data-name="Cuci AC 1.5 - 2 PK"
+
+            data-service="Cuci AC"
+
+            data-price="0"
+
+            data-consultation="true"
+          >
+
+            <i class="fa-solid fa-phone"></i>
+
+          </button>
+
+        </article>
+
+
+
+        <!-- AC CASSETTE -->
+
+        <article class="service-card">
+
+          <div class="service-card-icon">
+
+            <i class="fa-solid fa-fan"></i>
+
+          </div>
+
+
+          <div class="service-card-info">
+
+            <strong>
+              AC Cassette
+            </strong>
+
+            <small>
+              Cleaning AC cassette
+            </small>
+
+            <b>
+              Konsultasi
+            </b>
+
+          </div>
+
+
+          <button
+            class="add-service"
+            type="button"
+
+            data-name="Cuci AC Cassette"
+
+            data-service="Cuci AC"
+
+            data-price="0"
+
+            data-consultation="true"
+          >
+
+            <i class="fa-solid fa-phone"></i>
+
+          </button>
+
+        </article>
+
+
+
+        <!-- AC SPLIT PREMIUM -->
+
+        <article class="service-card">
+
+          <div class="service-card-icon">
+
+            <i class="fa-solid fa-wind"></i>
+
+          </div>
+
+
+          <div class="service-card-info">
+
+            <strong>
+              AC Split Premium
+            </strong>
+
+            <small>
+              Deep cleaning AC
+            </small>
+
+            <b>
+              Konsultasi
+            </b>
+
+          </div>
+
+
+          <button
+            class="add-service"
+            type="button"
+
+            data-name="Deep Cleaning AC Split"
+
+            data-service="Deep Cleaning AC"
+
+            data-price="0"
+
+            data-consultation="true"
+          >
+
+            <i class="fa-solid fa-phone"></i>
+
+          </button>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         INFO
+    ==================================================== -->
+
+    <section class="info-card">
+
+      <div class="info-icon">
+
+        <i class="fa-solid fa-circle-info"></i>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          Informasi Layanan
+        </strong>
+
+        <p>
+          Harga AC dapat berbeda berdasarkan
+          kapasitas PK, tipe AC, kondisi unit,
+          dan tingkat kotoran. Silakan
+          konsultasikan terlebih dahulu.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         CART
+    ==================================================== -->
+
+    <section
+      id="cartPreview"
+      class="cart-preview"
+    >
+
+      <div>
+
+        <small>
+          Total Keranjang
+        </small>
+
+        <strong id="cartTotal">
+          Rp0
+        </strong>
+
+      </div>
+
+
+      <a
+        href="checkout.html"
+        class="checkout-link"
+      >
+
+        Lanjut Checkout
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+      </a>
+
+    </section>
+
+
+  </main>
+
+
+
+  <script src="js/ac.js"></script>
+
+</body>
+
+</html>
