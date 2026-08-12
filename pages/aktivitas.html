@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Aktivitas - Shae Cleaners</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/aktivitas.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="activity-header">
+
+    <button
+      class="back-button"
+      onclick="history.back()"
+      aria-label="Kembali"
+    >
+
+      <i class="fa-solid fa-arrow-left"></i>
+
+    </button>
+
+
+    <div class="activity-title">
+
+      <strong>Aktivitas</strong>
+
+      <small>Riwayat pesanan Shae Cleaners</small>
+
+    </div>
+
+
+    <button
+      class="clear-button"
+      id="clearActivity"
+      aria-label="Hapus aktivitas"
+    >
+
+      <i class="fa-solid fa-trash"></i>
+
+    </button>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       PAGE
+  ====================================================== -->
+
+  <main class="activity-page">
+
+
+    <!-- ===================================================
+         SUMMARY
+    ==================================================== -->
+
+    <section class="activity-summary">
+
+      <div class="summary-box">
+
+        <div class="summary-icon">
+
+          <i class="fa-solid fa-receipt"></i>
+
+        </div>
+
+        <div>
+
+          <strong id="totalOrders">0</strong>
+
+          <small>Total Pesanan</small>
+
+        </div>
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <div class="summary-icon">
+
+          <i class="fa-solid fa-clock"></i>
+
+        </div>
+
+        <div>
+
+          <strong id="waitingOrders">0</strong>
+
+          <small>Menunggu</small>
+
+        </div>
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <div class="summary-icon">
+
+          <i class="fa-solid fa-check"></i>
+
+        </div>
+
+        <div>
+
+          <strong id="completedOrders">0</strong>
+
+          <small>Selesai</small>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         FILTER
+    ==================================================== -->
+
+    <section class="activity-filter">
+
+      <button
+        class="filter-btn active"
+        data-filter="all"
+      >
+        Semua
+      </button>
+
+      <button
+        class="filter-btn"
+        data-filter="Menunggu Konfirmasi"
+      >
+        Menunggu
+      </button>
+
+      <button
+        class="filter-btn"
+        data-filter="Diproses"
+      >
+        Diproses
+      </button>
+
+      <button
+        class="filter-btn"
+        data-filter="Selesai"
+      >
+        Selesai
+      </button>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         ORDER LIST
+    ==================================================== -->
+
+    <section
+      class="activity-list"
+      id="activityList"
+    >
+
+      <!-- Javascript mengisi daftar pesanan -->
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+       BOTTOM NAV
+  ====================================================== -->
+
+  <nav class="bottom-nav">
+
+    <a href="index.html">
+
+      <i class="fa-solid fa-house"></i>
+
+      <span>Home</span>
+
+    </a>
+
+
+    <a href="promo.html">
+
+      <i class="fa-solid fa-tag"></i>
+
+      <span>Promo</span>
+
+    </a>
+
+
+    <a
+      href="order.html"
+      class="bottom-order"
+    >
+
+      <span>
+
+        <i class="fa-solid fa-plus"></i>
+
+      </span>
+
+      <label>Order</label>
+
+    </a>
+
+
+    <a
+      href="aktivitas.html"
+      class="active"
+    >
+
+      <i class="fa-solid fa-clock-rotate-left"></i>
+
+      <span>Aktivitas</span>
+
+    </a>
+
+
+    <a href="akun.html">
+
+      <i class="fa-solid fa-user"></i>
+
+      <span>Akun</span>
+
+    </a>
+
+  </nav>
+
+
+
+  <script src="js/aktivitas.js"></script>
+
+</body>
+
+</html>
