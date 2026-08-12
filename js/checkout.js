@@ -1,107 +1,44 @@
 /* =========================================================
-   SHAE CLEANERS MARKETPLACE
+   SHAE CLEANERS
    js/checkout.js
-   CART + CUSTOMER + TOTAL + INVOICE
+
+   FITUR:
+   - Membaca shae_cart
+   - Menampilkan pesanan
+   - Hitung subtotal
+   - Promo otomatis
+   - Data customer
+   - Jadwal
+   - Invoice otomatis
+   - Simpan order
+   - Kirim ke WhatsApp
 ========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  initCheckout
+);
 
 
 /* =========================================================
    CONFIG
 ========================================================= */
 
-const CART_KEY =
-  "shae_cart";
+const CART_KEY = "shae_cart";
+
+const CUSTOMER_KEY =
+  "shae_customer";
 
 const ORDER_KEY =
-  "shae_order";
-
-const INVOICE_KEY =
-  "shae_invoice";
+  "shae_orders";
 
 
-/* =========================================================
-   ELEMENT
-========================================================= */
-
-const checkoutItems =
-  document.getElementById(
-    "checkoutItems"
-  );
-
-const checkoutItemCount =
-  document.getElementById(
-    "checkoutItemCount"
-  );
-
-const emptyCart =
-  document.getElementById(
-    "emptyCart"
-  );
-
-const subtotalElement =
-  document.getElementById(
-    "subtotal"
-  );
-
-const serviceFeeElement =
-  document.getElementById(
-    "serviceFee"
-  );
-
-const discountElement =
-  document.getElementById(
-    "discount"
-  );
-
-const checkoutTotalElement =
-  document.getElementById(
-    "checkoutTotal"
-  );
-
-const bottomCheckoutTotal =
-  document.getElementById(
-    "bottomCheckoutTotal"
-  );
-
-const createOrderButton =
-  document.getElementById(
-    "createOrderButton"
-  );
-
-const customerForm =
-  document.getElementById(
-    "customerForm"
-  );
-
-const customerName =
-  document.getElementById(
-    "customerName"
-  );
-
-const customerPhone =
-  document.getElementById(
-    "customerPhone"
-  );
-
-const customerAddress =
-  document.getElementById(
-    "customerAddress"
-  );
-
-const customerNote =
-  document.getElementById(
-    "customerNote"
-  );
-
-const checkoutToast =
-  document.getElementById(
-    "checkoutToast"
-  );
-
-const checkoutToastText =
-  document.getElementById(
-    "checkoutToastText"
-  );
+/*
+ * Nomor WhatsApp Shae Cleaners.
+ * Format internasional tanpa +
+ */
+const ADMIN_WA =
+  "6283813138221";
 
 
 /* =========================================================
@@ -110,37 +47,28 @@ const checkoutToastText =
 
 let cart = [];
 
-let subtotal = 0;
-
-let serviceFee = 0;
+let customer = null;
 
 let discount = 0;
 
-let grandTotal = 0;
-
 
 /* =========================================================
-   FORMAT RUPIAH
+   INIT
 ========================================================= */
 
-function checkoutFormatRupiah(
-  value
-) {
+function initCheckout() {
 
-  return new Intl.NumberFormat(
-    "id-ID",
-    {
+  loadCart();
 
-      style: "currency",
+  loadCustomer();
 
-      currency: "IDR",
+  setMinimumDate();
 
-      minimumFractionDigits: 0
+  renderCart();
 
-    }
-  ).format(
-    Number(value) || 0
-  );
+  calculateTotal();
+
+  setupEvents();
 
 }
 
@@ -149,353 +77,325 @@ function checkoutFormatRupiah(
    LOAD CART
 ========================================================= */
 
-function loadCheckoutCart() {
+function loadCart() {
 
   try {
 
+    const saved =
+      localStorage.getItem(
+        CART_KEY
+      );
+
+
+    if (!saved) {
+
+      cart = [];
+
+      return;
+
+    }
+
+
+    const data =
+      JSON.parse(saved);
+
+
     cart =
-      JSON.parse(
-        localStorage.getItem(
-          CART_KEY
-        )
-      ) || [];
-
-  } catch {
-
-    cart = [];
-
-  }
+      Array.isArray(data)
+        ? data
+        : [];
 
 
-  if (!Array.isArray(cart)) {
+  } catch (error) {
+
+    console.error(
+      "Cart error:",
+      error
+    );
 
     cart = [];
 
   }
-
-
-  renderCheckoutItems();
-
-  calculateCheckout();
 
 }
 
 
 /* =========================================================
-   RENDER ITEMS
+   LOAD CUSTOMER
 ========================================================= */
 
-function renderCheckoutItems() {
+function loadCustomer() {
 
-  if (!checkoutItems) return;
+  try {
+
+    const saved =
+      localStorage.getItem(
+        CUSTOMER_KEY
+      );
 
 
-  checkoutItems.innerHTML = "";
+    if (!saved) {
+
+      return;
+
+    }
 
 
-  const itemCount =
+    customer =
+      JSON.parse(saved);
+
+
+    if (!customer) {
+
+      return;
+
+    }
+
+
+    setValue(
+      "customerName",
+      customer.name
+    );
+
+
+    setValue(
+      "customerPhone",
+      customer.phone
+    );
+
+
+    setValue(
+      "customerAddress",
+      customer.address
+    );
+
+
+    setValue(
+      "customerNote",
+      customer.note
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "Customer error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   MINIMUM DATE
+========================================================= */
+
+function setMinimumDate() {
+
+  const dateInput =
+    document.getElementById(
+      "serviceDate"
+    );
+
+
+  if (!dateInput) {
+
+    return;
+
+  }
+
+
+  const today =
+    new Date();
+
+
+  const year =
+    today.getFullYear();
+
+
+  const month =
+    String(
+      today.getMonth() + 1
+    ).padStart(2,"0");
+
+
+  const day =
+    String(
+      today.getDate()
+    ).padStart(2,"0");
+
+
+  const date =
+    `${year}-${month}-${day}`;
+
+
+  dateInput.min =
+    date;
+
+
+  /*
+   * Default jadwal:
+   * hari ini
+   */
+
+  if (!dateInput.value) {
+
+    dateInput.value =
+      date;
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER CART
+========================================================= */
+
+function renderCart() {
+
+  const container =
+    document.getElementById(
+      "checkoutItems"
+    );
+
+
+  const count =
+    document.getElementById(
+      "checkoutItemCount"
+    );
+
+
+  if (!container) {
+
+    return;
+
+  }
+
+
+  const totalQty =
     cart.reduce(
       (
         total,
         item
       ) =>
         total +
-        Number(
-          item.qty || 0
-        ),
+        Number(item.qty || 0),
       0
     );
 
 
-  if (checkoutItemCount) {
+  if (count) {
 
-    checkoutItemCount.textContent =
-      `${itemCount} item`;
+    count.textContent =
+      `${totalQty} item`;
 
   }
 
 
-  if (!cart.length) {
+  if (
+    cart.length === 0
+  ) {
 
-    checkoutItems.style.display =
-      "none";
+    container.innerHTML = `
+
+      <div class="checkout-empty">
+
+        <i
+          class="fa-solid fa-cart-shopping"
+        ></i>
+
+        <span>
+          Keranjang masih kosong
+        </span>
+
+      </div>
+
+    `;
 
 
-    if (emptyCart) {
-
-      emptyCart.style.display =
-        "block";
-
-    }
-
-
-    if (createOrderButton) {
-
-      createOrderButton.disabled =
-        true;
-
-    }
-
+    disableCheckout();
 
     return;
 
   }
 
 
-  checkoutItems.style.display =
-    "flex";
-
-
-  if (emptyCart) {
-
-    emptyCart.style.display =
-      "none";
-
-  }
-
-
-  if (createOrderButton) {
-
-    createOrderButton.disabled =
-      false;
-
-  }
-
-
-  cart.forEach(
-    (
-      item,
-      index
-    ) => {
-
-      const element =
-        document.createElement(
-          "div"
-        );
-
-
-      element.className =
-        "checkout-item";
-
-
-      const image =
-        item.image ||
-        "assets/logo.png";
-
-
-      const price =
-        Number(
-          item.price || 0
-        );
-
-
-      const qty =
-        Number(
-          item.qty || 1
-        );
-
-
-      const total =
-        price * qty;
-
-
-      element.innerHTML = `
-
-        <div class="checkout-item-image">
-
-          <img
-            src="${image}"
-            alt="${escapeHTML(
-              item.name || "Layanan"
-            )}"
-            onerror="
-              this.style.display='none';
-            "
-          >
-
-        </div>
-
-
-        <div class="checkout-item-info">
-
-          <span class="checkout-item-category">
-
-            ${escapeHTML(
-              item.category || "Layanan"
-            )}
-
-          </span>
-
-
-          <div class="checkout-item-name">
-
-            ${escapeHTML(
-              item.name || "Layanan"
-            )}
-
-          </div>
-
-
-          <div class="checkout-item-variant">
-
-            ${escapeHTML(
-              item.variant || ""
-            )}
-
-          </div>
-
-
-          <div class="checkout-item-price">
-
-            ${checkoutFormatRupiah(
-              total
-            )}
-
-          </div>
-
-        </div>
-
-
-        <div class="checkout-item-side">
-
-          <button
-            type="button"
-            class="remove-item"
-            data-index="${index}"
-            aria-label="Hapus"
-          >
-
-            <i class="fa-solid fa-trash"></i>
-
-          </button>
-
-
-          <span class="item-qty">
-
-            ${qty}x
-
-          </span>
-
-        </div>
-
-      `;
-
-
-      checkoutItems.appendChild(
-        element
-      );
-
-    }
-  );
-
-
-  bindRemoveButtons();
-
-}
-
-
-/* =========================================================
-   REMOVE BUTTON
-========================================================= */
-
-function bindRemoveButtons() {
-
-  document
-    .querySelectorAll(
-      ".remove-item"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const index =
-              Number(
-                button.dataset.index
-              );
-
-
-            removeCartItem(
-              index
+  container.innerHTML =
+    cart
+      .map(
+        item => {
+
+          const qty =
+            Number(
+              item.qty || 0
             );
 
-          }
-        );
 
-      }
-    );
-
-}
+          const price =
+            Number(
+              item.price || 0
+            );
 
 
-/* =========================================================
-   REMOVE ITEM
-========================================================= */
-
-function removeCartItem(
-  index
-) {
-
-  if (
-    index < 0 ||
-    index >= cart.length
-  ) {
-
-    return;
-
-  }
+          const subtotal =
+            qty * price;
 
 
-  const removed =
-    cart[index];
+          return `
+
+            <div class="checkout-item">
+
+              <div class="checkout-item-icon">
+
+                <i
+                  class="fa-solid fa-couch"
+                ></i>
+
+              </div>
 
 
-  cart.splice(
-    index,
-    1
-  );
+              <div class="checkout-item-info">
+
+                <strong>
+                  ${escapeHTML(
+                    item.name
+                  )}
+                </strong>
+
+                <small>
+                  ${qty} ×
+                  ${formatRupiah(price)}
+                </small>
+
+              </div>
 
 
-  saveCart();
+              <div class="checkout-item-price">
 
+                <strong>
+                  ${formatRupiah(
+                    subtotal
+                  )}
+                </strong>
 
-  renderCheckoutItems();
+                <small>
+                  ${escapeHTML(
+                    item.service || "Layanan"
+                  )}
+                </small>
 
-  calculateCheckout();
+              </div>
 
+            </div>
 
-  showCheckoutToast(
-    `${removed.name || "Layanan"} dihapus`
-  );
+          `;
 
-}
-
-
-/* =========================================================
-   SAVE CART
-========================================================= */
-
-function saveCart() {
-
-  localStorage.setItem(
-
-    CART_KEY,
-
-    JSON.stringify(cart)
-
-  );
-
-
-  if (
-    typeof updateCartCount ===
-    "function"
-  ) {
-
-    updateCartCount();
-
-  }
+        }
+      )
+      .join("");
 
 }
 
@@ -504,58 +404,81 @@ function saveCart() {
    CALCULATE
 ========================================================= */
 
-function calculateCheckout() {
+function calculateTotal() {
 
-  subtotal =
+  const subtotal =
     cart.reduce(
       (
         total,
         item
-      ) =>
-        total +
-        (
+      ) => {
+
+        const price =
           Number(
             item.price || 0
-          ) *
+          );
+
+
+        const qty =
           Number(
-            item.qty || 1
-          )
-        ),
+            item.qty || 0
+          );
+
+
+        return (
+          total +
+          price * qty
+        );
+
+      },
       0
     );
 
 
   /*
-    Untuk versi sederhana,
-    biaya layanan dibuat Rp0.
-
-    Bisa diubah nanti menjadi
-    biaya berdasarkan jarak.
-  */
-
-  serviceFee = 0;
-
-
-  /*
-    Promo otomatis.
-
-    Contoh:
-    Rp350.000 ke atas
-    mendapatkan diskon 17%.
-
-    Rp500.000 ke atas
-    tambahan diskon 8%.
-
-    Total maksimal diskon:
-    25%.
-  */
+   * Promo:
+   *
+   * >= Rp500.000
+   * diskon 8%
+   *
+   * >= Rp350.000
+   * diskon 17%
+   *
+   * Catatan:
+   * Untuk order >= 500rb,
+   * sistem menggunakan diskon
+   * 8% tambahan setelah diskon
+   * 17%.
+   */
 
   discount = 0;
 
 
-  if (subtotal >= 350000) {
+  if (
+    subtotal >= 500000
+  ) {
+
+    discount =
+      Math.round(
+        subtotal * 0.17
+      );
+
 
     discount +=
+      Math.round(
+        (
+          subtotal -
+          discount
+        ) * 0.08
+      );
+
+  }
+
+  else if (
+    subtotal >= 350000
+  ) {
+
+    discount =
       Math.round(
         subtotal * 0.17
       );
@@ -563,86 +486,326 @@ function calculateCheckout() {
   }
 
 
-  if (subtotal >= 500000) {
-
-    discount +=
-      Math.round(
-        subtotal * 0.08
-      );
-
-  }
+  const grandTotal =
+    Math.max(
+      0,
+      subtotal - discount
+    );
 
 
-  grandTotal =
-    subtotal +
-    serviceFee -
-    discount;
+  setText(
+    "subtotal",
+    formatRupiah(
+      subtotal
+    )
+  );
 
 
-  if (grandTotal < 0) {
+  setText(
+    "discount",
+    `- ${formatRupiah(
+      discount
+    )}`
+  );
 
-    grandTotal = 0;
 
-  }
+  setText(
+    "grandTotal",
+    formatRupiah(
+      grandTotal
+    )
+  );
 
 
-  updateCheckoutPrice();
+  setText(
+    "buttonTotal",
+    formatRupiah(
+      grandTotal
+    )
+  );
+
+
+  return {
+
+    subtotal,
+
+    discount,
+
+    grandTotal
+
+  };
 
 }
 
 
 /* =========================================================
-   UPDATE PRICE
+   EVENTS
 ========================================================= */
 
-function updateCheckoutPrice() {
+function setupEvents() {
 
-  if (subtotalElement) {
+  const fields = [
 
-    subtotalElement.textContent =
-      checkoutFormatRupiah(
-        subtotal
+    "customerName",
+    "customerPhone",
+    "customerAddress",
+    "customerNote",
+    "serviceDate",
+    "serviceTime"
+
+  ];
+
+
+  fields.forEach(
+    id => {
+
+      const element =
+        document.getElementById(
+          id
+        );
+
+
+      if (!element) {
+
+        return;
+
+      }
+
+
+      element.addEventListener(
+        "input",
+        saveCustomerDraft
       );
+
+
+      element.addEventListener(
+        "change",
+        saveCustomerDraft
+      );
+
+    }
+  );
+
+
+  const agreement =
+    document.getElementById(
+      "agreement"
+    );
+
+
+  if (agreement) {
+
+    agreement.addEventListener(
+      "change",
+      validateCheckout
+    );
 
   }
 
 
-  if (serviceFeeElement) {
-
-    serviceFeeElement.textContent =
-      checkoutFormatRupiah(
-        serviceFee
-      );
-
-  }
+  const button =
+    document.getElementById(
+      "checkoutButton"
+    );
 
 
-  if (discountElement) {
+  if (button) {
 
-    discountElement.textContent =
-      `- ${checkoutFormatRupiah(
-        discount
-      )}`;
+    button.addEventListener(
+      "click",
+      createOrder
+    );
 
   }
 
 
-  if (checkoutTotalElement) {
+  const promo =
+    document.getElementById(
+      "promoButton"
+    );
 
-    checkoutTotalElement.textContent =
-      checkoutFormatRupiah(
-        grandTotal
-      );
+
+  if (promo) {
+
+    promo.addEventListener(
+      "click",
+      function () {
+
+        calculateTotal();
+
+
+        alert(
+          "Promo otomatis akan diterapkan sesuai total pesanan."
+        );
+
+      }
+    );
 
   }
 
 
-  if (bottomCheckoutTotal) {
+  validateCheckout();
 
-    bottomCheckoutTotal.textContent =
-      checkoutFormatRupiah(
-        grandTotal
-      );
+}
+
+
+/* =========================================================
+   SAVE CUSTOMER DRAFT
+========================================================= */
+
+function saveCustomerDraft() {
+
+  const data =
+    getCustomerData();
+
+
+  localStorage.setItem(
+    CUSTOMER_KEY,
+    JSON.stringify(
+      data
+    )
+  );
+
+
+  validateCheckout();
+
+}
+
+
+/* =========================================================
+   GET CUSTOMER
+========================================================= */
+
+function getCustomerData() {
+
+  return {
+
+    name:
+      getValue(
+        "customerName"
+      ),
+
+    phone:
+      getValue(
+        "customerPhone"
+      ),
+
+    address:
+      getValue(
+        "customerAddress"
+      ),
+
+    note:
+      getValue(
+        "customerNote"
+      ),
+
+    date:
+      getValue(
+        "serviceDate"
+      ),
+
+    time:
+      getValue(
+        "serviceTime"
+      )
+
+  };
+
+}
+
+
+/* =========================================================
+   VALIDATE
+========================================================= */
+
+function validateCheckout() {
+
+  const button =
+    document.getElementById(
+      "checkoutButton"
+    );
+
+
+  const agreement =
+    document.getElementById(
+      "agreement"
+    );
+
+
+  if (!button) {
+
+    return;
+
+  }
+
+
+  const data =
+    getCustomerData();
+
+
+  const validName =
+    data.name.length >= 2;
+
+
+  const validPhone =
+    normalizePhone(
+      data.phone
+    ).length >= 10;
+
+
+  const validAddress =
+    data.address.length >= 5;
+
+
+  const validDate =
+    data.date !== "";
+
+
+  const validTime =
+    data.time !== "";
+
+
+  const agreed =
+    agreement
+      ? agreement.checked
+      : false;
+
+
+  const validCart =
+    cart.length > 0;
+
+
+  button.disabled =
+    !(
+      validName &&
+      validPhone &&
+      validAddress &&
+      validDate &&
+      validTime &&
+      agreed &&
+      validCart
+    );
+
+}
+
+
+/* =========================================================
+   DISABLE
+========================================================= */
+
+function disableCheckout() {
+
+  const button =
+    document.getElementById(
+      "checkoutButton"
+    );
+
+
+  if (button) {
+
+    button.disabled =
+      true;
 
   }
 
@@ -650,7 +813,455 @@ function updateCheckoutPrice() {
 
 
 /* =========================================================
-   PHONE NORMALIZE
+   CREATE ORDER
+========================================================= */
+
+function createOrder() {
+
+  const data =
+    getCustomerData();
+
+
+  const agreement =
+    document.getElementById(
+      "agreement"
+    );
+
+
+  if (
+    !validateCustomer(
+      data
+    )
+  ) {
+
+    alert(
+      "Mohon lengkapi data customer."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    agreement &&
+    !agreement.checked
+  ) {
+
+    alert(
+      "Silakan centang konfirmasi data terlebih dahulu."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    cart.length === 0
+  ) {
+
+    alert(
+      "Keranjang masih kosong."
+    );
+
+    return;
+
+  }
+
+
+  const totals =
+    calculateTotal();
+
+
+  const invoice =
+    generateInvoice();
+
+
+  const order = {
+
+    invoice,
+
+    createdAt:
+      new Date().toISOString(),
+
+    customer: data,
+
+    items: cart,
+
+    subtotal:
+      totals.subtotal,
+
+    discount:
+      totals.discount,
+
+    total:
+      totals.grandTotal,
+
+    status:
+      "Menunggu Konfirmasi"
+
+  };
+
+
+  saveOrder(
+    order
+  );
+
+
+  /*
+   * Simpan order aktif
+   */
+
+  localStorage.setItem(
+    "shae_active_order",
+    JSON.stringify(
+      order
+    )
+  );
+
+
+  /*
+   * Buat pesan WhatsApp
+   */
+
+  const message =
+    createWhatsAppMessage(
+      order
+    );
+
+
+  const waURL =
+    `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(
+      message
+    )}`;
+
+
+  /*
+   * Buka WhatsApp
+   */
+
+  window.location.href =
+    waURL;
+
+}
+
+
+/* =========================================================
+   VALIDATE CUSTOMER
+========================================================= */
+
+function validateCustomer(
+  data
+) {
+
+  if (
+    data.name.length < 2
+  ) {
+
+    return false;
+
+  }
+
+
+  if (
+    normalizePhone(
+      data.phone
+    ).length < 10
+  ) {
+
+    return false;
+
+  }
+
+
+  if (
+    data.address.length < 5
+  ) {
+
+    return false;
+
+  }
+
+
+  if (!data.date) {
+
+    return false;
+
+  }
+
+
+  if (!data.time) {
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   GENERATE INVOICE
+========================================================= */
+
+function generateInvoice() {
+
+  const today =
+    new Date();
+
+
+  const year =
+    today.getFullYear();
+
+
+  const month =
+    String(
+      today.getMonth() + 1
+    ).padStart(2,"0");
+
+
+  const day =
+    String(
+      today.getDate()
+    ).padStart(2,"0");
+
+
+  const dateKey =
+    `${year}${month}${day}`;
+
+
+  const storageKey =
+    `shae_invoice_${dateKey}`;
+
+
+  let number =
+    Number(
+      localStorage.getItem(
+        storageKey
+      ) || 0
+    );
+
+
+  number++;
+
+
+  localStorage.setItem(
+    storageKey,
+    String(number)
+  );
+
+
+  return (
+    `INV-${dateKey}-` +
+    String(number)
+      .padStart(3,"0")
+  );
+
+}
+
+
+/* =========================================================
+   SAVE ORDER
+========================================================= */
+
+function saveOrder(
+  order
+) {
+
+  try {
+
+    const saved =
+      localStorage.getItem(
+        ORDER_KEY
+      );
+
+
+    let orders =
+      saved
+        ? JSON.parse(saved)
+        : [];
+
+
+    if (
+      !Array.isArray(orders)
+    ) {
+
+      orders = [];
+
+    }
+
+
+    orders.unshift(
+      order
+    );
+
+
+    /*
+     * Simpan maksimal
+     * 50 order terakhir.
+     */
+
+    orders =
+      orders.slice(
+        0,
+        50
+      );
+
+
+    localStorage.setItem(
+      ORDER_KEY,
+      JSON.stringify(
+        orders
+      )
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "Gagal menyimpan order:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   WHATSAPP MESSAGE
+========================================================= */
+
+function createWhatsAppMessage(
+  order
+) {
+
+  let message =
+
+`*ORDER BARU - SHAE CLEANERS*
+
+🧾 Invoice:
+${order.invoice}
+
+👤 Nama:
+${order.customer.name}
+
+📱 WhatsApp:
+${order.customer.phone}
+
+📍 Alamat:
+${order.customer.address}
+
+📅 Jadwal:
+${formatDate(
+  order.customer.date
+)}
+
+⏰ Jam:
+${order.customer.time}
+
+━━━━━━━━━━━━━━
+*DETAIL PESANAN*
+━━━━━━━━━━━━━━
+`;
+
+
+  order.items.forEach(
+    item => {
+
+      const subtotal =
+        Number(
+          item.price
+        ) *
+        Number(
+          item.qty
+        );
+
+
+      message +=
+
+`\n• ${item.name}
+  ${item.qty} × ${formatRupiah(item.price)}
+  = ${formatRupiah(subtotal)}
+`;
+
+    }
+  );
+
+
+  message +=
+
+`
+━━━━━━━━━━━━━━
+Subtotal:
+${formatRupiah(
+  order.subtotal
+)}
+
+Diskon:
+- ${formatRupiah(
+  order.discount
+)}
+
+*TOTAL:
+${formatRupiah(
+  order.total
+)}*
+━━━━━━━━━━━━━━
+
+Catatan:
+${order.customer.note || "-"}
+
+Mohon konfirmasi pesanan saya.
+
+Terima kasih.
+`;
+
+  return message;
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(
+  value
+) {
+
+  if (!value) {
+
+    return "-";
+
+  }
+
+
+  const date =
+    new Date(
+      `${value}T00:00:00`
+    );
+
+
+  return new Intl.DateTimeFormat(
+    "id-ID",
+    {
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    }
+  ).format(
+    date
+  );
+
+}
+
+
+/* =========================================================
+   PHONE
 ========================================================= */
 
 function normalizePhone(
@@ -658,7 +1269,9 @@ function normalizePhone(
 ) {
 
   let value =
-    String(phone || "")
+    String(
+      phone || ""
+    )
       .replace(
         /\D/g,
         ""
@@ -666,24 +1279,18 @@ function normalizePhone(
 
 
   if (
-    value.startsWith(
-      "0"
-    )
+    value.startsWith("0")
   ) {
 
     value =
       "62" +
-      value.substring(
-        1
-      );
+      value.substring(1);
 
   }
 
 
   if (
-    !value.startsWith(
-      "62"
-    )
+    value.startsWith("8")
   ) {
 
     value =
@@ -699,360 +1306,90 @@ function normalizePhone(
 
 
 /* =========================================================
-   VALIDATE PHONE
+   RUPIAH
 ========================================================= */
 
-function validPhone(
-  phone
+function formatRupiah(
+  value
 ) {
 
-  const normalized =
-    normalizePhone(
-      phone
-    );
+  return new Intl.NumberFormat(
+    "id-ID",
+    {
 
+      style: "currency",
 
-  return (
-    normalized.length >= 10 &&
-    normalized.length <= 15
+      currency: "IDR",
+
+      maximumFractionDigits: 0
+
+    }
+  ).format(
+    Number(value) || 0
   );
 
 }
 
 
 /* =========================================================
-   CREATE INVOICE NUMBER
+   DOM HELPERS
 ========================================================= */
 
-function generateInvoiceNumber() {
-
-  const now =
-    new Date();
-
-
-  const year =
-    now.getFullYear();
-
-
-  const month =
-    String(
-      now.getMonth() + 1
-    ).padStart(
-      2,
-      "0"
-    );
-
-
-  const day =
-    String(
-      now.getDate()
-    ).padStart(
-      2,
-      "0"
-    );
-
-
-  let sequence =
-    Number(
-      localStorage.getItem(
-        "shae_invoice_sequence"
-      )
-    ) || 0;
-
-
-  sequence++;
-
-
-  localStorage.setItem(
-
-    "shae_invoice_sequence",
-
-    String(sequence)
-
-  );
-
-
-  return (
-
-    `INV-${year}${month}${day}-` +
-
-    String(sequence)
-      .padStart(
-        3,
-        "0"
-      )
-
-  );
-
-}
-
-
-/* =========================================================
-   CREATE ORDER
-========================================================= */
-
-if (createOrderButton) {
-
-  createOrderButton.addEventListener(
-    "click",
-    createOrder
-  );
-
-}
-
-
-function createOrder() {
-
-  if (!cart.length) {
-
-    showCheckoutToast(
-      "Pesanan masih kosong."
-    );
-
-    return;
-
-  }
-
-
-  /*
-    Validasi form
-  */
-
-  if (
-    customerForm &&
-    !customerForm.checkValidity()
-  ) {
-
-    customerForm.reportValidity();
-
-    return;
-
-  }
-
-
-  const name =
-    customerName
-      ? customerName.value.trim()
-      : "";
-
-
-  const phone =
-    customerPhone
-      ? customerPhone.value.trim()
-      : "";
-
-
-  const address =
-    customerAddress
-      ? customerAddress.value.trim()
-      : "";
-
-
-  const note =
-    customerNote
-      ? customerNote.value.trim()
-      : "";
-
-
-  if (
-    !name ||
-    !phone ||
-    !address
-  ) {
-
-    showCheckoutToast(
-      "Lengkapi data pelanggan."
-    );
-
-    return;
-
-  }
-
-
-  if (!validPhone(phone)) {
-
-    showCheckoutToast(
-      "Nomor WhatsApp tidak valid."
-    );
-
-    return;
-
-  }
-
-
-  const invoiceNumber =
-    generateInvoiceNumber();
-
-
-  const orderDate =
-    new Date()
-      .toISOString();
-
-
-  /*
-    Salin cart supaya data
-    tidak berubah jika cart
-    nanti dihapus.
-  */
-
-  const orderItems =
-    cart.map(
-      item => ({
-        ...item
-      })
-    );
-
-
-  const order = {
-
-    invoice:
-      invoiceNumber,
-
-    orderDate:
-      orderDate,
-
-    status:
-      "Menunggu Konfirmasi",
-
-    customer: {
-
-      name:
-        name,
-
-      phone:
-        normalizePhone(
-          phone
-        ),
-
-      phoneOriginal:
-        phone,
-
-      address:
-        address,
-
-      note:
-        note
-
-    },
-
-    items:
-      orderItems,
-
-    subtotal:
-      subtotal,
-
-    serviceFee:
-      serviceFee,
-
-    discount:
-      discount,
-
-    total:
-      grandTotal
-
-  };
-
-
-  /*
-    Simpan order
-  */
-
-  localStorage.setItem(
-
-    ORDER_KEY,
-
-    JSON.stringify(
-      order
-    )
-
-  );
-
-
-  localStorage.setItem(
-
-    INVOICE_KEY,
-
-    JSON.stringify(
-      order
-    )
-
-  );
-
-
-  /*
-    Jangan langsung hapus cart.
-    Invoice akan membacanya jika
-    diperlukan.
-
-    Tandai bahwa order berhasil.
-  */
-
-  localStorage.setItem(
-
-    "shae_order_created",
-
-    "true"
-
-  );
-
-
-  /*
-    Pindah ke invoice.
-  */
-
-  window.location.href =
-    `invoice.html?invoice=${encodeURIComponent(
-      invoiceNumber
-    )}`;
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showCheckoutToast(
-  message
+function getValue(
+  id
 ) {
 
-  if (
-    !checkoutToast ||
-    !checkoutToastText
-  ) {
+  const element =
+    document.getElementById(
+      id
+    );
 
-    alert(message);
 
-    return;
+  return element
+    ? element.value.trim()
+    : "";
+
+}
+
+
+function setValue(
+  id,
+  value
+) {
+
+  const element =
+    document.getElementById(
+      id
+    );
+
+
+  if (element) {
+
+    element.value =
+      value || "";
 
   }
 
-
-  checkoutToastText.textContent =
-    message;
+}
 
 
-  checkoutToast.classList.add(
-    "show"
-  );
+function setText(
+  id,
+  value
+) {
 
-
-  clearTimeout(
-    window.checkoutToastTimer
-  );
-
-
-  window.checkoutToastTimer =
-    setTimeout(
-      () => {
-
-        checkoutToast.classList.remove(
-          "show"
-        );
-
-      },
-      2200
+  const element =
+    document.getElementById(
+      id
     );
+
+
+  if (element) {
+
+    element.textContent =
+      value;
+
+  }
 
 }
 
@@ -1066,169 +1403,32 @@ function escapeHTML(
 ) {
 
   return String(
-    value || ""
+    value ?? ""
   )
+
     .replace(
       /&/g,
       "&amp;"
     )
+
     .replace(
       /</g,
       "&lt;"
     )
+
     .replace(
       />/g,
       "&gt;"
     )
+
     .replace(
       /"/g,
       "&quot;"
     )
+
     .replace(
       /'/g,
       "&#039;"
     );
 
 }
-
-
-/* =========================================================
-   RESTORE CUSTOMER DATA
-========================================================= */
-
-function restoreCustomerData() {
-
-  const saved =
-    localStorage.getItem(
-      "shae_customer"
-    );
-
-
-  if (!saved) return;
-
-
-  try {
-
-    const data =
-      JSON.parse(
-        saved
-      );
-
-
-    if (
-      customerName &&
-      data.name
-    ) {
-
-      customerName.value =
-        data.name;
-
-    }
-
-
-    if (
-      customerPhone &&
-      data.phone
-    ) {
-
-      customerPhone.value =
-        data.phone;
-
-    }
-
-
-    if (
-      customerAddress &&
-      data.address
-    ) {
-
-      customerAddress.value =
-        data.address;
-
-    }
-
-  } catch {
-
-    return;
-
-  }
-
-}
-
-
-/* =========================================================
-   SAVE CUSTOMER DATA
-========================================================= */
-
-function saveCustomerData() {
-
-  const data = {
-
-    name:
-      customerName
-        ? customerName.value.trim()
-        : "",
-
-    phone:
-      customerPhone
-        ? customerPhone.value.trim()
-        : "",
-
-    address:
-      customerAddress
-        ? customerAddress.value.trim()
-        : ""
-
-  };
-
-
-  localStorage.setItem(
-
-    "shae_customer",
-
-    JSON.stringify(
-      data
-    )
-
-  );
-
-}
-
-
-/* =========================================================
-   AUTO SAVE CUSTOMER
-========================================================= */
-
-[
-  customerName,
-  customerPhone,
-  customerAddress
-].forEach(
-  input => {
-
-    if (!input) return;
-
-
-    input.addEventListener(
-      "input",
-      saveCustomerData
-    );
-
-  }
-);
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    restoreCustomerData();
-
-    loadCheckoutCart();
-
-  }
-);
