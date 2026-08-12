@@ -10,16 +10,16 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Akun - Shae Cleaners</title>
-
   <meta
     name="theme-color"
     content="#16a34a"
   >
 
+  <title>Akun Saya - Shae Cleaners</title>
+
   <link
     rel="stylesheet"
-    href="css/style.css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
   <link
@@ -27,525 +27,273 @@
     href="css/akun.css"
   >
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  >
-
 </head>
-
 
 <body>
 
+  <main class="account-page">
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+    <!-- HEADER -->
 
-<header class="account-header">
+    <header class="account-header">
 
-  <button
-    type="button"
-    class="account-header-button"
-    onclick="history.back()"
-    aria-label="Kembali"
-  >
+      <button
+        class="back-button"
+        onclick="history.back()"
+        type="button"
+      >
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
 
-    <i class="fa-solid fa-arrow-left"></i>
+      <h1>Akun Saya</h1>
 
-  </button>
+      <button
+        class="header-setting"
+        type="button"
+        onclick="location.href='pengaturan.html'"
+      >
+        <i class="fa-solid fa-gear"></i>
+      </button>
 
+    </header>
 
-  <div class="account-header-title">
 
-    <strong>
-      Akun Saya
-    </strong>
+    <!-- PROFILE -->
 
-    <small>
-      Shae Cleaners
-    </small>
+    <section class="profile-card">
 
-  </div>
+      <div
+        class="account-avatar"
+        id="accountInitial"
+      >
+        SC
+      </div>
 
+      <div class="profile-info">
 
-  <button
-    type="button"
-    class="account-header-button"
-    onclick="location.href='notifikasi.html'"
-    aria-label="Notifikasi"
-  >
+        <h2 id="accountName">
+          Customer
+        </h2>
 
-    <i class="fa-regular fa-bell"></i>
+        <p id="accountPhone">
+          -
+        </p>
 
-  </button>
+        <span class="member-badge">
+          <i class="fa-solid fa-circle-check"></i>
+          Customer Shae Cleaners
+        </span>
 
-</header>
+      </div>
 
+      <button
+        class="edit-profile"
+        type="button"
+        onclick="location.href='edit-profile.html'"
+      >
+        <i class="fa-solid fa-pen"></i>
+      </button>
 
+    </section>
 
-<!-- =====================================================
-     CONTENT
-===================================================== -->
 
-<main class="account-page">
+    <!-- CONTACT -->
 
+    <section class="account-section">
 
-  <!-- ===================================================
-       PROFILE
-  ==================================================== -->
+      <h3>Informasi Saya</h3>
 
-  <section class="account-profile">
+      <div class="info-card">
 
-    <div class="account-avatar">
+        <div class="info-row">
 
-      <span id="accountInitial">
-        S
-      </span>
+          <div class="info-icon">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
 
-    </div>
+          <div>
+            <small>Email</small>
+            <strong id="accountEmail">
+              -
+            </strong>
+          </div>
 
+        </div>
 
-    <div class="account-profile-info">
 
-      <strong id="accountName">
-        Customer
-      </strong>
+        <div class="info-row">
 
-      <span id="accountPhone">
-        Belum login
-      </span>
+          <div class="info-icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
 
-      <small id="accountStatus">
-        Akun Shae Cleaners
-      </small>
+          <div>
+            <small>Alamat</small>
+            <strong id="accountAddress">
+              Alamat belum diisi
+            </strong>
+          </div>
 
-    </div>
+        </div>
 
+      </div>
 
-    <button
-      type="button"
-      class="account-edit"
-      onclick="location.href='profile.html'"
-    >
+    </section>
 
-      <i class="fa-solid fa-pen"></i>
 
-    </button>
+    <!-- MENU -->
 
-  </section>
+    <section class="account-section">
 
+      <h3>Menu Saya</h3>
 
+      <div class="account-menu">
 
-  <!-- ===================================================
-       QUICK MENU
-  ==================================================== -->
 
-  <section class="account-menu">
+        <a
+          href="pesanan.html"
+          class="account-menu-item"
+        >
 
-    <button
-      type="button"
-      onclick="location.href='aktivitas.html'"
-    >
+          <div class="menu-left">
 
-      <span class="account-menu-icon green">
+            <div class="menu-icon green">
+              <i class="fa-solid fa-bag-shopping"></i>
+            </div>
 
-        <i class="fa-solid fa-box"></i>
+            <div>
+              <strong>Pesanan Saya</strong>
+              <small>Lihat pesanan dan statusnya</small>
+            </div>
 
-      </span>
+          </div>
 
-      <strong>
-        Pesanan
-      </strong>
+          <i class="fa-solid fa-chevron-right"></i>
 
-      <small>
-        Aktivitas
-      </small>
+        </a>
 
-    </button>
 
+        <a
+          href="aktivitas.html"
+          class="account-menu-item"
+        >
 
-    <button
-      type="button"
-      onclick="location.href='invoice.html'"
-    >
+          <div class="menu-left">
 
-      <span class="account-menu-icon blue">
+            <div class="menu-icon blue">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
 
-        <i class="fa-solid fa-file-invoice"></i>
+            <div>
+              <strong>Aktivitas</strong>
+              <small>Riwayat aktivitas akun</small>
+            </div>
 
-      </span>
+          </div>
 
-      <strong>
-        Invoice
-      </strong>
+          <i class="fa-solid fa-chevron-right"></i>
 
-      <small>
-        Tagihan
-      </small>
+        </a>
 
-    </button>
 
+        <a
+          href="promo.html"
+          class="account-menu-item"
+        >
 
-    <button
-      type="button"
-      onclick="location.href='alamat.html'"
-    >
+          <div class="menu-left">
 
-      <span class="account-menu-icon orange">
+            <div class="menu-icon orange">
+              <i class="fa-solid fa-ticket"></i>
+            </div>
 
-        <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Promo</strong>
+              <small>Promo dan penawaran terbaru</small>
+            </div>
 
-      </span>
+          </div>
 
-      <strong>
-        Alamat
-      </strong>
+          <i class="fa-solid fa-chevron-right"></i>
 
-      <small>
-        Pengiriman
-      </small>
+        </a>
 
-    </button>
 
+        <a
+          href="alamat.html"
+          class="account-menu-item"
+        >
 
-    <button
-      type="button"
-      onclick="location.href='favorit.html'"
-    >
+          <div class="menu-left">
 
-      <span class="account-menu-icon red">
+            <div class="menu-icon purple">
+              <i class="fa-solid fa-map-location-dot"></i>
+            </div>
 
-        <i class="fa-solid fa-heart"></i>
+            <div>
+              <strong>Alamat Saya</strong>
+              <small>Kelola alamat pemesanan</small>
+            </div>
 
-      </span>
+          </div>
 
-      <strong>
-        Favorit
-      </strong>
+          <i class="fa-solid fa-chevron-right"></i>
 
-      <small>
-        Layanan
-      </small>
+        </a>
 
-    </button>
 
-  </section>
+      </div>
 
+    </section>
 
 
-  <!-- ===================================================
-       PESANAN TERBARU
-  ==================================================== -->
+    <!-- LOGOUT -->
 
-  <section class="account-section">
-
-    <div class="account-section-title">
-
-      <strong>
-        Pesanan Terbaru
-      </strong>
+    <section class="logout-section">
 
       <button
         type="button"
-        onclick="location.href='aktivitas.html'"
+        class="logout-button"
+        onclick="logoutCustomer()"
       >
 
-        Lihat Semua
+        <i class="fa-solid fa-right-from-bracket"></i>
 
-        <i class="fa-solid fa-chevron-right"></i>
+        Keluar dari Akun
 
       </button>
 
-    </div>
+    </section>
 
 
-    <div
-      id="latestOrders"
-      class="latest-orders"
-    >
+    <!-- FOOTER -->
 
-      <!-- Diisi otomatis oleh Akun.js -->
+    <footer class="account-footer">
 
-    </div>
+      <strong>
+        Shae Cleaners
+      </strong>
 
-  </section>
-
-
-
-  <!-- ===================================================
-       MENU AKUN
-  ==================================================== -->
-
-  <section class="account-list">
-
-
-    <button
-      type="button"
-      onclick="location.href='profile.html'"
-    >
-
-      <span class="account-list-icon">
-
-        <i class="fa-regular fa-user"></i>
-
+      <span>
+        Cleaning Service Profesional
       </span>
 
+      <small>
+        © 2026 Shae Cleaners
+      </small>
 
-      <span class="account-list-text">
+    </footer>
 
-        <strong>
-          Profil Saya
-        </strong>
+  </main>
 
-        <small>
-          Nama dan nomor WhatsApp
-        </small>
 
-      </span>
+  <!-- SCRIPT -->
 
+  <script src="js/auth-guard.js"></script>
 
-      <i class="fa-solid fa-chevron-right"></i>
+  <script src="js/account.js"></script>
 
-    </button>
-
-
-
-    <button
-      type="button"
-      onclick="location.href='alamat.html'"
-    >
-
-      <span class="account-list-icon">
-
-        <i class="fa-solid fa-location-dot"></i>
-
-      </span>
-
-
-      <span class="account-list-text">
-
-        <strong>
-          Alamat Saya
-        </strong>
-
-        <small>
-          Kelola alamat cleaning
-        </small>
-
-      </span>
-
-
-      <i class="fa-solid fa-chevron-right"></i>
-
-    </button>
-
-
-
-    <button
-      type="button"
-      onclick="location.href='promo.html'"
-    >
-
-      <span class="account-list-icon">
-
-        <i class="fa-solid fa-ticket"></i>
-
-      </span>
-
-
-      <span class="account-list-text">
-
-        <strong>
-          Promo & Voucher
-        </strong>
-
-        <small>
-          Lihat promo terbaru
-        </small>
-
-      </span>
-
-
-      <i class="fa-solid fa-chevron-right"></i>
-
-    </button>
-
-
-
-    <button
-      type="button"
-      onclick="location.href='chat.html'"
-    >
-
-      <span class="account-list-icon">
-
-        <i class="fa-regular fa-comments"></i>
-
-      </span>
-
-
-      <span class="account-list-text">
-
-        <strong>
-          Chat Shae Cleaners
-        </strong>
-
-        <small>
-          Hubungi admin
-        </small>
-
-      </span>
-
-
-      <i class="fa-solid fa-chevron-right"></i>
-
-    </button>
-
-
-
-    <button
-      type="button"
-      onclick="location.href='pengaturan.html'"
-    >
-
-      <span class="account-list-icon">
-
-        <i class="fa-solid fa-gear"></i>
-
-      </span>
-
-
-      <span class="account-list-text">
-
-        <strong>
-          Pengaturan
-        </strong>
-
-        <small>
-          Preferensi aplikasi
-        </small>
-
-      </span>
-
-
-      <i class="fa-solid fa-chevron-right"></i>
-
-    </button>
-
-  </section>
-
-
-
-  <!-- ===================================================
-       LOGOUT
-  ==================================================== -->
-
-  <button
-    type="button"
-    id="logoutButton"
-    class="logout-button"
-  >
-
-    <i class="fa-solid fa-right-from-bracket"></i>
-
-    Keluar dari Akun
-
-  </button>
-
-
-  <div class="account-version">
-
-    Shae Cleaners
-
-    <span>
-      •
-    </span>
-
-    Marketplace Cleaning
-
-  </div>
-
-
-</main>
-
-
-
-<!-- =====================================================
-     BOTTOM NAV
-===================================================== -->
-
-<nav class="bottom-nav">
-
-  <a href="index.html">
-
-    <i class="fa-solid fa-house"></i>
-
-    <span>
-      Home
-    </span>
-
-  </a>
-
-
-  <a href="aktivitas.html">
-
-    <i class="fa-solid fa-receipt"></i>
-
-    <span>
-      Pesanan
-    </span>
-
-  </a>
-
-
-  <a
-    href="order.html"
-    class="bottom-order"
-  >
-
-    <span>
-
-      <i class="fa-solid fa-plus"></i>
-
-    </span>
-
-    <label>
-      Order
-    </label>
-
-  </a>
-
-
-  <a href="promo.html">
-
-    <i class="fa-solid fa-ticket"></i>
-
-    <span>
-      Promo
-    </span>
-
-  </a>
-
-
-  <a
-    href="akun.html"
-    class="active"
-  >
-
-    <i class="fa-solid fa-user"></i>
-
-    <span>
-      Akun
-    </span>
-
-  </a>
-
-</nav>
-
-
-
-<script src="js/Akun.js"></script>
+  <script src="js/logout.js"></script>
 
 </body>
 
