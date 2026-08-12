@@ -49,22 +49,22 @@ import {
 const firebaseConfig = {
 
   apiKey:
-    "GANTI_API_KEY",
+    "AIzaSyAQRKEMFceCbJRGgPfr3Vtt-AdbE38pwVg",
 
   authDomain:
-    "GANTI_PROJECT_ID.firebaseapp.com",
+    "shaecleaners-f6ed8.firebaseapp.com",
 
   projectId:
-    "GANTI_PROJECT_ID",
+    "shaecleaners-f6ed8",
 
   storageBucket:
-    "GANTI_PROJECT_ID.firebasestorage.app",
+    "shaecleaners-f6ed8.firebasestorage.app",
 
   messagingSenderId:
-    "GANTI_MESSAGING_SENDER_ID",
+    "839960858623",
 
   appId:
-    "GANTI_APP_ID"
+    "1:839960858623:web:1aa97b91f54924cd10e1ca"
 
 };
 
