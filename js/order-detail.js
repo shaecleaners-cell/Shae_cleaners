@@ -1,934 +1,540 @@
 /* =========================================================
-   SHAE CLEANERS MARKETPLACE
+   SHAE CLEANERS
    js/order-detail.js
+
+   FITUR:
+   - Membaca shae_active_order
+   - Menampilkan detail order
+   - Status pesanan
+   - Invoice
+   - Customer
+   - Jadwal
+   - Detail layanan
+   - Subtotal
+   - Diskon
+   - Total
+   - WhatsApp
+   - Share order
 ========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  initOrderDetail
+);
 
 
 /* =========================================================
-   STORAGE
+   CONFIG
 ========================================================= */
 
-const DETAIL_CART_KEY = "shae_cart";
+const ACTIVE_ORDER_KEY =
+  "shae_active_order";
+
+const ADMIN_WA =
+  "6283813138221";
 
 
 /* =========================================================
-   WHATSAPP
+   STATE
 ========================================================= */
 
-const DETAIL_WHATSAPP = "6283813138221";
-
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const detailImage =
-  document.getElementById("detailImage");
-
-const detailName =
-  document.getElementById("detailName");
-
-const detailPrice =
-  document.getElementById("detailPrice");
-
-const detailVariants =
-  document.getElementById("detailVariants");
-
-const detailTotal =
-  document.getElementById("detailTotal");
-
-const qtyValue =
-  document.getElementById("qtyValue");
-
-const qtyMinus =
-  document.getElementById("qtyMinus");
-
-const qtyPlus =
-  document.getElementById("qtyPlus");
-
-const bookingDate =
-  document.getElementById("bookingDate");
-
-const bookingTime =
-  document.getElementById("bookingTime");
-
-const detailNote =
-  document.getElementById("detailNote");
-
-const noteCounter =
-  document.getElementById("noteCounter");
-
-const addToCart =
-  document.getElementById("addToCart");
-
-const buyNow =
-  document.getElementById("buyNow");
-
-const detailCartButton =
-  document.getElementById("detailCartButton");
-
-const detailCartBadge =
-  document.getElementById("detailCartBadge");
-
-const detailToast =
-  document.getElementById("detailToast");
-
-const detailToastText =
-  document.getElementById("detailToastText");
-
-
-/* =========================================================
-   CURRENT DATA
-========================================================= */
-
-let currentService = null;
-
-let selectedVariant = null;
-
-let quantity = 1;
-
-
-/* =========================================================
-   SERVICE DATABASE
-========================================================= */
-
-const SERVICE_DATA = {
-
-  sofa: {
-
-    name: "Cuci Sofa",
-
-    icon: "fa-couch",
-
-    image: "assets/services/sofa.jpg",
-
-    description:
-      "Cleaning sofa profesional untuk mengangkat debu, noda, bau dan kotoran.",
-
-    variants: [
-
-      {
-        id: "sofa-standard",
-        name: "Sofa Standard",
-        price: 60000
-      },
-
-      {
-        id: "sofa-lepasan",
-        name: "Sofa Lepasan",
-        price: 75000
-      },
-
-      {
-        id: "sofa-besar",
-        name: "Sofa Besar",
-        price: 75000
-      },
-
-      {
-        id: "sofa-stool",
-        name: "Sofa Stool",
-        price: 50000
-      },
-
-      {
-        id: "sofa-l-standard",
-        name: "Sofa L Standard",
-        price: 250000
-      },
-
-      {
-        id: "sofa-l-big",
-        name: "Sofa L BIG",
-        price: 300000
-      },
-
-      {
-        id: "sofa-u",
-        name: "Sofa U",
-        price: 350000
-      }
-
-    ]
-
-  },
-
-
-  kasur: {
-
-    name: "Cuci Springbed",
-
-    icon: "fa-bed",
-
-    image: "assets/services/kasur.jpg",
-
-    description:
-      "Membersihkan springbed dari debu, noda, bau dan kotoran.",
-
-    variants: [
-
-      {
-        id: "kasur-mini",
-        name: "Mini Single",
-        price: 150000
-      },
-
-      {
-        id: "kasur-single",
-        name: "Single",
-        price: 180000
-      },
-
-      {
-        id: "kasur-queen",
-        name: "Queen",
-        price: 270000
-      },
-
-      {
-        id: "kasur-king",
-        name: "King",
-        price: 290000
-      },
-
-      {
-        id: "kasur-superking",
-        name: "Super King",
-        price: 310000
-      }
-
-    ]
-
-  },
-
-
-  jokmobil: {
-
-    name: "Cuci Jok Mobil",
-
-    icon: "fa-car",
-
-    image: "assets/services/jokmobil.jpg",
-
-    description:
-      "Cleaning jok dan interior mobil dengan peralatan profesional.",
-
-    variants: [
-
-      {
-        id: "jok-2",
-        name: "Jok 2 Baris",
-        price: 250000
-      },
-
-      {
-        id: "jok-interior-2",
-        name: "Interior 2 Baris",
-        price: 400000
-      },
-
-      {
-        id: "jok-3",
-        name: "Jok 3 Baris",
-        price: 350000
-      }
-
-    ]
-
-  },
-
-
-  karpet: {
-
-    name: "Cuci Karpet",
-
-    icon: "fa-rug",
-
-    image: "assets/services/karpet.jpg",
-
-    description:
-      "Cuci karpet untuk membantu menghilangkan debu, noda dan bau.",
-
-    variants: [
-
-      {
-        id: "karpet-meter",
-        name: "Per m²",
-        price: 13000
-      }
-
-    ]
-
-  },
-
-
-  kursi: {
-
-    name: "Cuci Kursi",
-
-    icon: "fa-chair",
-
-    image: "assets/services/kursi.jpg",
-
-    description:
-      "Cleaning kursi makan dan kursi kantor.",
-
-    variants: [
-
-      {
-        id: "kursi-makan-small",
-        name: "Kursi Makan Small",
-        price: 30000
-      },
-
-      {
-        id: "kursi-makan-standard",
-        name: "Kursi Makan Standard",
-        price: 35000
-      },
-
-      {
-        id: "kursi-kantor-small",
-        name: "Kursi Kantor Small",
-        price: 30000
-      },
-
-      {
-        id: "kursi-kantor-big",
-        name: "Kursi Kantor BIG",
-        price: 40000
-      }
-
-    ]
-
-  }
-
-};
+let order = null;
 
 
 /* =========================================================
    INIT
 ========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  initDetailPage
-);
+function initOrderDetail() {
+
+  loadOrder();
+
+  if (!order) {
+
+    showOrderError();
+
+    return;
+
+  }
 
 
-function initDetailPage() {
+  renderStatus();
 
-  setMinimumDate();
+  renderInvoice();
 
-  loadService();
+  renderCustomer();
 
-  updateCartBadge();
+  renderSchedule();
 
-  setupEvents();
+  renderItems();
+
+  renderPayment();
+
+  setupWhatsApp();
+
+  setupShare();
+
+  setupBackButton();
 
 }
 
 
 /* =========================================================
-   GET SERVICE
+   LOAD ORDER
 ========================================================= */
 
-function loadService() {
+function loadOrder() {
 
-  const params =
-    new URLSearchParams(
-      window.location.search
+  try {
+
+    const saved =
+      localStorage.getItem(
+        ACTIVE_ORDER_KEY
+      );
+
+
+    if (!saved) {
+
+      order = null;
+
+      return;
+
+    }
+
+
+    const data =
+      JSON.parse(
+        saved
+      );
+
+
+    if (
+      !data ||
+      typeof data !== "object"
+    ) {
+
+      order = null;
+
+      return;
+
+    }
+
+
+    order = data;
+
+
+  } catch (error) {
+
+    console.error(
+      "Order detail error:",
+      error
+    );
+
+    order = null;
+
+  }
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function renderStatus() {
+
+  const status =
+    normalizeStatus(
+      order.status
     );
 
 
-  const serviceId =
-    (
-      params.get("service") ||
-      params.get("id") ||
-      "sofa"
-    ).toLowerCase();
+  const statusText =
+    getStatusText(
+      status
+    );
 
 
-  currentService =
-    SERVICE_DATA[serviceId];
+  const statusIcon =
+    document.getElementById(
+      "statusIcon"
+    );
 
 
-  if (!currentService) {
+  const statusElement =
+    document.getElementById(
+      "orderStatus"
+    );
 
-    currentService =
-      SERVICE_DATA.sofa;
+
+  const description =
+    document.getElementById(
+      "statusDescription"
+    );
+
+
+  if (statusElement) {
+
+    statusElement.textContent =
+      statusText;
 
   }
 
 
-  selectedVariant =
-    currentService.variants[0];
+  if (description) {
+
+    description.textContent =
+      getStatusDescription(
+        status
+      );
+
+  }
 
 
-  renderService();
+  if (statusIcon) {
 
-}
+    statusIcon.innerHTML =
+      `<i class="${getStatusIcon(
+        status
+      )}"></i>`;
+
+  }
 
 
-/* =========================================================
-   RENDER SERVICE
-========================================================= */
+  /*
+   * Ubah warna kartu sesuai status.
+   */
 
-function renderService() {
+  const card =
+    document.querySelector(
+      ".detail-status-card"
+    );
 
-  if (!currentService) {
+
+  if (!card) {
 
     return;
 
   }
 
 
-  /* -----------------------------------------
-     NAME
-  ----------------------------------------- */
-
-  if (detailName) {
-
-    detailName.textContent =
-      currentService.name;
-
-  }
+  card.classList.remove(
+    "status-pending",
+    "status-process",
+    "status-completed",
+    "status-cancelled"
+  );
 
 
-  /* -----------------------------------------
-     IMAGE
-  ----------------------------------------- */
-
-  if (detailImage) {
-
-    if (
-      currentService.image
-    ) {
-
-      detailImage.innerHTML = `
-
-        <img
-          src="${currentService.image}"
-          alt="${escapeHTML(
-            currentService.name
-          )}"
-          onerror="this.style.display='none';this.parentElement.innerHTML='<i class=&quot;fa-solid ${currentService.icon}&quot;></i>';"
-        >
-
-      `;
-
-    } else {
-
-      detailImage.innerHTML = `
-
-        <i class="fa-solid ${currentService.icon}"></i>
-
-      `;
-
-    }
-
-  }
-
-
-  /* -----------------------------------------
-     VARIANTS
-  ----------------------------------------- */
-
-  renderVariants();
-
-
-  updatePrice();
+  card.classList.add(
+    `status-${status}`
+  );
 
 }
 
 
 /* =========================================================
-   RENDER VARIANTS
+   INVOICE
 ========================================================= */
 
-function renderVariants() {
+function renderInvoice() {
 
-  if (!detailVariants) {
+  setText(
+    "invoiceNumber",
+    order.invoice ||
+      "-"
+  );
+
+
+  const created =
+    order.createdAt
+      ? formatDateTime(
+          order.createdAt
+        )
+      : "-";
+
+
+  setText(
+    "createdDate",
+    created
+  );
+
+}
+
+
+/* =========================================================
+   CUSTOMER
+========================================================= */
+
+function renderCustomer() {
+
+  const customer =
+    order.customer || {};
+
+
+  setText(
+    "customerName",
+    customer.name ||
+      "-"
+  );
+
+
+  setText(
+    "customerPhone",
+    customer.phone ||
+      "-"
+  );
+
+
+  setText(
+    "customerAddress",
+    customer.address ||
+      "-"
+  );
+
+
+  setText(
+    "customerNote",
+    customer.note ||
+      "-"
+  );
+
+}
+
+
+/* =========================================================
+   SCHEDULE
+========================================================= */
+
+function renderSchedule() {
+
+  const customer =
+    order.customer || {};
+
+
+  setText(
+    "serviceDate",
+    formatDate(
+      customer.date
+    )
+  );
+
+
+  setText(
+    "serviceTime",
+    customer.time ||
+      "-"
+  );
+
+}
+
+
+/* =========================================================
+   ITEMS
+========================================================= */
+
+function renderItems() {
+
+  const container =
+    document.getElementById(
+      "orderItems"
+    );
+
+
+  if (!container) {
 
     return;
 
   }
 
 
-  detailVariants.innerHTML =
-    "";
+  const items =
+    Array.isArray(
+      order.items
+    )
+      ? order.items
+      : [];
 
 
-  currentService.variants.forEach(
-    (variant, index) => {
+  if (
+    items.length === 0
+  ) {
 
-      const element =
-        document.createElement(
-          "button"
-        );
+    container.innerHTML = `
 
+      <div class="detail-item">
 
-      element.type =
-        "button";
+        <div class="detail-item-icon">
 
+          <i
+            class="fa-solid fa-box-open"
+          ></i>
 
-      element.className =
-        "detail-variant";
-
-
-      if (
-        index === 0
-      ) {
-
-        element.classList.add(
-          "active"
-        );
-
-      }
+        </div>
 
 
-      element.innerHTML = `
+        <div class="detail-item-info">
 
-        <span class="detail-variant-name">
+          <strong>
+            Tidak ada detail layanan
+          </strong>
 
-          ${escapeHTML(
-            variant.name
-          )}
+        </div>
 
-        </span>
+      </div>
 
+    `;
 
-        <span class="detail-variant-price">
+    return;
 
-          ${formatRupiah(
-            variant.price
-          )}
-
-        </span>
+  }
 
 
-        <span class="detail-variant-check">
+  container.innerHTML =
+    items
+      .map(
+        item => {
 
-          <i class="fa-solid fa-check"></i>
-
-        </span>
-
-      `;
-
-
-      element.addEventListener(
-        "click",
-        () => {
-
-          selectedVariant =
-            variant;
-
-
-          document
-            .querySelectorAll(
-              ".detail-variant"
-            )
-            .forEach(
-              button =>
-                button.classList.remove(
-                  "active"
-                )
+          const qty =
+            Number(
+              item.qty || 0
             );
 
 
-          element.classList.add(
-            "active"
-          );
+          const price =
+            Number(
+              item.price || 0
+            );
 
 
-          updatePrice();
+          const subtotal =
+            qty * price;
+
+
+          return `
+
+            <div
+              class="detail-item"
+            >
+
+
+              <div
+                class="detail-item-icon"
+              >
+
+                <i
+                  class="${getItemIcon(
+                    item
+                  )}"
+                ></i>
+
+              </div>
+
+
+
+              <div
+                class="detail-item-info"
+              >
+
+                <strong>
+                  ${escapeHTML(
+                    item.name ||
+                    "Layanan Cleaning"
+                  )}
+                </strong>
+
+
+                <small>
+                  ${qty} ×
+                  ${formatRupiah(
+                    price
+                  )}
+                </small>
+
+              </div>
+
+
+
+              <div
+                class="detail-item-price"
+              >
+
+                <strong>
+                  ${formatRupiah(
+                    subtotal
+                  )}
+                </strong>
+
+
+                <small>
+                  ${escapeHTML(
+                    item.service ||
+                    "Cleaning"
+                  )}
+                </small>
+
+              </div>
+
+
+            </div>
+
+          `;
 
         }
-      );
-
-
-      detailVariants.appendChild(
-        element
-      );
-
-    }
-  );
+      )
+      .join("");
 
 }
 
 
 /* =========================================================
-   QUANTITY
+   PAYMENT
 ========================================================= */
 
-if (qtyMinus) {
+function renderPayment() {
 
-  qtyMinus.addEventListener(
-    "click",
-    () => {
-
-      if (
-        quantity <= 1
-      ) {
-
-        return;
-
-      }
+  const subtotal =
+    Number(
+      order.subtotal || 0
+    );
 
 
-      quantity--;
-
-      updateQuantity();
-
-    }
-  );
-
-}
-
-
-if (qtyPlus) {
-
-  qtyPlus.addEventListener(
-    "click",
-    () => {
-
-      if (
-        quantity >= 99
-      ) {
-
-        return;
-
-      }
-
-
-      quantity++;
-
-      updateQuantity();
-
-    }
-  );
-
-}
-
-
-function updateQuantity() {
-
-  if (qtyValue) {
-
-    qtyValue.textContent =
-      quantity;
-
-  }
-
-
-  updatePrice();
-
-}
-
-
-/* =========================================================
-   PRICE
-========================================================= */
-
-function updatePrice() {
-
-  if (
-    !selectedVariant
-  ) {
-
-    return;
-
-  }
+  const discount =
+    Number(
+      order.discount || 0
+    );
 
 
   const total =
     Number(
-      selectedVariant.price
-    ) *
-    quantity;
-
-
-  if (detailPrice) {
-
-    detailPrice.textContent =
-      formatRupiah(
-        selectedVariant.price
-      );
-
-  }
-
-
-  if (detailTotal) {
-
-    detailTotal.textContent =
-      formatRupiah(
-        total
-      );
-
-  }
-
-}
-
-
-/* =========================================================
-   NOTE COUNTER
-========================================================= */
-
-if (detailNote) {
-
-  detailNote.addEventListener(
-    "input",
-    () => {
-
-      const length =
-        detailNote.value.length;
-
-
-      if (noteCounter) {
-
-        noteCounter.textContent =
-          `${length}/250`;
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   ADD TO CART
-========================================================= */
-
-if (addToCart) {
-
-  addToCart.addEventListener(
-    "click",
-    () => {
-
-      const item =
-        createCartItem();
-
-
-      addCartItem(
-        item
-      );
-
-
-      showToast(
-        "Layanan berhasil ditambahkan ke keranjang."
-      );
-
-
-      updateCartBadge();
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   BUY NOW
-========================================================= */
-
-if (buyNow) {
-
-  buyNow.addEventListener(
-    "click",
-    () => {
-
-      const item =
-        createCartItem();
-
-
-      /*
-        Keranjang dikosongkan agar
-        customer langsung checkout
-        item yang dipilih.
-      */
-
-      saveCart([
-        item
-      ]);
-
-
-      window.location.href =
-        "checkout.html";
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   CREATE CART ITEM
-========================================================= */
-
-function createCartItem() {
-
-  const date =
-    bookingDate
-      ? bookingDate.value
-      : "";
-
-
-  const time =
-    bookingTime
-      ? bookingTime.value
-      : "";
-
-
-  const note =
-    detailNote
-      ? detailNote.value.trim()
-      : "";
-
-
-  return {
-
-    id:
-      `${Date.now()}-${Math.random()
-        .toString(36)
-        .substring(2,8)}`,
-
-    service:
-      getServiceId(),
-
-    name:
-      currentService.name,
-
-    variant:
-      selectedVariant.name,
-
-    price:
-      Number(
-        selectedVariant.price
-      ),
-
-    qty:
-      quantity,
-
-    total:
-      Number(
-        selectedVariant.price
-      ) * quantity,
-
-    date:
-      date,
-
-    time:
-      time,
-
-    note:
-      note,
-
-    image:
-      currentService.image || "",
-
-    createdAt:
-      new Date().toISOString()
-
-  };
-
-}
-
-
-/* =========================================================
-   GET SERVICE ID
-========================================================= */
-
-function getServiceId() {
-
-  const params =
-    new URLSearchParams(
-      window.location.search
+      order.total ||
+      Math.max(
+        0,
+        subtotal - discount
+      )
     );
 
 
-  return (
-    params.get("service") ||
-    params.get("id") ||
-    "sofa"
-  ).toLowerCase();
-
-}
-
-
-/* =========================================================
-   ADD CART ITEM
-========================================================= */
-
-function addCartItem(
-  item
-) {
-
-  let cart =
-    getCart();
-
-
-  cart.push(
-    item
+  setText(
+    "subtotal",
+    formatRupiah(
+      subtotal
+    )
   );
 
 
-  saveCart(
-    cart
+  setText(
+    "discount",
+    `- ${formatRupiah(
+      discount
+    )}`
   );
 
-}
 
-
-/* =========================================================
-   GET CART
-========================================================= */
-
-function getCart() {
-
-  try {
-
-    const cart =
-      JSON.parse(
-        localStorage.getItem(
-          DETAIL_CART_KEY
-        )
-      );
-
-
-    if (
-      Array.isArray(cart)
-    ) {
-
-      return cart;
-
-    }
-
-  } catch {
-
-    // ignore
-
-  }
-
-
-  return [];
-
-}
-
-
-/* =========================================================
-   SAVE CART
-========================================================= */
-
-function saveCart(
-  cart
-) {
-
-  localStorage.setItem(
-    DETAIL_CART_KEY,
-    JSON.stringify(
-      cart
+  setText(
+    "grandTotal",
+    formatRupiah(
+      total
     )
   );
 
@@ -936,56 +542,48 @@ function saveCart(
 
 
 /* =========================================================
-   CART BADGE
+   WHATSAPP
 ========================================================= */
 
-function updateCartBadge() {
+function setupWhatsApp() {
 
-  if (!detailCartBadge) {
+  const button =
+    document.getElementById(
+      "whatsappOrder"
+    );
+
+
+  if (!button) {
 
     return;
 
   }
 
 
-  const cart =
-    getCart();
-
-
-  const count =
-    cart.reduce(
-      (
-        total,
-        item
-      ) =>
-        total +
-        Number(
-          item.qty || 1
-        ),
-      0
-    );
-
-
-  detailCartBadge.textContent =
-    count > 99
-      ? "99+"
-      : count;
-
-}
-
-
-/* =========================================================
-   CART BUTTON
-========================================================= */
-
-if (detailCartButton) {
-
-  detailCartButton.addEventListener(
+  button.addEventListener(
     "click",
-    () => {
+    function () {
+
+      const message =
+        createWhatsAppMessage(
+          order
+        );
+
+
+      const phone =
+        normalizePhone(
+          ADMIN_WA
+        );
+
+
+      const url =
+        `https://wa.me/${phone}?text=${encodeURIComponent(
+          message
+        )}`;
+
 
       window.location.href =
-        "cart.html";
+        url;
 
     }
   );
@@ -994,66 +592,560 @@ if (detailCartButton) {
 
 
 /* =========================================================
-   EVENTS
+   SHARE
 ========================================================= */
 
-function setupEvents() {
+function setupShare() {
 
-  /*
-    Klik tombol tambah keranjang
-    sudah ditangani di atas.
-  */
-
-}
+  const button =
+    document.getElementById(
+      "shareOrder"
+    );
 
 
-/* =========================================================
-   MINIMUM DATE
-========================================================= */
-
-function setMinimumDate() {
-
-  if (!bookingDate) {
+  if (!button) {
 
     return;
 
   }
 
 
-  const today =
-    new Date();
+  button.addEventListener(
+    "click",
+    async function () {
+
+      const shareData = {
+
+        title:
+          "Detail Pesanan Shae Cleaners",
+
+        text:
+          `Invoice ${order.invoice || ""} - ${formatRupiah(order.total)}`,
+
+        url:
+          window.location.href
+
+      };
 
 
-  const year =
-    today.getFullYear();
+      try {
+
+        if (
+          navigator.share
+        ) {
+
+          await navigator.share(
+            shareData
+          );
+
+        } else {
+
+          await navigator.clipboard.writeText(
+            window.location.href
+          );
 
 
-  const month =
-    String(
-      today.getMonth() + 1
-    ).padStart(
-      2,
-      "0"
-    );
+          alert(
+            "Link detail pesanan berhasil disalin."
+          );
 
+        }
 
-  const day =
-    String(
-      today.getDate()
-    ).padStart(
-      2,
-      "0"
-    );
+      } catch (error) {
 
+        /*
+         * User membatalkan share.
+         * Tidak perlu menampilkan error.
+         */
 
-  bookingDate.min =
-    `${year}-${month}-${day}`;
+        console.log(
+          "Share dibatalkan."
+        );
+
+      }
+
+    }
+  );
 
 }
 
 
 /* =========================================================
-   FORMAT RUPIAH
+   BACK BUTTON
+========================================================= */
+
+function setupBackButton() {
+
+  const button =
+    document.getElementById(
+      "backOrders"
+    );
+
+
+  if (!button) {
+
+    return;
+
+  }
+
+
+  button.addEventListener(
+    "click",
+    function () {
+
+      window.location.href =
+        "pesanan.html";
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   WHATSAPP MESSAGE
+========================================================= */
+
+function createWhatsAppMessage(
+  order
+) {
+
+  const customer =
+    order.customer || {};
+
+
+  let message =
+
+`*DETAIL PESANAN - SHAE CLEANERS*
+
+🧾 Invoice:
+${order.invoice || "-"}
+
+👤 Nama:
+${customer.name || "-"}
+
+📱 WhatsApp:
+${customer.phone || "-"}
+
+📍 Alamat:
+${customer.address || "-"}
+
+📅 Jadwal:
+${formatDate(customer.date)}
+
+⏰ Jam:
+${customer.time || "-"}
+
+━━━━━━━━━━━━━━
+*DETAIL LAYANAN*
+━━━━━━━━━━━━━━
+`;
+
+
+  const items =
+    Array.isArray(
+      order.items
+    )
+      ? order.items
+      : [];
+
+
+  items.forEach(
+    item => {
+
+      const qty =
+        Number(
+          item.qty || 0
+        );
+
+
+      const price =
+        Number(
+          item.price || 0
+        );
+
+
+      const subtotal =
+        qty * price;
+
+
+      message +=
+
+`\n• ${item.name || "Layanan"}
+  ${qty} × ${formatRupiah(price)}
+  = ${formatRupiah(subtotal)}
+`;
+
+    }
+  );
+
+
+  message +=
+
+`
+━━━━━━━━━━━━━━
+Subtotal:
+${formatRupiah(
+  order.subtotal
+)}
+
+Diskon:
+- ${formatRupiah(
+  order.discount
+)}
+
+*TOTAL:
+${formatRupiah(
+  order.total
+)}*
+━━━━━━━━━━━━━━
+
+Catatan:
+${customer.note || "-"}
+
+Mohon bantuan untuk konfirmasi pesanan saya.
+
+Terima kasih.
+`;
+
+
+  return message;
+
+}
+
+
+/* =========================================================
+   STATUS HELPERS
+========================================================= */
+
+function normalizeStatus(
+  status
+) {
+
+  const value =
+    String(
+      status || ""
+    )
+      .toLowerCase()
+      .trim();
+
+
+  if (
+    value.includes("selesai") ||
+    value.includes("completed") ||
+    value.includes("done")
+  ) {
+
+    return "completed";
+
+  }
+
+
+  if (
+    value.includes("batal") ||
+    value.includes("cancel")
+  ) {
+
+    return "cancelled";
+
+  }
+
+
+  if (
+    value.includes("proses") ||
+    value.includes("process") ||
+    value.includes("dikerjakan")
+  ) {
+
+    return "process";
+
+  }
+
+
+  return "pending";
+
+}
+
+
+function getStatusText(
+  status
+) {
+
+  const map = {
+
+    pending:
+      "Menunggu Konfirmasi",
+
+    process:
+      "Sedang Diproses",
+
+    completed:
+      "Pesanan Selesai",
+
+    cancelled:
+      "Pesanan Dibatalkan"
+
+  };
+
+
+  return (
+    map[status] ||
+    "Menunggu Konfirmasi"
+  );
+
+}
+
+
+function getStatusDescription(
+  status
+) {
+
+  const map = {
+
+    pending:
+      "Pesanan sedang menunggu konfirmasi dari Shae Cleaners.",
+
+    process:
+      "Pesanan kamu sedang diproses oleh tim Shae Cleaners.",
+
+    completed:
+      "Pesanan sudah selesai. Terima kasih telah menggunakan Shae Cleaners.",
+
+    cancelled:
+      "Pesanan ini telah dibatalkan."
+
+  };
+
+
+  return (
+    map[status] ||
+    map.pending
+  );
+
+}
+
+
+function getStatusIcon(
+  status
+) {
+
+  const map = {
+
+    pending:
+      "fa-solid fa-clock",
+
+    process:
+      "fa-solid fa-spinner",
+
+    completed:
+      "fa-solid fa-circle-check",
+
+    cancelled:
+      "fa-solid fa-circle-xmark"
+
+  };
+
+
+  return (
+    map[status] ||
+    map.pending
+  );
+
+}
+
+
+/* =========================================================
+   ITEM ICON
+========================================================= */
+
+function getItemIcon(
+  item
+) {
+
+  const value =
+    (
+      `${item.name || ""} ${item.service || ""}`
+    )
+      .toLowerCase();
+
+
+  if (
+    value.includes("sofa")
+  ) {
+
+    return "fa-solid fa-couch";
+
+  }
+
+
+  if (
+    value.includes("kasur") ||
+    value.includes("spring")
+  ) {
+
+    return "fa-solid fa-bed";
+
+  }
+
+
+  if (
+    value.includes("jok") ||
+    value.includes("mobil")
+  ) {
+
+    return "fa-solid fa-car";
+
+  }
+
+
+  if (
+    value.includes("karpet")
+  ) {
+
+    return "fa-solid fa-rug";
+
+  }
+
+
+  if (
+    value.includes("gorden")
+  ) {
+
+    return "fa-solid fa-scroll";
+
+  }
+
+
+  if (
+    value.includes("kursi")
+  ) {
+
+    return "fa-solid fa-chair";
+
+  }
+
+
+  if (
+    value.includes("ac")
+  ) {
+
+    return "fa-solid fa-snowflake";
+
+  }
+
+
+  return "fa-solid fa-spray-can-sparkles";
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(
+  value
+) {
+
+  if (!value) {
+
+    return "-";
+
+  }
+
+
+  const date =
+    new Date(
+      `${value}T00:00:00`
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return value;
+
+  }
+
+
+  return new Intl.DateTimeFormat(
+    "id-ID",
+    {
+
+      day:
+        "2-digit",
+
+      month:
+        "long",
+
+      year:
+        "numeric"
+
+    }
+  ).format(
+    date
+  );
+
+}
+
+
+/* =========================================================
+   FORMAT DATETIME
+========================================================= */
+
+function formatDateTime(
+  value
+) {
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "-";
+
+  }
+
+
+  return new Intl.DateTimeFormat(
+    "id-ID",
+    {
+
+      day:
+        "2-digit",
+
+      month:
+        "long",
+
+      year:
+        "numeric",
+
+      hour:
+        "2-digit",
+
+      minute:
+        "2-digit"
+
+    }
+  ).format(
+    date
+  );
+
+}
+
+
+/* =========================================================
+   RUPIAH
 ========================================================= */
 
 function formatRupiah(
@@ -1070,13 +1162,133 @@ function formatRupiah(
       currency:
         "IDR",
 
-      minimumFractionDigits:
+      maximumFractionDigits:
         0
 
     }
   ).format(
-    Number(value) || 0
+    Number(
+      value
+    ) || 0
   );
+
+}
+
+
+/* =========================================================
+   PHONE
+========================================================= */
+
+function normalizePhone(
+  phone
+) {
+
+  let value =
+    String(
+      phone || ""
+    )
+      .replace(
+        /\D/g,
+        ""
+      );
+
+
+  if (
+    value.startsWith("0")
+  ) {
+
+    value =
+      "62" +
+      value.substring(1);
+
+  }
+
+
+  if (
+    value.startsWith("8")
+  ) {
+
+    value =
+      "62" +
+      value;
+
+  }
+
+
+  return value;
+
+}
+
+
+/* =========================================================
+   SET TEXT
+========================================================= */
+
+function setText(
+  id,
+  value
+) {
+
+  const element =
+    document.getElementById(
+      id
+    );
+
+
+  if (element) {
+
+    element.textContent =
+      value;
+
+  }
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showOrderError() {
+
+  const page =
+    document.querySelector(
+      ".detail-page"
+    );
+
+
+  if (!page) {
+
+    return;
+
+  }
+
+
+  page.innerHTML = `
+
+    <section
+      class="detail-error"
+    >
+
+      <i
+        class="fa-solid fa-receipt"
+      ></i>
+
+
+      <h3>
+        Pesanan tidak ditemukan
+      </h3>
+
+
+      <p>
+        Detail pesanan tidak tersedia
+        atau sudah tidak tersimpan.
+      </p>
+
+
+    </section>
+
+  `;
 
 }
 
@@ -1092,132 +1304,30 @@ function escapeHTML(
   return String(
     value ?? ""
   )
+
     .replace(
       /&/g,
       "&amp;"
     )
+
     .replace(
       /</g,
       "&lt;"
     )
+
     .replace(
       />/g,
       "&gt;"
     )
+
     .replace(
       /"/g,
       "&quot;"
     )
+
     .replace(
       /'/g,
       "&#039;"
     );
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(
-  message
-) {
-
-  if (
-    !detailToast ||
-    !detailToastText
-  ) {
-
-    alert(message);
-
-    return;
-
-  }
-
-
-  detailToastText.textContent =
-    message;
-
-
-  detailToast.classList.add(
-    "show"
-  );
-
-
-  clearTimeout(
-    window.detailToastTimer
-  );
-
-
-  window.detailToastTimer =
-    setTimeout(
-      () => {
-
-        detailToast.classList.remove(
-          "show"
-        );
-
-      },
-      2200
-    );
-
-}
-
-
-/* =========================================================
-   WHATSAPP QUICK ORDER
-========================================================= */
-
-function openQuickWhatsApp() {
-
-  if (
-    !currentService ||
-    !selectedVariant
-  ) {
-
-    return;
-
-  }
-
-
-  const message =
-`Halo Shae Cleaners 👋
-
-Saya ingin memesan:
-
-🧹 Layanan:
-${currentService.name}
-
-📦 Paket:
-${selectedVariant.name}
-
-🔢 Jumlah:
-${quantity}
-
-💰 Total:
-${formatRupiah(
-  selectedVariant.price *
-  quantity
-)}
-
-📅 Tanggal:
-${bookingDate?.value || "-"}
-
-⏰ Jam:
-${bookingTime?.value || "-"}
-
-📝 Catatan:
-${detailNote?.value || "-"}
-
-Mohon dibantu untuk konfirmasi pesanan. Terima kasih 🙏`;
-
-
-  window.open(
-    `https://wa.me/${DETAIL_WHATSAPP}?text=${encodeURIComponent(
-      message
-    )}`,
-    "_blank"
-  );
 
 }
