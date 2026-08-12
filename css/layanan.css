@@ -1,75 +1,233 @@
 /* =========================================================
-   SHAE CLEANERS MARKETPLACE
+   SHAE CLEANERS
    css/layanan.css
-   HALAMAN SEMUA LAYANAN
 ========================================================= */
+
+:root {
+
+  --green: #16a34a;
+
+  --green-dark: #15803d;
+
+  --green-soft: #ecfdf3;
+
+  --bg: #f5f7f8;
+
+  --text: #344054;
+
+  --muted: #98a2b3;
+
+  --border: #e7eaec;
+
+}
 
 
 /* =========================================================
-   PAGE HEADER
+   BODY
 ========================================================= */
 
-.layanan-header {
+body {
+
+  margin: 0;
+
+  padding: 0 0 76px;
+
+  background: var(--bg);
+
+  color: var(--text);
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.service-header {
 
   position: sticky;
 
   top: 0;
 
-}
+  z-index: 2000;
 
-
-/* =========================================================
-   PAGE HEADING
-========================================================= */
-
-.page-heading {
+  height: 60px;
 
   display: flex;
 
   align-items: center;
 
-  gap: 11px;
+  justify-content: space-between;
+
+  padding: 0 12px;
+
+  box-sizing: border-box;
+
+  background:
+    rgba(255,255,255,.97);
+
+  border-bottom:
+    1px solid var(--border);
+
+  box-shadow:
+    0 2px 12px
+    rgba(16,24,40,.05);
+
+  backdrop-filter: blur(12px);
 
 }
 
 
-.page-heading h1 {
+.service-back,
+.service-cart {
 
-  font-size: 17px;
+  position: relative;
 
-  font-weight: 800;
+  width: 37px;
 
-  line-height: 1.2;
+  height: 37px;
 
-  letter-spacing: -0.3px;
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: #f3f5f6;
+
+  color: #475467;
+
+  cursor: pointer;
 
 }
 
 
-.page-heading small {
+.service-header-title {
+
+  position: absolute;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  text-align: center;
+
+}
+
+
+.service-header-title strong {
 
   display: block;
 
-  margin-top: 3px;
+  color: #1d2939;
 
-  color: var(--text-soft);
+  font-size: 12px;
 
-  font-size: 9px;
+  font-weight: 900;
 
-  line-height: 1.3;
+}
+
+
+.service-header-title small {
+
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--muted);
+
+  font-size: 6.5px;
+
+}
+
+
+.cart-badge {
+
+  position: absolute;
+
+  top: -3px;
+
+  right: -3px;
+
+  min-width: 15px;
+
+  height: 15px;
+
+  padding: 0 3px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ef4444;
+
+  color: white;
+
+  font-size: 6px;
+
+  font-weight: 900;
 
 }
 
 
 /* =========================================================
-   BACK BUTTON
+   PAGE
 ========================================================= */
 
-.back-button {
+.service-page {
 
-  width: 39px;
+  width: 100%;
 
-  height: 39px;
+  max-width: 680px;
+
+  margin: auto;
+
+  padding: 10px;
+
+  box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.service-hero {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 14px;
+
+  background: white;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 15px;
+
+}
+
+
+.service-hero-icon {
+
+  width: 70px;
+
+  height: 70px;
 
   flex-shrink: 0;
 
@@ -79,425 +237,207 @@
 
   justify-content: center;
 
-  border-radius: 12px;
-
-  background: #f3f5f6;
-
-  color: #344054;
-
-  font-size: 14px;
-
-  transition: 0.18s ease;
-
-}
-
-
-.back-button:active {
-
-  transform: scale(0.9);
-
-  background: #e8ecee;
-
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.layanan-main {
-
-  width: 100%;
-
-  padding-bottom: 25px;
-
-}
-
-
-/* =========================================================
-   FILTER SECTION
-========================================================= */
-
-.filter-section {
-
-  padding: 14px 16px 4px;
-
-  background: var(--white);
-
-}
-
-
-.filter-scroll {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 8px;
-
-  overflow-x: auto;
-
-  scrollbar-width: none;
-
-  padding-bottom: 4px;
-
-  scroll-behavior: smooth;
-
-}
-
-
-.filter-scroll::-webkit-scrollbar {
-
-  display: none;
-
-}
-
-
-/* =========================================================
-   FILTER BUTTON
-========================================================= */
-
-.filter-btn {
-
-  flex: 0 0 auto;
-
-  min-height: 34px;
-
-  padding: 0 14px;
-
-  border-radius: 20px;
-
-  border: 1px solid #e5e9ec;
-
-  background: #fff;
-
-  color: #667085;
-
-  font-size: 10px;
-
-  font-weight: 600;
-
-  white-space: nowrap;
-
-  transition:
-
-    background 0.2s ease,
-
-    color 0.2s ease,
-
-    border 0.2s ease,
-
-    transform 0.15s ease;
-
-}
-
-
-.filter-btn:active {
-
-  transform: scale(0.94);
-
-}
-
-
-.filter-btn.active {
-
-  background: var(--primary);
-
-  color: white;
-
-  border-color: var(--primary);
-
-  box-shadow:
-    0 5px 12px rgba(22, 163, 74, 0.16);
-
-}
-
-
-/* =========================================================
-   SERVICE HEADING
-========================================================= */
-
-.service-heading {
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  padding: 18px 16px 12px;
-
-}
-
-
-.service-heading h2 {
-
-  font-size: 16px;
-
-  font-weight: 800;
-
-  letter-spacing: -0.3px;
-
-}
-
-
-.service-heading p {
-
-  margin-top: 3px;
-
-  color: var(--text-soft);
-
-  font-size: 9px;
-
-}
-
-
-/* =========================================================
-   SERVICE GRID
-========================================================= */
-
-.all-service-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 12px;
-
-  padding: 0 16px;
-
-}
-
-
-/* =========================================================
-   MARKET SERVICE CARD
-========================================================= */
-
-.market-service-card {
-
-  min-width: 0;
-
   overflow: hidden;
 
-  background: white;
+  border-radius: 17px;
 
-  border: 1px solid var(--border);
-
-  border-radius: 16px;
-
-  box-shadow:
-    0 4px 16px rgba(20, 30, 40, 0.04);
-
-  cursor: pointer;
-
-  animation:
-    cardAppear 0.35s ease both;
-
-  transition:
-    transform 0.18s ease,
-
-    box-shadow 0.18s ease;
+  background: var(--green-soft);
 
 }
 
 
-.market-service-card:active {
-
-  transform: scale(0.98);
-
-}
-
-
-.market-service-card:hover {
-
-  box-shadow:
-    0 9px 24px rgba(20, 30, 40, 0.08);
-
-}
-
-
-/* =========================================================
-   MARKET IMAGE
-========================================================= */
-
-.market-image {
-
-  position: relative;
-
-  width: 100%;
-
-  height: 145px;
-
-  overflow: hidden;
-
-  background: #eef1f2;
-
-}
-
-
-.market-image img {
+.service-hero-icon img {
 
   width: 100%;
 
   height: 100%;
 
-  object-fit: cover;
-
-  transition:
-    transform 0.35s ease;
+  object-fit: contain;
 
 }
 
 
-.market-service-card:hover
-.market-image img {
+.service-hero-info {
 
-  transform: scale(1.04);
+  flex: 1;
 
-}
-
-
-/* =========================================================
-   MARKET BADGE
-========================================================= */
-
-.market-badge {
-
-  position: absolute;
-
-  top: 8px;
-
-  left: 8px;
-
-  padding: 5px 7px;
-
-  border-radius: 6px;
-
-  background: var(--primary);
-
-  color: white;
-
-  font-size: 8px;
-
-  font-weight: 800;
-
-  line-height: 1;
+  min-width: 0;
 
 }
 
 
-.market-badge.favorite {
+.service-label {
 
-  background: #f59e0b;
+  display: block;
 
-}
+  color: var(--green);
 
+  font-size: 6px;
 
-/* =========================================================
-   MARKET INFO
-========================================================= */
+  font-weight: 900;
 
-.market-info {
-
-  padding: 11px;
+  letter-spacing: .4px;
 
 }
 
 
-.market-category {
+.service-hero h1 {
 
-  display: inline-block;
+  margin: 4px 0;
 
-  margin-bottom: 5px;
+  color: #1d2939;
 
-  color: var(--primary);
+  font-size: 17px;
 
-  font-size: 8px;
-
-  font-weight: 700;
+  font-weight: 900;
 
 }
 
 
-.market-info h3 {
+.service-hero p {
 
-  font-size: 13px;
+  margin: 0;
 
-  font-weight: 800;
+  color: #667085;
 
-  line-height: 1.25;
+  font-size: 7.5px;
 
-  margin-bottom: 5px;
-
-}
-
-
-.market-info p {
-
-  min-height: 27px;
-
-  color: var(--text-soft);
-
-  font-size: 9px;
-
-  line-height: 1.45;
+  line-height: 1.5;
 
 }
 
 
 /* =========================================================
-   MARKET BOTTOM
+   PROMO
 ========================================================= */
 
-.market-bottom {
+.service-promo {
 
   display: flex;
 
-  align-items: flex-end;
+  align-items: center;
 
-  justify-content: space-between;
+  gap: 7px;
 
-  gap: 8px;
+  margin-top: 8px;
+
+  padding: 9px 11px;
+
+  border-radius: 10px;
+
+  background: #ecfdf3;
+
+  color: var(--green-dark);
+
+  font-size: 7px;
+
+  font-weight: 800;
+
+}
+
+
+.service-promo i {
+
+  font-size: 10px;
+
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.service-section {
 
   margin-top: 12px;
 
 }
 
 
-.market-bottom small {
+.service-section-title {
 
-  display: block;
-
-  margin-bottom: 2px;
-
-  color: #98a2b3;
-
-  font-size: 8px;
+  margin-bottom: 7px;
 
 }
 
 
-.market-bottom strong {
+.service-section-title strong {
 
   display: block;
 
-  color: var(--primary);
+  color: #344054;
 
-  font-size: 11px;
+  font-size: 10px;
 
-  font-weight: 800;
-
-  white-space: nowrap;
+  font-weight: 900;
 
 }
 
 
-.market-bottom button {
+.service-section-title small {
 
-  width: 31px;
+  display: block;
 
-  height: 31px;
+  margin-top: 3px;
+
+  color: var(--muted);
+
+  font-size: 6.5px;
+
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+.service-products {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+}
+
+
+.service-product {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 11px;
+
+  background: white;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 12px;
+
+  transition: .2s ease;
+
+}
+
+
+.service-product.selected {
+
+  border-color: #86efac;
+
+  background: #f0fdf4;
+
+}
+
+
+.product-icon {
+
+  width: 40px;
+
+  height: 40px;
 
   flex-shrink: 0;
 
@@ -509,47 +449,77 @@
 
   border-radius: 10px;
 
-  background: var(--primary);
+  background: var(--green-soft);
 
-  color: white;
-
-  font-size: 11px;
-
-  box-shadow:
-    0 5px 13px rgba(22, 163, 74, 0.18);
-
-  transition: 0.18s ease;
+  color: var(--green);
 
 }
 
 
-.market-bottom button:active {
+.product-info {
 
-  transform: scale(0.86);
+  flex: 1;
 
-}
-
-
-/* =========================================================
-   EMPTY RESULT
-========================================================= */
-
-.empty-result {
-
-  padding: 60px 20px;
-
-  text-align: center;
+  min-width: 0;
 
 }
 
 
-.empty-icon {
+.product-info strong {
 
-  width: 64px;
+  display: block;
 
-  height: 64px;
+  color: #344054;
 
-  margin: 0 auto 15px;
+  font-size: 8px;
+
+  font-weight: 900;
+
+}
+
+
+.product-info small {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--muted);
+
+  font-size: 6.5px;
+
+}
+
+
+.product-price {
+
+  margin-top: 5px;
+
+  color: var(--green-dark);
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+}
+
+
+.product-controls {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+}
+
+
+.qty-button {
+
+  width: 27px;
+
+  height: 27px;
 
   display: flex;
 
@@ -557,160 +527,369 @@
 
   justify-content: center;
 
-  border-radius: 50%;
+  border: 0;
 
-  background: #eef2f3;
+  border-radius: 8px;
 
-  color: #98a2b3;
+  background: #ecfdf3;
 
-  font-size: 23px;
+  color: var(--green);
 
-}
+  font-size: 9px;
 
-
-.empty-result h3 {
-
-  font-size: 14px;
-
-  font-weight: 800;
-
-  margin-bottom: 6px;
+  cursor: pointer;
 
 }
 
 
-.empty-result p {
+.qty-value {
 
-  color: var(--text-soft);
+  min-width: 15px;
+
+  text-align: center;
+
+  color: #344054;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.service-summary {
+
+  margin-top: 13px;
+
+  padding: 13px;
+
+  background: white;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 14px;
+
+}
+
+
+.summary-title {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+}
+
+
+.summary-title strong {
 
   font-size: 10px;
 
-}
-
-
-/* =========================================================
-   CARD ANIMATION
-========================================================= */
-
-@keyframes cardAppear {
-
-  from {
-
-    opacity: 0;
-
-    transform: translateY(10px);
-
-  }
-
-  to {
-
-    opacity: 1;
-
-    transform: translateY(0);
-
-  }
+  font-weight: 900;
 
 }
 
 
-/* =========================================================
-   HIDE CARD
-========================================================= */
+.summary-title span {
 
-.market-service-card.hidden {
+  color: var(--muted);
 
-  display: none;
+  font-size: 6.5px;
+
+}
+
+
+.summary-items {
+
+  margin-top: 9px;
+
+}
+
+
+.summary-empty {
+
+  padding: 13px;
+
+  text-align: center;
+
+  color: var(--muted);
+
+}
+
+
+.summary-empty i {
+
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 16px;
+
+}
+
+
+.summary-empty span {
+
+  font-size: 7px;
+
+}
+
+
+.summary-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 6px 0;
+
+  border-bottom: 1px solid #f0f2f3;
+
+}
+
+
+.summary-item:last-child {
+
+  border-bottom: 0;
+
+}
+
+
+.summary-item-name {
+
+  color: #667085;
+
+  font-size: 7px;
+
+}
+
+
+.summary-item-price {
+
+  color: #344054;
+
+  font-size: 7px;
+
+  font-weight: 900;
+
+}
+
+
+.summary-total {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 9px;
+
+  padding-top: 10px;
+
+  border-top: 1px dashed #dfe4e7;
+
+}
+
+
+.summary-total span {
+
+  color: #667085;
+
+  font-size: 8px;
+
+}
+
+
+.summary-total strong {
+
+  color: var(--green);
+
+  font-size: 13px;
+
+  font-weight: 900;
 
 }
 
 
 /* =========================================================
-   TABLET
+   ORDER BUTTON
 ========================================================= */
 
-@media (min-width: 600px) {
+.order-button {
 
-  .filter-section {
+  width: 100%;
 
-    max-width: 720px;
+  min-height: 44px;
 
-    margin: auto;
+  display: flex;
 
-  }
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-top: 11px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: var(--green);
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+
+}
 
 
-  .service-heading {
+.order-button:disabled {
 
-    max-width: 720px;
+  background: #d0d5d9;
 
-    margin: auto;
+  cursor: not-allowed;
 
-  }
-
-
-  .all-service-grid {
-
-    max-width: 720px;
-
-    margin: auto;
-
-    grid-template-columns:
-      repeat(3, minmax(0, 1fr));
-
-  }
+}
 
 
-  .market-image {
+.order-button:not(:disabled):active {
 
-    height: 170px;
-
-  }
+  transform: scale(.98);
 
 }
 
 
 /* =========================================================
-   SMALL MOBILE
+   BOTTOM NAV
 ========================================================= */
 
-@media (max-width: 360px) {
+.bottom-nav {
 
-  .all-service-grid {
+  position: fixed;
 
-    gap: 9px;
+  left: 0;
 
-    padding-left: 12px;
+  right: 0;
 
-    padding-right: 12px;
+  bottom: 0;
 
-  }
+  z-index: 3000;
+
+  height: 64px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+  align-items: end;
+
+  padding:
+    4px 6px
+    env(safe-area-inset-bottom);
+
+  box-sizing: border-box;
+
+  background:
+    rgba(255,255,255,.98);
+
+  border-top:
+    1px solid var(--border);
+
+  box-shadow:
+    0 -4px 18px
+    rgba(16,24,40,.06);
+
+}
 
 
-  .market-image {
+.bottom-nav a {
 
-    height: 125px;
+  height: 55px;
 
-  }
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 3px;
+
+  color: #98a2b3;
+
+  text-decoration: none;
+
+  font-size: 7px;
+
+}
 
 
-  .market-info {
+.bottom-nav a i {
 
-    padding: 9px;
+  font-size: 14px;
 
-  }
-
-
-  .market-info h3 {
-
-    font-size: 12px;
-
-  }
+}
 
 
-  .market-bottom strong {
+.bottom-order {
 
-    font-size: 10px;
+  justify-content: flex-start !important;
 
-  }
+}
+
+
+.bottom-order span {
+
+  width: 43px;
+
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-top: -17px;
+
+  border-radius: 50%;
+
+  background: var(--green);
+
+  color: white;
+
+  box-shadow:
+    0 6px 15px
+    rgba(22,163,74,.25);
+
+}
+
+
+.bottom-order label {
+
+  margin-top: 1px;
+
+  color: var(--green);
+
+  font-size: 7px;
+
+  font-weight: 900;
 
 }
