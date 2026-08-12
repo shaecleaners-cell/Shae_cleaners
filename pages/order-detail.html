@@ -10,26 +10,22 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Detail Layanan - Shae Cleaners</title>
-
   <meta
-    name="description"
-    content="Detail layanan Shae Cleaners"
+    name="theme-color"
+    content="#16a34a"
   >
+
+  <title>Detail Pesanan - Shae Cleaners</title>
+
 
   <link
     rel="stylesheet"
-    href="css/style.css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
   <link
     rel="stylesheet"
     href="css/order-detail.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
 </head>
@@ -38,523 +34,480 @@
 <body>
 
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header class="detail-header">
-
-  <button
-    type="button"
-    class="detail-header-button"
-    onclick="history.back()"
-    aria-label="Kembali"
-  >
-
-    <i class="fa-solid fa-arrow-left"></i>
-
-  </button>
-
-
-  <div class="detail-header-title">
-
-    <h1>
-      Detail Layanan
-    </h1>
-
-    <span>
-      Shae Cleaners
-    </span>
-
-  </div>
-
-
-  <button
-    type="button"
-    class="detail-header-button"
-    id="detailCartButton"
-    aria-label="Keranjang"
-  >
-
-    <i class="fa-solid fa-cart-shopping"></i>
-
-
-    <span
-      id="detailCartBadge"
-      class="detail-cart-badge"
-    >
-      0
-    </span>
-
-  </button>
-
-</header>
-
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
-<main class="detail-main">
-
-
-  <!-- ===================================================
-       PRODUCT IMAGE
-  ==================================================== -->
-
-  <section class="detail-image-section">
-
-    <div
-      id="detailImage"
-      class="detail-image"
-    >
-
-      <i class="fa-solid fa-broom"></i>
-
-    </div>
-
-
-    <div class="detail-image-dots">
-
-      <span class="active"></span>
-
-      <span></span>
-
-      <span></span>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- ===================================================
-       PRODUCT INFO
-  ==================================================== -->
-
-  <section class="detail-info">
-
-
-    <div class="detail-service-category">
-
-      <i class="fa-solid fa-circle-check"></i>
-
-      Layanan Shae Cleaners
-
-    </div>
-
-
-    <h2
-      id="detailName"
-      class="detail-name"
-    >
-      Layanan Cleaning
-    </h2>
-
-
-    <div class="detail-rating">
-
-      <span class="rating-star">
-
-        <i class="fa-solid fa-star"></i>
-
-        4.9
-
-      </span>
-
-
-      <span class="rating-divider">
-        |
-      </span>
-
-
-      <span>
-        Banyak dipesan
-      </span>
-
-    </div>
-
-
-    <div
-      id="detailPrice"
-      class="detail-price"
-    >
-      Rp0
-    </div>
-
-
-    <div class="detail-price-note">
-
-      Harga dapat menyesuaikan
-      ukuran dan jumlah item.
-
-    </div>
-
-
-  </section>
-
-
-
-  <!-- ===================================================
-       VARIANT
-  ==================================================== -->
-
-  <section class="detail-card">
-
-
-    <div class="detail-card-title">
-
-      <i class="fa-solid fa-layer-group"></i>
-
-      <span>
-        Pilih Paket / Ukuran
-      </span>
-
-    </div>
-
-
-    <div
-      id="detailVariants"
-      class="detail-variants"
-    >
-
-      <!-- Diisi oleh order-detail.js -->
-
-    </div>
-
-
-  </section>
-
-
-
-  <!-- ===================================================
-       QUANTITY
-  ==================================================== -->
-
-  <section class="detail-card">
-
-
-    <div class="detail-card-title">
-
-      <i class="fa-solid fa-calculator"></i>
-
-      <span>
-        Jumlah
-      </span>
-
-    </div>
-
-
-    <div class="detail-quantity">
-
-
-      <button
-        type="button"
-        id="qtyMinus"
-        class="qty-button"
-      >
-
-        <i class="fa-solid fa-minus"></i>
-
-      </button>
-
-
-      <strong
-        id="qtyValue"
-        class="qty-value"
-      >
-        1
-      </strong>
-
-
-      <button
-        type="button"
-        id="qtyPlus"
-        class="qty-button"
-      >
-
-        <i class="fa-solid fa-plus"></i>
-
-      </button>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- ===================================================
-       BOOKING
-  ==================================================== -->
-
-  <section class="detail-card">
-
-
-    <div class="detail-card-title">
-
-      <i class="fa-regular fa-calendar"></i>
-
-      <span>
-        Jadwal Cleaning
-      </span>
-
-    </div>
-
-
-    <div class="detail-booking">
-
-
-      <div class="detail-input-group">
-
-        <label for="bookingDate">
-
-          Tanggal
-
-        </label>
-
-
-        <div class="detail-input">
-
-          <i class="fa-regular fa-calendar"></i>
-
-
-          <input
-            type="date"
-            id="bookingDate"
-          >
-
-        </div>
-
-      </div>
-
-
-
-      <div class="detail-input-group">
-
-        <label for="bookingTime">
-
-          Jam
-
-        </label>
-
-
-        <div class="detail-input">
-
-          <i class="fa-regular fa-clock"></i>
-
-
-          <input
-            type="time"
-            id="bookingTime"
-          >
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-    <small class="detail-booking-note">
-
-      Jadwal akan dikonfirmasi kembali
-      melalui WhatsApp.
-
-    </small>
-
-  </section>
-
-
-
-  <!-- ===================================================
-       NOTE
-  ==================================================== -->
-
-  <section class="detail-card">
-
-
-    <div class="detail-card-title">
-
-      <i class="fa-regular fa-note-sticky"></i>
-
-      <span>
-        Catatan Pesanan
-      </span>
-
-    </div>
-
-
-    <textarea
-      id="detailNote"
-      class="detail-note"
-      rows="3"
-      maxlength="250"
-      placeholder="Contoh: sofa warna cream, ada noda kopi..."
-    ></textarea>
-
-
-    <div class="detail-note-counter">
-
-      <span>
-        Maksimal 250 karakter
-      </span>
-
-      <strong id="noteCounter">
-        0/250
-      </strong>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- ===================================================
-       SUMMARY
-  ==================================================== -->
-
-  <section class="detail-summary">
-
-
-    <div>
-
-      <span>
-        Total Pesanan
-      </span>
-
-
-      <strong
-        id="detailTotal"
-      >
-        Rp0
-      </strong>
-
-    </div>
-
-
-    <small>
-      Harga belum termasuk biaya tambahan
-      jika ada permintaan khusus.
-    </small>
-
-
-  </section>
-
-
-
-  <!-- ===================================================
-       ACTION
-  ==================================================== -->
-
-  <section class="detail-actions">
-
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="detail-header">
 
     <button
-      type="button"
-      id="addToCart"
-      class="detail-cart-button"
+      class="header-back"
+      onclick="history.back()"
+      aria-label="Kembali"
     >
 
-      <i class="fa-solid fa-cart-plus"></i>
-
-      Tambah ke Keranjang
+      <i class="fa-solid fa-arrow-left"></i>
 
     </button>
 
 
+    <div class="detail-header-title">
+
+      <strong>
+        Detail Pesanan
+      </strong>
+
+      <small>
+        Informasi pesanan kamu
+      </small>
+
+    </div>
+
+
     <button
+      id="shareOrder"
+      class="header-share"
       type="button"
-      id="buyNow"
-      class="detail-buy-button"
+      aria-label="Bagikan"
     >
 
-      Pesan Sekarang
-
-      <i class="fa-solid fa-arrow-right"></i>
+      <i class="fa-solid fa-share-nodes"></i>
 
     </button>
 
-
-  </section>
-
-
-
-  <!-- ===================================================
-       TRUST
-  ==================================================== -->
-
-  <section class="detail-trust">
-
-
-    <div>
-
-      <i class="fa-solid fa-shield-heart"></i>
-
-      <span>
-        Teknisi Profesional
-      </span>
-
-    </div>
-
-
-    <div>
-
-      <i class="fa-solid fa-spray-can-sparkles"></i>
-
-      <span>
-        Peralatan Profesional
-      </span>
-
-    </div>
-
-
-    <div>
-
-      <i class="fa-solid fa-headset"></i>
-
-      <span>
-        Bantuan WhatsApp
-      </span>
-
-    </div>
-
-
-  </section>
-
-
-</main>
+  </header>
 
 
 
-<!-- =====================================================
-     TOAST
-===================================================== -->
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
 
-<div
-  id="detailToast"
-  class="detail-toast"
->
-
-  <i class="fa-solid fa-circle-check"></i>
-
-  <span id="detailToastText">
-    Berhasil
-  </span>
-
-</div>
+  <main class="detail-page">
 
 
+    <!-- ===================================================
+         STATUS
+    ==================================================== -->
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
+    <section class="detail-status-card">
 
-<script src="js/app.js"></script>
+      <div
+        id="statusIcon"
+        class="detail-status-icon"
+      >
 
-<script src="js/order-detail.js"></script>
+        <i class="fa-solid fa-clock"></i>
+
+      </div>
+
+
+      <div class="detail-status-info">
+
+        <small>
+          Status Pesanan
+        </small>
+
+
+        <strong id="orderStatus">
+          Menunggu Konfirmasi
+        </strong>
+
+
+        <span id="statusDescription">
+          Pesanan sedang menunggu konfirmasi.
+        </span>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         INVOICE
+    ==================================================== -->
+
+    <section class="detail-section invoice-card">
+
+      <div class="detail-section-title">
+
+        <i class="fa-solid fa-receipt"></i>
+
+        <strong>
+          Informasi Invoice
+        </strong>
+
+      </div>
+
+
+      <div class="invoice-number">
+
+        <span>
+          Nomor Invoice
+        </span>
+
+
+        <strong id="invoiceNumber">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="invoice-date">
+
+        <span>
+          Dibuat
+        </span>
+
+
+        <strong id="createdDate">
+          -
+        </strong>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         CUSTOMER
+    ==================================================== -->
+
+    <section class="detail-section">
+
+      <div class="detail-section-title">
+
+        <i class="fa-solid fa-user"></i>
+
+        <strong>
+          Data Customer
+        </strong>
+
+      </div>
+
+
+      <div class="detail-info-list">
+
+
+        <div class="detail-info-row">
+
+          <div class="detail-info-icon">
+
+            <i class="fa-solid fa-user"></i>
+
+          </div>
+
+
+          <div>
+
+            <small>
+              Nama
+            </small>
+
+            <strong id="customerName">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="detail-info-row">
+
+          <div class="detail-info-icon">
+
+            <i class="fa-brands fa-whatsapp"></i>
+
+          </div>
+
+
+          <div>
+
+            <small>
+              WhatsApp
+            </small>
+
+            <strong id="customerPhone">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="detail-info-row">
+
+          <div class="detail-info-icon">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+          </div>
+
+
+          <div>
+
+            <small>
+              Alamat
+            </small>
+
+            <strong id="customerAddress">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="detail-info-row">
+
+          <div class="detail-info-icon">
+
+            <i class="fa-solid fa-note-sticky"></i>
+
+          </div>
+
+
+          <div>
+
+            <small>
+              Catatan
+            </small>
+
+            <strong id="customerNote">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         SCHEDULE
+    ==================================================== -->
+
+    <section class="detail-section">
+
+      <div class="detail-section-title">
+
+        <i class="fa-solid fa-calendar-days"></i>
+
+        <strong>
+          Jadwal Cleaning
+        </strong>
+
+      </div>
+
+
+      <div class="schedule-detail">
+
+
+        <div class="schedule-box">
+
+          <i class="fa-solid fa-calendar"></i>
+
+
+          <div>
+
+            <small>
+              Tanggal
+            </small>
+
+            <strong id="serviceDate">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="schedule-box">
+
+          <i class="fa-solid fa-clock"></i>
+
+
+          <div>
+
+            <small>
+              Jam
+            </small>
+
+            <strong id="serviceTime">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         ITEMS
+    ==================================================== -->
+
+    <section class="detail-section">
+
+      <div class="detail-section-title">
+
+        <i class="fa-solid fa-basket-shopping"></i>
+
+        <strong>
+          Detail Layanan
+        </strong>
+
+      </div>
+
+
+      <div
+        id="orderItems"
+        class="detail-items"
+      >
+
+        <!-- Diisi order-detail.js -->
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         PAYMENT
+    ==================================================== -->
+
+    <section class="detail-section payment-section">
+
+      <div class="detail-section-title">
+
+        <i class="fa-solid fa-money-bill-wave"></i>
+
+        <strong>
+          Ringkasan Pembayaran
+        </strong>
+
+      </div>
+
+
+      <div class="payment-row">
+
+        <span>
+          Subtotal
+        </span>
+
+
+        <strong id="subtotal">
+          Rp0
+        </strong>
+
+      </div>
+
+
+      <div class="payment-row discount">
+
+        <span>
+
+          <i class="fa-solid fa-tag"></i>
+
+          Diskon Promo
+
+        </span>
+
+
+        <strong id="discount">
+          - Rp0
+        </strong>
+
+      </div>
+
+
+      <div class="payment-divider"></div>
+
+
+      <div class="payment-total">
+
+        <span>
+          Total Pembayaran
+        </span>
+
+
+        <strong id="grandTotal">
+          Rp0
+        </strong>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         ACTION
+    ==================================================== -->
+
+    <section class="detail-actions">
+
+
+      <button
+        type="button"
+        id="whatsappOrder"
+        class="action-whatsapp"
+      >
+
+        <i class="fa-brands fa-whatsapp"></i>
+
+        Hubungi WhatsApp
+
+      </button>
+
+
+      <button
+        type="button"
+        id="backOrders"
+        class="action-secondary"
+      >
+
+        <i class="fa-solid fa-receipt"></i>
+
+        Kembali ke Pesanan
+
+      </button>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+       SCRIPT
+  ====================================================== -->
+
+  <script src="js/order-detail.js"></script>
 
 
 </body>
