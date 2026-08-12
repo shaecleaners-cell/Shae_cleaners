@@ -1805,3 +1805,337 @@ a {
   }
 
 }
+
+/* =========================================================
+   SHAE CLEANERS
+   GRID MENU PNG
+========================================================= */
+
+.menu-section {
+  padding:
+    4px 15px 18px;
+}
+
+
+.section-title {
+  display:
+    flex;
+
+  align-items:
+    flex-end;
+
+  justify-content:
+    space-between;
+
+  margin-bottom:
+    12px;
+}
+
+
+.section-title span {
+  display:
+    block;
+
+  margin-bottom:
+    3px;
+
+  color:
+    #16a34a;
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+}
+
+
+.section-title h2 {
+  color:
+    #17202a;
+
+  font-size:
+    17px;
+
+  line-height:
+    1.2;
+}
+
+
+.section-title a {
+  color:
+    #16a34a;
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+
+  text-decoration:
+    none;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.menu-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap:
+    10px;
+}
+
+
+/* =========================================================
+   MENU ITEM
+========================================================= */
+
+.menu-item {
+  min-width:
+    0;
+
+  padding:
+    9px 5px 10px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  text-align:
+    center;
+
+  text-decoration:
+    none;
+
+  background:
+    #ffffff;
+
+  border:
+    1px solid #edf0f2;
+
+  border-radius:
+    15px;
+
+  box-shadow:
+    0 4px 14px
+    rgba(0, 0, 0, .045);
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+
+.menu-item:active {
+  transform:
+    scale(.94);
+}
+
+
+.menu-item:hover {
+  box-shadow:
+    0 7px 20px
+    rgba(0, 0, 0, .08);
+}
+
+
+/* =========================================================
+   PNG ICON
+========================================================= */
+
+.menu-icon {
+  width:
+    55px;
+
+  height:
+    55px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  margin-bottom:
+    6px;
+
+  border-radius:
+    15px;
+
+  background:
+    #ecfdf3;
+
+  overflow:
+    hidden;
+}
+
+
+.menu-icon img {
+  width:
+    45px;
+
+  height:
+    45px;
+
+  object-fit:
+    contain;
+
+  display:
+    block;
+
+  transition:
+    transform .2s ease;
+}
+
+
+.menu-item:hover
+.menu-icon img {
+  transform:
+    scale(1.08);
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.menu-item span {
+  width:
+    100%;
+
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+
+  color:
+    #17202a;
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+}
+
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
+.menu-item small {
+  margin-top:
+    3px;
+
+  color:
+    #8a929a;
+
+  font-size:
+    7px;
+
+  line-height:
+    1.2;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .menu-section {
+    padding-left:
+      12px;
+
+    padding-right:
+      12px;
+  }
+
+
+  .menu-grid {
+    gap:
+      7px;
+  }
+
+
+  .menu-item {
+    padding:
+      8px 3px 9px;
+
+    border-radius:
+      13px;
+  }
+
+
+  .menu-icon {
+    width:
+      49px;
+
+    height:
+      49px;
+
+    border-radius:
+      13px;
+  }
+
+
+  .menu-icon img {
+    width:
+      40px;
+
+    height:
+      40px;
+  }
+
+}
+
+
+@media (min-width: 600px) {
+
+  .menu-grid {
+    grid-template-columns:
+      repeat(4, 1fr);
+
+    gap:
+      14px;
+  }
+
+
+  .menu-icon {
+    width:
+      65px;
+
+    height:
+      65px;
+  }
+
+
+  .menu-icon img {
+    width:
+      52px;
+
+    height:
+      52px;
+  }
+
+}
