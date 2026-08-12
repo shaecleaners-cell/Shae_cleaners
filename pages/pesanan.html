@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#16a34a"
+  >
+
+  <title>Pesanan - Shae Cleaners</title>
+
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/pesanan.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="pesanan-header">
+
+    <button
+      class="back-button"
+      onclick="history.back()"
+      aria-label="Kembali"
+    >
+
+      <i class="fa-solid fa-arrow-left"></i>
+
+    </button>
+
+
+    <div class="header-title">
+
+      <strong>
+        Pesanan
+      </strong>
+
+      <small>
+        Riwayat pemesanan kamu
+      </small>
+
+    </div>
+
+
+    <button
+      class="header-refresh"
+      id="refreshOrders"
+      aria-label="Refresh"
+    >
+
+      <i class="fa-solid fa-rotate"></i>
+
+    </button>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="pesanan-page">
+
+
+    <!-- ===================================================
+         SUMMARY
+    ==================================================== -->
+
+    <section class="order-summary">
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+
+          <i class="fa-solid fa-receipt"></i>
+
+        </div>
+
+
+        <div>
+
+          <strong id="totalOrders">
+            0
+          </strong>
+
+          <span>
+            Total Pesanan
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon pending">
+
+          <i class="fa-solid fa-clock"></i>
+
+        </div>
+
+
+        <div>
+
+          <strong id="pendingOrders">
+            0
+          </strong>
+
+          <span>
+            Menunggu
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon success">
+
+          <i class="fa-solid fa-circle-check"></i>
+
+        </div>
+
+
+        <div>
+
+          <strong id="completedOrders">
+            0
+          </strong>
+
+          <span>
+            Selesai
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         FILTER
+    ==================================================== -->
+
+    <section class="order-filter">
+
+      <button
+        class="filter-btn active"
+        data-filter="all"
+      >
+        Semua
+      </button>
+
+
+      <button
+        class="filter-btn"
+        data-filter="pending"
+      >
+        Menunggu
+      </button>
+
+
+      <button
+        class="filter-btn"
+        data-filter="process"
+      >
+        Diproses
+      </button>
+
+
+      <button
+        class="filter-btn"
+        data-filter="completed"
+      >
+        Selesai
+      </button>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         ORDER LIST
+    ==================================================== -->
+
+    <section
+      id="orderList"
+      class="order-list"
+    >
+
+      <!-- Diisi pesanan.js -->
+
+    </section>
+
+
+
+    <!-- ===================================================
+         EMPTY
+    ==================================================== -->
+
+    <section
+      id="emptyOrders"
+      class="empty-orders"
+      hidden
+    >
+
+      <div class="empty-icon">
+
+        <i class="fa-solid fa-receipt"></i>
+
+      </div>
+
+
+      <h3>
+        Belum ada pesanan
+      </h3>
+
+
+      <p>
+        Pesanan yang kamu buat akan muncul
+        di halaman ini.
+      </p>
+
+
+      <a
+        href="order.html"
+        class="empty-button"
+      >
+
+        <i class="fa-solid fa-plus"></i>
+
+        Buat Pesanan
+
+      </a>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+       BOTTOM NAV
+  ====================================================== -->
+
+  <nav class="bottom-nav">
+
+
+    <a
+      href="index.html"
+      class="nav-item"
+    >
+
+      <i class="fa-solid fa-house"></i>
+
+      <span>
+        Home
+      </span>
+
+    </a>
+
+
+    <a
+      href="/pages/checkout.html"
+      class="nav-item"
+    >
+
+      <i class="fa-solid fa-cart-plus"></i>
+
+      <span>
+        Order
+      </span>
+
+    </a>
+
+
+    <a
+      href="pages/pesanan.html"
+      class="nav-item active"
+    >
+
+      <i class="fa-solid fa-receipt"></i>
+
+      <span>
+        Pesanan
+      </span>
+
+    </a>
+
+
+    <a
+      href="pages/aktivitas.html"
+      class="nav-item"
+    >
+
+      <i class="fa-solid fa-clock-rotate-left"></i>
+
+      <span>
+        Aktivitas
+      </span>
+
+    </a>
+
+
+    <a
+      href="akun.html"
+      class="nav-item"
+    >
+
+      <i class="fa-solid fa-user"></i>
+
+      <span>
+        Akun
+      </span>
+
+    </a>
+
+
+  </nav>
+
+
+
+  <script src="js/pesanan.js"></script>
+
+</body>
+
+</html>
