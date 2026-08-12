@@ -10,285 +10,481 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Daftar - Shae Cleaners</title>
-
   <meta
     name="theme-color"
     content="#16a34a"
   >
 
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
+  <title>Daftar - Shae Cleaners</title>
 
-  <link
-    rel="stylesheet"
-    href="css/auth.css"
-  >
+
+  <!-- FONT AWESOME -->
 
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
+
+  <!-- AUTH CSS -->
+
+  <link
+    rel="stylesheet"
+    href="css/login.css"
+  >
+
 </head>
 
 
-<body class="auth-body">
+<body>
 
 
-<main class="auth-page">
+  <!-- =====================================================
+       REGISTER PAGE
+  ====================================================== -->
 
+  <main class="auth-page">
 
-  <!-- LOGO -->
 
-  <div class="auth-logo">
+    <!-- ===================================================
+         BRAND
+    ==================================================== -->
 
-    <div class="auth-logo-icon">
+    <section class="auth-brand">
 
-      <i class="fa-solid fa-spray-can-sparkles"></i>
+      <div class="brand-logo">
 
-    </div>
-
-    <strong>
-      Shae <span>Cleaners</span>
-    </strong>
-
-    <small>
-      Cleaning Service Profesional
-    </small>
-
-  </div>
-
-
-
-  <!-- REGISTER CARD -->
-
-  <section class="auth-card">
-
-    <div class="auth-heading">
-
-      <h1>
-        Buat Akun
-      </h1>
-
-      <p>
-        Daftar untuk memesan layanan Shae Cleaners
-      </p>
-
-    </div>
-
-
-    <form
-      id="registerForm"
-      novalidate
-    >
-
-
-      <!-- NAMA -->
-
-      <div class="auth-field">
-
-        <label for="registerName">
-          Nama Lengkap
-        </label>
-
-        <div class="auth-input">
-
-          <i class="fa-regular fa-user"></i>
-
-          <input
-            type="text"
-            id="registerName"
-            placeholder="Nama lengkap"
-            autocomplete="name"
-            maxlength="60"
-            required
-          >
-
-        </div>
-
-      </div>
-
-
-
-      <!-- WHATSAPP -->
-
-      <div class="auth-field">
-
-        <label for="registerPhone">
-          Nomor WhatsApp
-        </label>
-
-        <div class="auth-input">
-
-          <i class="fa-brands fa-whatsapp"></i>
-
-          <input
-            type="tel"
-            id="registerPhone"
-            placeholder="08xxxxxxxxxx"
-            inputmode="tel"
-            autocomplete="tel"
-            maxlength="16"
-            required
-          >
-
-        </div>
-
-      </div>
-
-
-
-      <!-- PASSWORD -->
-
-      <div class="auth-field">
-
-        <label for="registerPassword">
-          Password
-        </label>
-
-        <div class="auth-input">
-
-          <i class="fa-solid fa-lock"></i>
-
-          <input
-            type="password"
-            id="registerPassword"
-            placeholder="Minimal 6 karakter"
-            autocomplete="new-password"
-            minlength="6"
-            required
-          >
-
-          <button
-            type="button"
-            class="password-toggle"
-            data-target="registerPassword"
-          >
-
-            <i class="fa-regular fa-eye"></i>
-
-          </button>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- CONFIRM PASSWORD -->
-
-      <div class="auth-field">
-
-        <label for="registerConfirmPassword">
-          Ulangi Password
-        </label>
-
-        <div class="auth-input">
-
-          <i class="fa-solid fa-shield-halved"></i>
-
-          <input
-            type="password"
-            id="registerConfirmPassword"
-            placeholder="Ulangi password"
-            autocomplete="new-password"
-            required
-          >
-
-          <button
-            type="button"
-            class="password-toggle"
-            data-target="registerConfirmPassword"
-          >
-
-            <i class="fa-regular fa-eye"></i>
-
-          </button>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- TERMS -->
-
-      <label class="auth-check">
-
-        <input
-          type="checkbox"
-          id="registerTerms"
-          required
+        <img
+          src="assets/logo.png"
+          alt="Shae Cleaners"
         >
 
+      </div>
+
+
+      <h1>
+        Shae Cleaners
+      </h1>
+
+
+      <p>
+        Buat akun untuk pemesanan
+        cleaning lebih mudah.
+      </p>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         REGISTER CARD
+    ==================================================== -->
+
+    <section class="auth-card">
+
+
+      <div class="auth-heading">
+
+        <h2>
+          Buat Akun Baru ✨
+        </h2>
+
+        <p>
+          Isi data Anda untuk membuat
+          akun Shae Cleaners.
+        </p>
+
+      </div>
+
+
+
+      <!-- =================================================
+           MESSAGE
+      ================================================== -->
+
+      <div
+        id="registerMessage"
+        class="login-message"
+        style="display:none"
+      ></div>
+
+
+
+      <!-- =================================================
+           FORM
+      ================================================== -->
+
+      <form
+        id="registerForm"
+        autocomplete="on"
+      >
+
+
+        <!-- ===============================================
+             NAMA
+        ================================================ -->
+
+        <div class="input-group">
+
+          <label
+            for="registerName"
+          >
+            Nama Lengkap
+          </label>
+
+
+          <div class="input-box">
+
+            <i
+              class="fa-solid fa-user"
+            ></i>
+
+
+            <input
+              type="text"
+              id="registerName"
+              name="name"
+              placeholder="Masukkan nama lengkap"
+              autocomplete="name"
+              maxlength="60"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ===============================================
+             WHATSAPP
+        ================================================ -->
+
+        <div class="input-group">
+
+          <label
+            for="registerPhone"
+          >
+            Nomor WhatsApp
+          </label>
+
+
+          <div class="input-box">
+
+            <i
+              class="fa-brands fa-whatsapp"
+            ></i>
+
+
+            <input
+              type="tel"
+              id="registerPhone"
+              name="phone"
+              placeholder="08xxxxxxxxxx"
+              autocomplete="tel"
+              inputmode="tel"
+              maxlength="16"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ===============================================
+             EMAIL
+        ================================================ -->
+
+        <div class="input-group">
+
+          <label
+            for="registerEmail"
+          >
+            Email
+          </label>
+
+
+          <div class="input-box">
+
+            <i
+              class="fa-solid fa-envelope"
+            ></i>
+
+
+            <input
+              type="email"
+              id="registerEmail"
+              name="email"
+              placeholder="nama@email.com"
+              autocomplete="email"
+              maxlength="100"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ===============================================
+             ALAMAT
+        ================================================ -->
+
+        <div class="input-group">
+
+          <label
+            for="registerAddress"
+          >
+            Alamat
+          </label>
+
+
+          <div class="input-box">
+
+            <i
+              class="fa-solid fa-location-dot"
+            ></i>
+
+
+            <input
+              type="text"
+              id="registerAddress"
+              name="address"
+              placeholder="Alamat lengkap"
+              autocomplete="street-address"
+              maxlength="200"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ===============================================
+             PASSWORD
+        ================================================ -->
+
+        <div class="input-group">
+
+          <label
+            for="registerPassword"
+          >
+            Password
+          </label>
+
+
+          <div class="input-box">
+
+            <i
+              class="fa-solid fa-lock"
+            ></i>
+
+
+            <input
+              type="password"
+              id="registerPassword"
+              name="password"
+              placeholder="Minimal 6 karakter"
+              autocomplete="new-password"
+              minlength="6"
+              maxlength="50"
+              required
+            >
+
+
+            <button
+              type="button"
+              class="password-toggle"
+              data-toggle-password="registerPassword"
+              aria-label="Tampilkan password"
+            >
+
+              <i
+                class="fa-solid fa-eye"
+              ></i>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ===============================================
+             CONFIRM PASSWORD
+        ================================================ -->
+
+        <div class="input-group">
+
+          <label
+            for="registerConfirmPassword"
+          >
+            Konfirmasi Password
+          </label>
+
+
+          <div class="input-box">
+
+            <i
+              class="fa-solid fa-shield-halved"
+            ></i>
+
+
+            <input
+              type="password"
+              id="registerConfirmPassword"
+              name="confirmPassword"
+              placeholder="Ulangi password"
+              autocomplete="new-password"
+              minlength="6"
+              maxlength="50"
+              required
+            >
+
+
+            <button
+              type="button"
+              class="password-toggle"
+              data-toggle-password="registerConfirmPassword"
+              aria-label="Tampilkan password"
+            >
+
+              <i
+                class="fa-solid fa-eye"
+              ></i>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ===============================================
+             TERMS
+        ================================================ -->
+
+        <label
+          class="register-terms"
+        >
+
+          <input
+            type="checkbox"
+            id="registerAgreement"
+            required
+          >
+
+
+          <span>
+            Saya menyetujui data yang saya
+            berikan digunakan untuk kebutuhan
+            pemesanan Shae Cleaners.
+          </span>
+
+        </label>
+
+
+
+        <!-- ===============================================
+             REGISTER BUTTON
+        ================================================ -->
+
+        <button
+          type="submit"
+          class="auth-button"
+        >
+
+          <i
+            class="fa-solid fa-user-plus"
+          ></i>
+
+          Daftar Sekarang
+
+        </button>
+
+
+      </form>
+
+
+
+      <!-- =================================================
+           LOGIN
+      ================================================== -->
+
+      <div class="auth-divider">
+
         <span>
-          Saya setuju menggunakan layanan
-          Shae Cleaners.
+          Sudah punya akun?
         </span>
 
-      </label>
-
+      </div>
 
 
       <button
-        type="submit"
-        class="auth-submit"
+        type="button"
+        id="loginButton"
+        class="register-button"
       >
 
-        <i class="fa-solid fa-user-plus"></i>
+        <i
+          class="fa-solid fa-right-to-bracket"
+        ></i>
 
-        Daftar Sekarang
+        Login
 
       </button>
 
 
-    </form>
+
+      <!-- =================================================
+           SECURITY
+      ================================================== -->
+
+      <div class="security-note">
+
+        <i
+          class="fa-solid fa-shield-halved"
+        ></i>
+
+        <span>
+          Jangan bagikan password Anda
+          kepada orang lain.
+        </span>
+
+      </div>
 
 
-    <div
-      id="authMessage"
-      class="auth-message"
-    ></div>
-
-
-    <!-- LOGIN -->
-
-    <div class="auth-footer">
-
-      <span>
-        Sudah punya akun?
-      </span>
-
-      <a href="login.html">
-        Login
-      </a>
-
-    </div>
-
-
-  </section>
+    </section>
 
 
 
-  <button
-    class="auth-back"
-    onclick="location.href='index.html'"
-  >
+    <!-- ===================================================
+         FOOTER
+    ==================================================== -->
 
-    <i class="fa-solid fa-arrow-left"></i>
+    <footer class="auth-footer">
 
-    Kembali ke Home
+      © 2026 Shae Cleaners
 
-  </button>
-
-
-</main>
+    </footer>
 
 
-<script src="js/Auth.js"></script>
+  </main>
+
+
+
+  <!-- =====================================================
+       SCRIPT
+  ====================================================== -->
+
+  <script src="js/register.js"></script>
 
 </body>
 
