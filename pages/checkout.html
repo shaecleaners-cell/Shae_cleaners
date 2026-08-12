@@ -13,8 +13,8 @@
   <title>Checkout - Shae Cleaners</title>
 
   <meta
-    name="description"
-    content="Checkout pesanan Shae Cleaners"
+    name="theme-color"
+    content="#16a34a"
   >
 
   <link
@@ -45,7 +45,7 @@
 <header class="checkout-header">
 
   <button
-    class="checkout-back"
+    type="button"
     onclick="history.back()"
     aria-label="Kembali"
   >
@@ -55,24 +55,24 @@
   </button>
 
 
-  <div class="checkout-title">
+  <div>
 
-    <h1>
+    <strong>
       Checkout
-    </h1>
+    </strong>
 
-    <span>
-      Periksa pesanan Anda
-    </span>
+    <small>
+      Shae Cleaners
+    </small>
 
   </div>
 
 
-  <div class="checkout-security">
+  <span class="checkout-secure">
 
     <i class="fa-solid fa-shield-halved"></i>
 
-  </div>
+  </span>
 
 </header>
 
@@ -82,486 +82,350 @@
      MAIN
 ===================================================== -->
 
-<main class="checkout-main">
+<main class="checkout-page">
 
 
-<!-- =====================================================
-     STEP
-===================================================== -->
+  <!-- ===================================================
+       STEP INDICATOR
+  ==================================================== -->
 
-<section class="checkout-step">
+  <div class="checkout-steps">
 
-  <div class="step-item active">
+    <div class="checkout-step active">
 
-    <span>
-      1
-    </span>
+      <span>1</span>
 
-    <p>
-      Pesanan
-    </p>
-
-  </div>
-
-
-  <div class="step-line"></div>
-
-
-  <div class="step-item">
-
-    <span>
-      2
-    </span>
-
-    <p>
-      Data
-    </p>
-
-  </div>
-
-
-  <div class="step-line"></div>
-
-
-  <div class="step-item">
-
-    <span>
-      3
-    </span>
-
-    <p>
-      Selesai
-    </p>
-
-  </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     PESANAN
-===================================================== -->
-
-<section class="checkout-card">
-
-  <div class="section-title">
-
-    <div>
-
-      <span class="section-icon">
-        <i class="fa-solid fa-bag-shopping"></i>
-      </span>
-
-      <div>
-
-        <h2>
-          Pesanan Anda
-        </h2>
-
-        <p id="checkoutItemCount">
-          0 item
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <a
-      href="layanan.html"
-      class="add-more"
-    >
-
-      <i class="fa-solid fa-plus"></i>
-
-      Tambah
-
-    </a>
-
-  </div>
-
-
-  <div
-    id="checkoutItems"
-    class="checkout-items"
-  >
-
-    <!-- Diisi checkout.js -->
-
-  </div>
-
-
-  <div
-    id="emptyCart"
-    class="empty-cart"
-    style="display:none;"
-  >
-
-    <div class="empty-cart-icon">
-
-      <i class="fa-solid fa-bag-shopping"></i>
-
-    </div>
-
-    <h3>
-      Pesanan masih kosong
-    </h3>
-
-    <p>
-      Yuk pilih layanan yang ingin dibersihkan.
-    </p>
-
-
-    <a
-      href="layanan.html"
-      class="empty-cart-button"
-    >
-
-      Pilih Layanan
-
-    </a>
-
-  </div>
-
-</section>
-<!-- =====================================================
-     DATA CUSTOMER
-===================================================== -->
-
-<section class="checkout-section">
-
-  <div class="checkout-section-title">
-
-    <div>
-      <span class="section-number">1</span>
-
-      <div>
-        <strong>Data Pemesan</strong>
-        <small>Data akan digunakan untuk invoice</small>
-      </div>
-    </div>
-
-  </div>
-
-
-  <!-- ALAMAT UTAMA -->
-
-  <div
-    id="selectedAddress"
-    class="selected-address"
-    style="display:none;"
-  >
-
-    <div class="selected-address-icon">
-
-      <i class="fa-solid fa-location-dot"></i>
-
-    </div>
-
-
-    <div class="selected-address-content">
-
-      <div class="selected-address-top">
-
-        <strong id="selectedAddressName">
-          -
-        </strong>
-
-        <span id="selectedAddressLabel">
-          Rumah
-        </span>
-
-      </div>
-
-
-      <span id="selectedAddressPhone">
-        -
-      </span>
-
-
-      <p id="selectedAddressText">
-        -
-      </p>
-
-    </div>
-
-
-    <button
-      type="button"
-      id="changeAddressButton"
-      class="change-address-button"
-    >
-
-      Ganti
-
-    </button>
-
-  </div>
-
-
-  <!-- JIKA BELUM ADA ALAMAT -->
-
-  <div
-    id="noAddress"
-    class="no-address"
-  >
-
-    <div>
-
-      <i class="fa-solid fa-location-dot"></i>
-
-      <span>
-        Belum ada alamat cleaning
-      </span>
-
-    </div>
-
-
-    <button
-      type="button"
-      onclick="location.href='alamat.html'"
-    >
-
-      + Tambah Alamat
-
-    </button>
-
-  </div>
-
-
-  <!-- DATA TERSEMBUNYI UNTUK PROSES CHECKOUT -->
-
-  <input
-    type="hidden"
-    id="customerName"
-  >
-
-  <input
-    type="hidden"
-    id="customerPhone"
-  >
-
-  <input
-    type="hidden"
-    id="customerAddress"
-  >
-
-</section>
-<section class="checkout-card">
-
-  <div class="section-title">
-
-    <div>
-
-      <span class="section-icon">
-        <i class="fa-regular fa-user"></i>
-      </span>
-
-      <div>
-
-        <h2>
-          Data Pelanggan
-        </h2>
-
-        <p>
-          Untuk konfirmasi pesanan
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <form
-    id="customerForm"
-    class="customer-form"
-  >
-
-
-    <!-- NAMA -->
-
-    <div class="checkout-field">
-
-      <label for="customerName">
-
-        Nama Lengkap
-
-        <span>
-          *
-        </span>
-
-      </label>
-
-
-      <div class="field-box">
-
-        <i class="fa-regular fa-user"></i>
-
-        <input
-          type="text"
-          id="customerName"
-          name="customerName"
-          placeholder="Masukkan nama lengkap"
-          autocomplete="name"
-          required
-        >
-
-      </div>
-
-    </div>
-
-
-
-    <!-- WHATSAPP -->
-
-    <div class="checkout-field">
-
-      <label for="customerPhone">
-
-        Nomor WhatsApp
-
-        <span>
-          *
-        </span>
-
-      </label>
-
-
-      <div class="field-box">
-
-        <i class="fa-brands fa-whatsapp"></i>
-
-        <input
-          type="tel"
-          id="customerPhone"
-          name="customerPhone"
-          placeholder="Contoh: 081234567890"
-          inputmode="tel"
-          autocomplete="tel"
-          required
-        >
-
-      </div>
-
-
-      <small class="field-help">
-
-        Nomor ini digunakan untuk
-        mengirim konfirmasi pesanan.
-
+      <small>
+        Data
       </small>
 
     </div>
 
 
-
-    <!-- ALAMAT -->
-
-    <div class="checkout-field">
-
-      <label for="customerAddress">
-
-        Alamat
-
-        <span>
-          *
-        </span>
-
-      </label>
+    <i class="fa-solid fa-chevron-right"></i>
 
 
-      <div class="field-box textarea-box">
+    <div class="checkout-step">
 
-        <i class="fa-solid fa-location-dot"></i>
+      <span>2</span>
 
-        <textarea
-          id="customerAddress"
-          name="customerAddress"
-          rows="3"
-          placeholder="Masukkan alamat lengkap"
-          autocomplete="street-address"
-          required
-        ></textarea>
-
-      </div>
+      <small>
+        Jadwal
+      </small>
 
     </div>
 
 
-
-    <!-- CATATAN -->
-
-    <div class="checkout-field">
-
-      <label for="customerNote">
-
-        Catatan Tambahan
-
-        <span class="optional">
-          Opsional
-        </span>
-
-      </label>
+    <i class="fa-solid fa-chevron-right"></i>
 
 
-      <div class="field-box textarea-box">
+    <div class="checkout-step">
 
-        <i class="fa-regular fa-note-sticky"></i>
+      <span>3</span>
 
-        <textarea
-          id="customerNote"
-          name="customerNote"
-          rows="3"
-          placeholder="Contoh: rumah pagar hitam, lantai 2..."
-        ></textarea>
-
-      </div>
-
-    </div>
-
-
-  </form>
-
-</section>
-
-
-
-<!-- =====================================================
-     RINGKASAN HARGA
-===================================================== -->
-
-<section class="checkout-card price-card">
-
-  <div class="section-title">
-
-    <div>
-
-      <span class="section-icon">
-
-        <i class="fa-solid fa-receipt"></i>
-
-      </span>
-
-      <div>
-
-        <h2>
-          Ringkasan Pembayaran
-        </h2>
-
-      </div>
+      <small>
+        Bayar
+      </small>
 
     </div>
 
   </div>
 
 
-  <div class="price-summary">
+
+  <!-- ===================================================
+       CUSTOMER DATA
+  ==================================================== -->
+
+  <section class="checkout-card">
+
+    <div class="checkout-card-title">
+
+      <div class="checkout-title-icon">
+
+        <i class="fa-regular fa-user"></i>
+
+      </div>
 
 
-    <div class="price-row">
+      <div>
+
+        <strong>
+          Data Customer
+        </strong>
+
+        <small>
+          Isi data untuk pemesanan
+        </small>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="form-group">
+
+      <label for="customerName">
+        Nama Lengkap
+      </label>
+
+      <input
+        type="text"
+        id="customerName"
+        placeholder="Masukkan nama lengkap"
+        autocomplete="name"
+      >
+
+    </div>
+
+
+
+    <div class="form-group">
+
+      <label for="customerPhone">
+        Nomor WhatsApp
+      </label>
+
+      <input
+        type="tel"
+        id="customerPhone"
+        placeholder="Contoh: 081234567890"
+        inputmode="tel"
+        autocomplete="tel"
+      >
+
+    </div>
+
+
+
+    <div class="form-group">
+
+      <label for="customerAddress">
+        Alamat Cleaning
+      </label>
+
+      <textarea
+        id="customerAddress"
+        rows="3"
+        placeholder="Masukkan alamat lengkap"
+        autocomplete="street-address"
+      ></textarea>
+
+    </div>
+
+
+
+    <div class="form-group">
+
+      <label for="customerNote">
+
+        Catatan
+
+        <span>
+          (opsional)
+        </span>
+
+      </label>
+
+      <textarea
+        id="customerNote"
+        rows="2"
+        placeholder="Contoh: rumah warna putih, dekat minimarket..."
+      ></textarea>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       SCHEDULE
+  ==================================================== -->
+
+  <section class="checkout-card">
+
+    <div class="checkout-card-title">
+
+      <div class="checkout-title-icon">
+
+        <i class="fa-regular fa-calendar"></i>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          Jadwal Cleaning
+        </strong>
+
+        <small>
+          Pilih tanggal dan waktu
+        </small>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="schedule-grid">
+
+      <div class="form-group">
+
+        <label for="serviceDate">
+          Tanggal
+        </label>
+
+        <input
+          type="date"
+          id="serviceDate"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="serviceTime">
+          Jam
+        </label>
+
+        <input
+          type="time"
+          id="serviceTime"
+        >
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       CART
+  ==================================================== -->
+
+  <section class="checkout-card">
+
+    <div class="checkout-card-title">
+
+      <div class="checkout-title-icon">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          Pesanan
+        </strong>
+
+        <small id="checkoutItemCount">
+          0 item
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="checkoutItems"
+      class="checkout-items"
+    >
+
+      <!-- Diisi checkout.js -->
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       PROMO
+  ==================================================== -->
+
+  <section class="checkout-card">
+
+    <div class="voucher-row">
+
+      <div class="voucher-left">
+
+        <div class="voucher-icon">
+
+          <i class="fa-solid fa-ticket"></i>
+
+        </div>
+
+
+        <div>
+
+          <strong>
+            Promo / Voucher
+          </strong>
+
+          <small>
+            Gunakan promo jika tersedia
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        id="promoButton"
+      >
+
+        Pilih
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       SUMMARY
+  ==================================================== -->
+
+  <section class="checkout-card summary-card">
+
+    <div class="checkout-card-title">
+
+      <div class="checkout-title-icon">
+
+        <i class="fa-solid fa-receipt"></i>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          Ringkasan Pembayaran
+        </strong>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="summary-row">
 
       <span>
         Subtotal
@@ -574,20 +438,8 @@
     </div>
 
 
-    <div class="price-row">
 
-      <span>
-        Biaya layanan
-      </span>
-
-      <strong id="serviceFee">
-        Rp0
-      </strong>
-
-    </div>
-
-
-    <div class="price-row discount-row">
+    <div class="summary-row discount-row">
 
       <span>
         Diskon
@@ -600,119 +452,160 @@
     </div>
 
 
-    <div class="price-divider"></div>
+
+    <div class="summary-line"></div>
 
 
-    <div class="price-total">
+
+    <div class="summary-total">
 
       <span>
         Total
       </span>
 
-      <strong id="checkoutTotal">
+      <strong id="grandTotal">
         Rp0
       </strong>
 
     </div>
 
-  </div>
-
-</section>
+  </section>
 
 
 
-<!-- =====================================================
-     PAYMENT INFO
-===================================================== -->
+  <!-- ===================================================
+       TERMS
+  ==================================================== -->
 
-<section class="payment-info">
+  <label class="checkout-agreement">
 
-  <div class="payment-icon">
+    <input
+      type="checkbox"
+      id="agreement"
+    >
 
-    <i class="fa-brands fa-whatsapp"></i>
+    <span>
+      Saya memastikan data dan jadwal pemesanan
+      sudah benar.
+    </span>
 
-  </div>
-
-
-  <div>
-
-    <strong>
-      Pesan langsung via WhatsApp
-    </strong>
-
-    <p>
-      Setelah invoice dibuat, pesanan
-      dapat langsung dikirim ke WhatsApp.
-    </p>
-
-  </div>
-
-</section>
+  </label>
 
 
 
-<!-- =====================================================
-     BOTTOM ACTION
-===================================================== -->
-
-<div class="checkout-bottom">
-
-  <div class="checkout-bottom-total">
-
-    <small>
-      Total Pesanan
-    </small>
-
-    <strong id="bottomCheckoutTotal">
-      Rp0
-    </strong>
-
-  </div>
-
+  <!-- ===================================================
+       ORDER BUTTON
+  ==================================================== -->
 
   <button
     type="button"
-    id="createOrderButton"
-    class="create-order-button"
+    id="checkoutButton"
+    class="checkout-button"
+    disabled
   >
 
-    <i class="fa-solid fa-file-invoice"></i>
+    <span>
 
-    Buat Invoice
+      <i class="fa-brands fa-whatsapp"></i>
+
+      Buat Pesanan & WhatsApp
+
+    </span>
+
+
+    <strong id="buttonTotal">
+      Rp0
+    </strong>
 
   </button>
 
-</div>
+
+
+  <p class="checkout-note">
+
+    Setelah pesanan dibuat, invoice akan
+    otomatis dibuat dan detail pesanan
+    dikirim melalui WhatsApp.
+
+  </p>
+
+
+</main>
 
 
 
 <!-- =====================================================
-     TOAST
+     BOTTOM NAV
 ===================================================== -->
 
-<div
-  id="checkoutToast"
-  class="checkout-toast"
->
+<nav class="bottom-nav">
 
-  <i class="fa-solid fa-circle-check"></i>
+  <a href="index.html">
 
-  <span id="checkoutToastText">
-    Berhasil
-  </span>
+    <i class="fa-solid fa-house"></i>
 
-</div>
+    <span>
+      Home
+    </span>
 
+  </a>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
+  <a href="aktivitas.html">
 
-<script src="js/app.js"></script>
+    <i class="fa-solid fa-receipt"></i>
+
+    <span>
+      Pesanan
+    </span>
+
+  </a>
+
+
+  <a
+    href="order.html"
+    class="bottom-order"
+  >
+
+    <span>
+
+      <i class="fa-solid fa-plus"></i>
+
+    </span>
+
+    <label>
+      Order
+    </label>
+
+  </a>
+
+
+  <a href="promo.html">
+
+    <i class="fa-solid fa-ticket"></i>
+
+    <span>
+      Promo
+    </span>
+
+  </a>
+
+
+  <a href="akun.html">
+
+    <i class="fa-solid fa-user"></i>
+
+    <span>
+      Akun
+    </span>
+
+  </a>
+
+</nav>
+
+
 
 <script src="js/checkout.js"></script>
-
 
 </body>
 
