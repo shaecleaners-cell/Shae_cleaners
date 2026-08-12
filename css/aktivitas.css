@@ -1,0 +1,1137 @@
+/* =========================================================
+   SHAE CLEANERS
+   css/aktivitas.css
+========================================================= */
+
+:root {
+  --green: #16a34a;
+  --green-dark: #15803d;
+  --green-soft: #ecfdf3;
+
+  --bg: #f5f7f8;
+  --white: #ffffff;
+
+  --dark: #1d2939;
+  --text: #475467;
+  --muted: #98a2b3;
+
+  --border: #e7eaec;
+
+  --yellow: #f59e0b;
+  --yellow-soft: #fffbeb;
+
+  --blue: #2563eb;
+  --blue-soft: #eff6ff;
+
+  --red: #ef4444;
+  --red-soft: #fef2f2;
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  margin: 0;
+
+  padding-bottom: 78px;
+
+  background: var(--bg);
+
+  color: var(--text);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.activity-header {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 2000;
+
+  height: 60px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 12px;
+
+  background:
+    rgba(255,255,255,.97);
+
+  border-bottom:
+    1px solid var(--border);
+
+  box-shadow:
+    0 2px 12px
+    rgba(16,24,40,.06);
+
+  backdrop-filter:
+    blur(12px);
+}
+
+
+.back-button,
+.clear-button {
+  width: 38px;
+
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: #f2f4f5;
+
+  color: #475467;
+
+  cursor: pointer;
+
+  transition: .15s;
+}
+
+
+.back-button:active,
+.clear-button:active {
+  transform: scale(.93);
+}
+
+
+.clear-button {
+  color: var(--red);
+
+  background:
+    var(--red-soft);
+}
+
+
+.activity-title {
+  position: absolute;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+
+.activity-title strong {
+  display: block;
+
+  color: var(--dark);
+
+  font-size: 12px;
+
+  font-weight: 900;
+}
+
+
+.activity-title small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--muted);
+
+  font-size: 6.5px;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.activity-page {
+  width: 100%;
+
+  max-width: 680px;
+
+  margin: auto;
+
+  padding: 10px;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.activity-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 7px;
+
+  margin-bottom: 10px;
+}
+
+
+.summary-box {
+  min-height: 66px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 9px;
+
+  background:
+    var(--white);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 13px;
+
+  box-shadow:
+    0 2px 8px
+    rgba(16,24,40,.03);
+}
+
+
+.summary-icon {
+  width: 29px;
+
+  height: 29px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background:
+    var(--green-soft);
+
+  color:
+    var(--green);
+
+  font-size: 10px;
+}
+
+
+.summary-box strong {
+  display: block;
+
+  color: var(--dark);
+
+  font-size: 12px;
+
+  font-weight: 900;
+}
+
+
+.summary-box small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--muted);
+
+  font-size: 5.8px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.activity-filter {
+  display: flex;
+
+  gap: 6px;
+
+  overflow-x: auto;
+
+  margin-bottom: 10px;
+
+  padding-bottom: 2px;
+
+  scrollbar-width: none;
+}
+
+
+.activity-filter::-webkit-scrollbar {
+  display: none;
+}
+
+
+.filter-btn {
+  flex-shrink: 0;
+
+  min-height: 31px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 9px;
+
+  background:
+    var(--white);
+
+  color:
+    #667085;
+
+  font-family: inherit;
+
+  font-size: 7px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: .18s;
+}
+
+
+.filter-btn.active {
+  border-color:
+    var(--green);
+
+  background:
+    var(--green);
+
+  color:
+    white;
+}
+
+
+.filter-btn:active {
+  transform:
+    scale(.96);
+}
+
+
+/* =========================================================
+   ACTIVITY LIST
+========================================================= */
+
+.activity-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+
+/* =========================================================
+   ORDER CARD
+========================================================= */
+
+.activity-card {
+  padding: 12px;
+
+  background:
+    var(--white);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 2px 8px
+    rgba(16,24,40,.03);
+
+  animation:
+    activityFade .25s ease;
+}
+
+
+@keyframes activityFade {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.activity-card-top {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding-bottom: 9px;
+
+  border-bottom:
+    1px solid #f0f2f3;
+}
+
+
+.invoice-info {
+  min-width: 0;
+}
+
+
+.invoice-info strong {
+  display: block;
+
+  color: var(--dark);
+
+  font-size: 9px;
+
+  font-weight: 900;
+}
+
+
+.invoice-info small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--muted);
+
+  font-size: 6.5px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+  flex-shrink: 0;
+
+  padding:
+    5px 7px;
+
+  border-radius: 7px;
+
+  font-size: 5.8px;
+
+  font-weight: 900;
+
+  white-space: nowrap;
+}
+
+
+.status.waiting {
+  background:
+    var(--yellow-soft);
+
+  color:
+    #b45309;
+}
+
+
+.status.process {
+  background:
+    var(--blue-soft);
+
+  color:
+    var(--blue);
+}
+
+
+.status.completed {
+  background:
+    var(--green-soft);
+
+  color:
+    var(--green-dark);
+}
+
+
+.status.cancelled {
+  background:
+    var(--red-soft);
+
+  color:
+    #dc2626;
+}
+
+
+/* =========================================================
+   ORDER INFO
+========================================================= */
+
+.activity-info {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 7px;
+
+  padding:
+    10px 0;
+}
+
+
+.info-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+
+.info-icon {
+  width: 27px;
+
+  height: 27px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background:
+    #f8faf9;
+
+  color:
+    var(--green);
+
+  font-size: 9px;
+}
+
+
+.info-item strong {
+  display: block;
+
+  color: #667085;
+
+  font-size: 6px;
+
+  font-weight: 600;
+}
+
+
+.info-item span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--dark);
+
+  font-size: 7px;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.activity-services {
+  padding:
+    8px 0;
+
+  border-top:
+    1px dashed #e4e7ec;
+
+  border-bottom:
+    1px dashed #e4e7ec;
+}
+
+
+.service-line {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 4px 0;
+}
+
+
+.service-name {
+  overflow: hidden;
+
+  color: #667085;
+
+  font-size: 6.8px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+.service-price {
+  flex-shrink: 0;
+
+  color: var(--dark);
+
+  font-size: 6.8px;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+.activity-total {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding-top: 10px;
+}
+
+
+.activity-total span {
+  color: #667085;
+
+  font-size: 7px;
+}
+
+
+.activity-total strong {
+  color: var(--green);
+
+  font-size: 11px;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   CARD ACTION
+========================================================= */
+
+.activity-actions {
+  display: flex;
+
+  gap: 7px;
+
+  margin-top: 10px;
+}
+
+
+.activity-action {
+  flex: 1;
+
+  min-height: 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 9px;
+
+  background:
+    var(--white);
+
+  color:
+    #667085;
+
+  text-decoration: none;
+
+  font-family: inherit;
+
+  font-size: 6.5px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+
+.activity-action.primary {
+  border-color:
+    var(--green);
+
+  background:
+    var(--green);
+
+  color:
+    white;
+}
+
+
+.activity-action.whatsapp {
+  border-color:
+    #bbf7d0;
+
+  background:
+    var(--green-soft);
+
+  color:
+    var(--green-dark);
+}
+
+
+.activity-action:active {
+  transform:
+    scale(.97);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.activity-empty {
+  padding:
+    42px 20px;
+
+  text-align: center;
+
+  background:
+    var(--white);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 15px;
+}
+
+
+.activity-empty-icon {
+  width: 58px;
+
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin:
+    0 auto 12px;
+
+  border-radius: 18px;
+
+  background:
+    var(--green-soft);
+
+  color:
+    var(--green);
+
+  font-size: 21px;
+}
+
+
+.activity-empty strong {
+  display: block;
+
+  color: var(--dark);
+
+  font-size: 10px;
+
+  font-weight: 900;
+}
+
+
+.activity-empty p {
+  margin:
+    6px auto 14px;
+
+  max-width: 250px;
+
+  color: var(--muted);
+
+  font-size: 7px;
+
+  line-height: 1.5;
+}
+
+
+.empty-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  min-height: 34px;
+
+  padding:
+    0 14px;
+
+  border-radius: 9px;
+
+  background:
+    var(--green);
+
+  color:
+    white;
+
+  text-decoration: none;
+
+  font-size: 7px;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   DELETE MODAL
+========================================================= */
+
+.confirm-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 5000;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(16,24,40,.45);
+
+  backdrop-filter:
+    blur(4px);
+}
+
+
+.confirm-overlay.show {
+  display: flex;
+}
+
+
+.confirm-box {
+  width: 100%;
+
+  max-width: 320px;
+
+  padding: 18px;
+
+  background:
+    var(--white);
+
+  border-radius: 17px;
+
+  text-align: center;
+
+  box-shadow:
+    0 15px 40px
+    rgba(16,24,40,.18);
+}
+
+
+.confirm-icon {
+  width: 48px;
+
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin:
+    0 auto 10px;
+
+  border-radius: 14px;
+
+  background:
+    var(--red-soft);
+
+  color:
+    var(--red);
+
+  font-size: 17px;
+}
+
+
+.confirm-box strong {
+  display: block;
+
+  color: var(--dark);
+
+  font-size: 10px;
+
+  font-weight: 900;
+}
+
+
+.confirm-box p {
+  margin:
+    7px 0 14px;
+
+  color: var(--muted);
+
+  font-size: 7px;
+
+  line-height: 1.5;
+}
+
+
+.confirm-actions {
+  display: flex;
+
+  gap: 7px;
+}
+
+
+.confirm-actions button {
+  flex: 1;
+
+  min-height: 37px;
+
+  border-radius: 9px;
+
+  font-family: inherit;
+
+  font-size: 7px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+
+.confirm-cancel {
+  border:
+    1px solid var(--border);
+
+  background:
+    white;
+
+  color:
+    #667085;
+}
+
+
+.confirm-delete {
+  border:
+    0;
+
+  background:
+    var(--red);
+
+  color:
+    white;
+}
+
+
+/* =========================================================
+   BOTTOM NAV
+========================================================= */
+
+.bottom-nav {
+  position: fixed;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 3000;
+
+  height: 64px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  align-items: end;
+
+  padding:
+    4px 6px
+    env(safe-area-inset-bottom);
+
+  background:
+    rgba(255,255,255,.98);
+
+  border-top:
+    1px solid var(--border);
+
+  box-shadow:
+    0 -4px 18px
+    rgba(16,24,40,.06);
+}
+
+
+.bottom-nav a {
+  height: 55px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 3px;
+
+  color:
+    #98a2b3;
+
+  text-decoration: none;
+
+  font-size: 7px;
+}
+
+
+.bottom-nav a i {
+  font-size: 14px;
+}
+
+
+.bottom-nav a.active {
+  color:
+    var(--green);
+
+  font-weight: 900;
+}
+
+
+.bottom-order {
+  justify-content:
+    flex-start !important;
+}
+
+
+.bottom-order span {
+  width: 43px;
+
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-top:
+    -17px;
+
+  border-radius: 50%;
+
+  background:
+    var(--green);
+
+  color:
+    white;
+
+  box-shadow:
+    0 6px 15px
+    rgba(22,163,74,.25);
+}
+
+
+.bottom-order label {
+  margin-top: 1px;
+
+  color:
+    var(--green);
+
+  font-size: 7px;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (min-width: 600px) {
+
+  .activity-page {
+    padding: 16px;
+  }
+
+
+  .summary-box {
+    min-height: 72px;
+  }
+
+
+  .activity-card {
+    padding: 15px;
+  }
+
+}
