@@ -1,107 +1,104 @@
 /* =========================================================
    SHAE CLEANERS
    js/login.js
-
-   FITUR:
-   - Login customer
-   - Membaca akun dari localStorage
-   - Validasi email / nomor HP
-   - Menyimpan sesi login
-   - Menyimpan customer aktif
-   - Redirect ke Home
 ========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  initLogin
-);
+document.addEventListener("DOMContentLoaded", initLogin);
 
-
-/* =========================================================
-   CONFIG
-========================================================= */
-
-const USERS_KEY =
-  "shae_users";
-
-const LOGIN_KEY =
-  "shae_logged_in";
-
-const CURRENT_USER_KEY =
-  "shae_current_user";
-
-const CUSTOMER_KEY =
-  "shae_customer";
-
-
-/* =========================================================
-   INIT
-========================================================= */
+const LOGIN_KEY = "shae_logged_in";
+const USER_KEY = "shae_current_user";
 
 function initLogin() {
 
-  /*
-   * Jika sudah login,
-   * langsung ke Home
-   */
-
-  if (
-    localStorage.getItem(
-      LOGIN_KEY
-    ) === "true"
-  ) {
-
-    window.location.replace(
-      "index.html"
-    );
-
-    return;
-
-  }
-
-
-  setupLoginForm();
-
-  setupPasswordToggle();
-
-  setupRegisterButton();
-
-}
-
-
-/* =========================================================
-   LOGIN FORM
-========================================================= */
-
-function setupLoginForm() {
-
   const form =
-    document.getElementById(
-      "loginForm"
+    document.getElementById("loginForm");
+
+  const registerButton =
+    document.getElementById("registerButton");
+
+  const togglePassword =
+    document.getElementById("togglePassword");
+
+
+  /* =========================
+     REGISTER
+  ========================== */
+
+  if (registerButton) {
+
+    registerButton.addEventListener(
+      "click",
+      function () {
+
+        window.location.href =
+          "register.html";
+
+      }
     );
-
-
-  if (!form) {
-
-    console.warn(
-      "loginForm tidak ditemukan."
-    );
-
-    return;
 
   }
 
 
-  form.addEventListener(
-    "submit",
-    function (event) {
+  /* =========================
+     PASSWORD
+  ========================== */
 
-      event.preventDefault();
+  if (togglePassword) {
 
-      loginUser();
+    togglePassword.addEventListener(
+      "click",
+      function () {
 
-    }
-  );
+        const password =
+          document.getElementById(
+            "loginPassword"
+          );
+
+        if (!password) return;
+
+
+        const icon =
+          togglePassword.querySelector("i");
+
+
+        if (
+          password.type === "password"
+        ) {
+
+          password.type =
+            "text";
+
+          icon.className =
+            "fa-solid fa-eye-slash";
+
+        } else {
+
+          password.type =
+            "password";
+
+          icon.className =
+            "fa-solid fa-eye";
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* =========================
+     FORM LOGIN
+  ========================== */
+
+  if (form) {
+
+    form.addEventListener(
+      "submit",
+      handleLogin
+    );
+
+  }
 
 }
 
@@ -110,48 +107,23 @@ function setupLoginForm() {
    LOGIN
 ========================================================= */
 
-function loginUser() {
+function handleLogin(event) {
+
+  event.preventDefault();
+
 
   const identity =
-    getValue(
-      "loginIdentity"
-    );
+    getValue("loginIdentity");
 
   const password =
-    getValue(
-      "loginPassword"
-    );
+    getValue("loginPassword");
 
 
-  /*
-   * Validasi
-   */
-
-  if (!identity) {
+  if (!identity || !password) {
 
     showMessage(
-      "Masukkan email atau nomor WhatsApp.",
+      "Mohon isi email/WhatsApp dan password.",
       "error"
-    );
-
-    focusInput(
-      "loginIdentity"
-    );
-
-    return;
-
-  }
-
-
-  if (!password) {
-
-    showMessage(
-      "Masukkan password.",
-      "error"
-    );
-
-    focusInput(
-      "loginPassword"
     );
 
     return;
@@ -160,11 +132,26 @@ function loginUser() {
 
 
   /*
-   * Ambil semua user
+   * Ambil daftar customer
    */
 
-  const users =
-    getUsers();
+  let users = [];
+
+
+  try {
+
+    users =
+      JSON.parse(
+        localStorage.getItem(
+          "shae_users"
+        ) || "[]"
+      );
+
+  } catch {
+
+    users = [];
+
+  }
 
 
   /*
@@ -172,37 +159,41 @@ function loginUser() {
    */
 
   const normalizedIdentity =
-    normalizeIdentity(
+    identity
+      .trim()
+      .toLowerCase();
+
+
+  const normalizedPhone =
+    normalizePhone(
       identity
     );
 
 
   const user =
     users.find(
-      account => {
+      item => {
 
         const email =
-          normalizeIdentity(
-            account.email
-          );
+          String(
+            item.email || ""
+          )
+            .trim()
+            .toLowerCase();
 
 
         const phone =
-          normalizeIdentity(
-            account.phone
+          normalizePhone(
+            item.phone
           );
 
 
         return (
-
           email ===
-          normalizedIdentity
-
+            normalizedIdentity
           ||
-
           phone ===
-          normalizedIdentity
-
+            normalizedPhone
         );
 
       }
@@ -210,13 +201,13 @@ function loginUser() {
 
 
   /*
-   * Akun tidak ditemukan
+   * User tidak ditemukan
    */
 
   if (!user) {
 
     showMessage(
-      "Akun tidak ditemukan. Silakan Register terlebih dahulu.",
+      "Akun tidak ditemukan. Silakan daftar terlebih dahulu.",
       "error"
     );
 
@@ -235,7 +226,7 @@ function loginUser() {
   ) {
 
     showMessage(
-      "Email/nomor WhatsApp atau password salah.",
+      "Password yang Anda masukkan salah.",
       "error"
     );
 
@@ -244,9 +235,9 @@ function loginUser() {
   }
 
 
-  /*
-   * LOGIN BERHASIL
-   */
+  /* =========================
+     LOGIN BERHASIL
+  ========================== */
 
   localStorage.setItem(
     LOGIN_KEY,
@@ -254,82 +245,75 @@ function loginUser() {
   );
 
 
-  /*
-   * Simpan user aktif
-   */
-
-  const currentUser = {
-
-    id:
-      user.id,
-
-    name:
-      user.name,
-
-    email:
-      user.email,
-
-    phone:
-      user.phone,
-
-    address:
-      user.address || "",
-
-    loggedInAt:
-      new Date().toISOString()
-
-  };
-
-
   localStorage.setItem(
-    CURRENT_USER_KEY,
-    JSON.stringify(
-      currentUser
-    )
+    USER_KEY,
+    JSON.stringify(user)
   );
 
 
   /*
-   * Sinkronisasi dengan
-   * checkout.js
+   * Simpan data customer
+   * untuk checkout
    */
 
   localStorage.setItem(
-    CUSTOMER_KEY,
+    "shae_customer",
     JSON.stringify({
 
       name:
-        user.name,
+        user.name || "",
 
       phone:
-        user.phone,
+        user.phone || "",
+
+      email:
+        user.email || "",
 
       address:
         user.address || "",
 
       note:
-        ""
+        user.note || ""
 
     })
   );
 
 
   showMessage(
-    `Selamat datang, ${user.name}!`,
+    "Login berhasil. Mengalihkan...",
     "success"
   );
 
 
   /*
-   * Beri sedikit waktu agar
-   * pesan sukses terlihat
+   * Ambil halaman tujuan
    */
+
+  const redirect =
+    sessionStorage.getItem(
+      "shae_login_redirect"
+    );
+
+
+  sessionStorage.removeItem(
+    "shae_login_redirect"
+  );
+
+
+  /*
+   * Default ke Home
+   */
+
+  const destination =
+    redirect ||
+    "index.html";
+
 
   setTimeout(
     function () {
 
       window.location.replace(
-        "index.html"
+        destination
       );
 
     },
@@ -340,206 +324,41 @@ function loginUser() {
 
 
 /* =========================================================
-   GET USERS
+   NORMALIZE PHONE
 ========================================================= */
 
-function getUsers() {
+function normalizePhone(phone) {
 
-  try {
-
-    const saved =
-      localStorage.getItem(
-        USERS_KEY
-      );
-
-
-    if (!saved) {
-
-      return [];
-
-    }
-
-
-    const users =
-      JSON.parse(
-        saved
-      );
-
-
-    return Array.isArray(users)
-      ? users
-      : [];
-
-
-  } catch (error) {
-
-    console.error(
-      "Gagal membaca akun:",
-      error
-    );
-
-    return [];
-
-  }
-
-}
-
-
-/* =========================================================
-   PASSWORD TOGGLE
-========================================================= */
-
-function setupPasswordToggle() {
-
-  const button =
-    document.getElementById(
-      "togglePassword"
-    );
-
-
-  const input =
-    document.getElementById(
-      "loginPassword"
-    );
-
-
-  if (
-    !button ||
-    !input
-  ) {
-
-    return;
-
-  }
-
-
-  button.addEventListener(
-    "click",
-    function () {
-
-      const isPassword =
-        input.type ===
-        "password";
-
-
-      input.type =
-        isPassword
-          ? "text"
-          : "password";
-
-
-      const icon =
-        button.querySelector(
-         ("i")
-        );
-
-
-      if (icon) {
-
-        icon.className =
-          isPassword
-            ? "fa-solid fa-eye-slash"
-            : "fa-solid fa-eye";
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   REGISTER BUTTON
-========================================================= */
-
-function setupRegisterButton() {
-
-  const button =
-    document.getElementById(
-      "registerButton"
-    );
-
-
-  if (!button) {
-
-    return;
-
-  }
-
-
-  button.addEventListener(
-    "click",
-    function () {
-
-      window.location.href =
-        "register.html";
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   NORMALIZE IDENTITY
-========================================================= */
-
-function normalizeIdentity(
-  value
-) {
-
-  let text =
+  let value =
     String(
-      value || ""
+      phone || ""
     )
-      .trim()
-      .toLowerCase();
+      .replace(/\D/g, "");
 
-
-  /*
-   * Jika nomor HP,
-   * normalisasi ke 62
-   */
 
   if (
-    /^[0-9+\-\s()]+$/.test(
-      text
-    )
+    value.startsWith("0")
   ) {
 
-    text =
-      text.replace(
-        /\D/g,
-        ""
-      );
-
-
-    if (
-      text.startsWith("0")
-    ) {
-
-      text =
-        "62" +
-        text.substring(1);
-
-    }
-
-
-    if (
-      text.startsWith("8")
-    ) {
-
-      text =
-        "62" +
-        text;
-
-    }
+    value =
+      "62" +
+      value.substring(1);
 
   }
 
 
-  return text;
+  if (
+    value.startsWith("8")
+  ) {
+
+    value =
+      "62" +
+      value;
+
+  }
+
+
+  return value;
 
 }
 
@@ -550,7 +369,7 @@ function normalizeIdentity(
 
 function showMessage(
   message,
-  type
+  type = "error"
 ) {
 
   const element =
@@ -561,9 +380,7 @@ function showMessage(
 
   if (!element) {
 
-    alert(
-      message
-    );
+    alert(message);
 
     return;
 
@@ -573,10 +390,8 @@ function showMessage(
   element.textContent =
     message;
 
-
   element.className =
     `login-message ${type}`;
-
 
   element.style.display =
     "block";
@@ -585,40 +400,17 @@ function showMessage(
 
 
 /* =========================================================
-   DOM HELPERS
+   GET VALUE
 ========================================================= */
 
-function getValue(
-  id
-) {
+function getValue(id) {
 
   const element =
-    document.getElementById(
-      id
-    );
+    document.getElementById(id);
 
 
   return element
     ? element.value.trim()
     : "";
-
-}
-
-
-function focusInput(
-  id
-) {
-
-  const element =
-    document.getElementById(
-      id
-    );
-
-
-  if (element) {
-
-    element.focus();
-
-  }
 
 }
