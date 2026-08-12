@@ -10,222 +10,352 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Login - Shae Cleaners</title>
-
   <meta
     name="theme-color"
     content="#16a34a"
   >
 
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
+  <title>Login - Shae Cleaners</title>
 
-  <link
-    rel="stylesheet"
-    href="css/auth.css"
-  >
+
+  <!-- FONT AWESOME -->
 
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
+
+  <!-- LOGIN CSS -->
+
+  <link
+    rel="stylesheet"
+    href="css/login.css"
+  >
+
 </head>
 
 
-<body class="auth-body">
+<body>
 
 
-<main class="auth-page">
+  <!-- =====================================================
+       LOGIN PAGE
+  ====================================================== -->
+
+  <main class="auth-page">
 
 
-  <div class="auth-logo">
+    <!-- ===================================================
+         BRAND
+    ==================================================== -->
 
-    <div class="auth-logo-icon">
+    <section class="auth-brand">
 
-      <i class="fa-solid fa-spray-can-sparkles"></i>
+      <div class="brand-logo">
 
-    </div>
+        <img
+          src="assets/logo.png"
+          alt="Shae Cleaners"
+        >
 
-    <strong>
-      Shae <span>Cleaners</span>
-    </strong>
+      </div>
 
-    <small>
-      Cleaning Service Profesional
-    </small>
-
-  </div>
-
-
-
-  <section class="auth-card">
-
-
-    <div class="auth-heading">
 
       <h1>
-        Selamat Datang
+        Shae Cleaners
       </h1>
 
+
       <p>
-        Login untuk melanjutkan pemesanan
+        Cleaning profesional,
+        mudah dan terpercaya.
       </p>
 
-    </div>
+    </section>
 
 
 
-    <form
-      id="loginForm"
-      novalidate
-    >
+    <!-- ===================================================
+         LOGIN CARD
+    ==================================================== -->
+
+    <section class="auth-card">
 
 
-      <!-- WHATSAPP -->
+      <div class="auth-heading">
 
-      <div class="auth-field">
+        <h2>
+          Selamat Datang 👋
+        </h2>
 
-        <label for="loginPhone">
-          Nomor WhatsApp
-        </label>
-
-        <div class="auth-input">
-
-          <i class="fa-brands fa-whatsapp"></i>
-
-          <input
-            type="tel"
-            id="loginPhone"
-            placeholder="08xxxxxxxxxx"
-            inputmode="tel"
-            autocomplete="tel"
-            required
-          >
-
-        </div>
+        <p>
+          Login untuk melanjutkan
+          pemesanan Anda.
+        </p>
 
       </div>
 
 
 
-      <!-- PASSWORD -->
+      <!-- =================================================
+           MESSAGE
+      ================================================== -->
 
-      <div class="auth-field">
+      <div
+        id="loginMessage"
+        class="login-message"
+        style="display:none"
+      ></div>
 
-        <label for="loginPassword">
-          Password
-        </label>
 
-        <div class="auth-input">
 
-          <i class="fa-solid fa-lock"></i>
+      <!-- =================================================
+           FORM
+      ================================================== -->
 
-          <input
-            type="password"
-            id="loginPassword"
-            placeholder="Masukkan password"
-            autocomplete="current-password"
-            required
+      <form
+        id="loginForm"
+        autocomplete="on"
+      >
+
+
+        <!-- ===============================================
+             EMAIL / PHONE
+        ================================================ -->
+
+        <div class="input-group">
+
+          <label
+            for="loginIdentity"
           >
+            Email / No. WhatsApp
+          </label>
 
-          <button
-            type="button"
-            class="password-toggle"
-            data-target="loginPassword"
-          >
 
-            <i class="fa-regular fa-eye"></i>
+          <div class="input-box">
 
-          </button>
+            <i
+              class="fa-solid fa-user"
+            ></i>
+
+
+            <input
+              type="text"
+              id="loginIdentity"
+              name="identity"
+              placeholder="Email atau 08xxxxxxxxxx"
+              autocomplete="username"
+              required
+            >
+
+          </div>
 
         </div>
 
-      </div>
 
+
+        <!-- ===============================================
+             PASSWORD
+        ================================================ -->
+
+        <div class="input-group">
+
+          <label
+            for="loginPassword"
+          >
+            Password
+          </label>
+
+
+          <div class="input-box">
+
+            <i
+              class="fa-solid fa-lock"
+            ></i>
+
+
+            <input
+              type="password"
+              id="loginPassword"
+              name="password"
+              placeholder="Masukkan password"
+              autocomplete="current-password"
+              required
+            >
+
+
+            <button
+              type="button"
+              id="togglePassword"
+              class="password-toggle"
+              aria-label="Tampilkan password"
+            >
+
+              <i
+                class="fa-solid fa-eye"
+              ></i>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ===============================================
+             FORGOT PASSWORD
+        ================================================ -->
+
+        <div class="auth-options">
+
+          <a
+            href="javascript:void(0)"
+            onclick="forgotPassword()"
+          >
+            Lupa password?
+          </a>
+
+        </div>
+
+
+
+        <!-- ===============================================
+             LOGIN BUTTON
+        ================================================ -->
+
+        <button
+          type="submit"
+          class="auth-button"
+        >
+
+          <i
+            class="fa-solid fa-right-to-bracket"
+          ></i>
+
+          Login
+
+        </button>
+
+
+      </form>
+
+
+
+      <!-- =================================================
+           REGISTER
+      ================================================== -->
+
+      <div class="auth-divider">
+
+        <span>
+          atau
+        </span>
+
+      </div>
 
 
       <button
-        type="submit"
-        class="auth-submit"
+        type="button"
+        id="registerButton"
+        class="register-button"
       >
 
-        <i class="fa-solid fa-right-to-bracket"></i>
+        <i
+          class="fa-solid fa-user-plus"
+        ></i>
 
-        Login
+        Buat Akun Baru
 
       </button>
 
 
-    </form>
+
+      <!-- =================================================
+           SECURITY
+      ================================================== -->
+
+      <div class="security-note">
+
+        <i
+          class="fa-solid fa-shield-halved"
+        ></i>
+
+        <span>
+          Data Anda digunakan untuk
+          kebutuhan pemesanan Shae Cleaners.
+        </span>
+
+      </div>
 
 
-    <div
-      id="authMessage"
-      class="auth-message"
-    ></div>
+    </section>
 
 
+    <!-- ===================================================
+         FOOTER
+    ==================================================== -->
 
-    <div class="auth-divider">
+    <footer class="auth-footer">
 
-      <span>
-        atau
-      </span>
+      © 2026 Shae Cleaners
 
-    </div>
-
-
-
-    <button
-      type="button"
-      class="auth-whatsapp"
-      onclick="loginAsGuest()"
-    >
-
-      <i class="fa-solid fa-user"></i>
-
-      Lanjut sebagai Guest
-
-    </button>
+    </footer>
 
 
-
-    <div class="auth-footer">
-
-      <span>
-        Belum punya akun?
-      </span>
-
-      <a href="register.html">
-        Daftar
-      </a>
-
-    </div>
-
-
-  </section>
+  </main>
 
 
 
-  <button
-    class="auth-back"
-    onclick="location.href='index.html'"
-  >
+  <!-- =====================================================
+       SCRIPT
+  ====================================================== -->
 
-    <i class="fa-solid fa-arrow-left"></i>
-
-    Kembali ke Home
-
-  </button>
+  <script src="js/login.js"></script>
 
 
-</main>
+  <script>
+
+    function forgotPassword() {
+
+      const phone =
+        prompt(
+          "Masukkan nomor WhatsApp yang terdaftar:"
+        );
 
 
-<script src="js/Auth.js"></script>
+      if (!phone) {
+
+        return;
+
+      }
+
+
+      const message =
+        `Halo Shae Cleaners, saya lupa password akun saya.
+
+Nomor WhatsApp:
+${phone}
+
+Mohon bantuan untuk pemulihan akun saya.
+Terima kasih.`;
+
+
+      const wa =
+        "https://wa.me/6283813138221?text=" +
+        encodeURIComponent(
+          message
+        );
+
+
+      window.location.href =
+        wa;
+
+    }
+
+  </script>
+
 
 </body>
 
